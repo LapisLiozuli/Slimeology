@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "top": "slimeology:block/piston_magenta_top_sticky",
+        "bottom": "block/piston_bottom",
+        "side": "slimeology:block/piston_magenta_side_sticky"
+    }
+}

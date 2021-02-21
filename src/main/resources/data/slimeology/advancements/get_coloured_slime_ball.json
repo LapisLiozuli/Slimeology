@@ -1,0 +1,200 @@
+{
+  "parent": "slimeology:root",
+  "display": {
+    "icon": {
+      "item": "slimeology:slime_ball_yellow"
+    },
+    "title": {
+      "translate": "advancements.slimeology.get_coloured_slime_ball.title"
+    },
+    "description": {
+      "translate": "advancements.slimeology.get_coloured_slime_ball.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "get_slime_ball_white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_white"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_orange": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_orange"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_magenta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_magenta"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_light_blue": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_light_blue"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_yellow": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_yellow"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_lime": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_lime"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_pink": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_pink"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_gray": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_gray"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_light_gray": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_light_gray"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_cyan": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_cyan"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_purple": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_purple"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_blue": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_blue"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_brown": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_brown"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_green": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_green"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_red": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_red"
+          }
+        ]
+      }
+    },
+    "get_slime_ball_black": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:slime_ball_black"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_slime_ball_white",
+      "get_slime_ball_orange",
+      "get_slime_ball_magenta",
+      "get_slime_ball_light_blue",
+      "get_slime_ball_yellow",
+      "get_slime_ball_lime",
+      "get_slime_ball_pink",
+      "get_slime_ball_gray",
+      "get_slime_ball_light_gray",
+      "get_slime_ball_cyan",
+      "get_slime_ball_purple",
+      "get_slime_ball_blue",
+      "get_slime_ball_brown",
+      "get_slime_ball_green",
+      "get_slime_ball_red",
+      "get_slime_ball_black"
+    ]
+  ]
+}

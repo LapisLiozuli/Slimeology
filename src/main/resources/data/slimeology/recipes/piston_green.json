@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "S": {
+      "item": "slimeology:slime_ball_green"
+    }
+  },
+  "result": {
+    "item": "slimeology:piston_green",
+    "count":1
+  }
+}

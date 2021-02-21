@@ -1,0 +1,35 @@
+{
+  "parent": "slimeology:get_slimy_sand",
+  "display": {
+    "icon": {
+      "item": "slimeology:slimy_glass"
+    },
+    "title": {
+      "translate": "advancements.slimeology.get_slimy_glass.title"
+    },
+    "description": {
+      "translate": "advancements.slimeology.get_slimy_glass.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "get_slimy_glass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+          "item": "slimeology:slimy_glass"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_slimy_glass"
+    ]
+  ]
+}

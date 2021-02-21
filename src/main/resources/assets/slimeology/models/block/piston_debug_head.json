@@ -1,0 +1,8 @@
+{
+    "parent": "block/template_piston_head",
+    "textures": {
+        "unsticky": "slimeology:block/piston_debug_top_sticky",
+        "side": "slimeology:block/piston_debug_side_sticky",
+        "platform": "slimeology:block/piston_debug_top_sticky"
+    }
+}

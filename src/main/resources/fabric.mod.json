@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "slimeology",
+  "version": "0.1.0",
+
+  "name": "Slimeology",
+  "description": "A mod that profoundly explores the possibilities of slimes in Minecraft.",
+  "authors": [
+    "LapisLiozuli"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/slimeology/textures/block/slime_block_rainbow.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.lapisliozuli.slimeology.Slimeology"
+    ],
+    "client": [
+      "com.lapisliozuli.slimeology.SlimeologyClient"
+    ]
+  },
+  "mixins": [
+    "slimeology.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "*",
+    "autoconfig1u": "*"
+  },
+  "suggests": {
+  },
+  "accessWidener" : "slimeology.accesswidener"
+}

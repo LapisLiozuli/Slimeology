@@ -1,0 +1,17 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern":[
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key":{
+    "S":{
+      "tag":"slimeology:slime_blocks"
+    }
+  },
+  "result":{
+    "item":"slimeology:slime_block_rainbow",
+    "count":9
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "extended=false,facing=down": { "model": "slimeology:block/piston_yellow", "x": 90 },
+        "extended=false,facing=up": { "model": "slimeology:block/piston_yellow", "x": 270 },
+        "extended=false,facing=north": { "model": "slimeology:block/piston_yellow" },
+        "extended=false,facing=south": { "model": "slimeology:block/piston_yellow", "y": 180 },
+        "extended=false,facing=west": { "model": "slimeology:block/piston_yellow", "y": 270 },
+        "extended=false,facing=east": { "model": "slimeology:block/piston_yellow", "y": 90 },
+        "extended=true,facing=down": { "model": "slimeology:block/piston_yellow_base", "x": 90 },
+        "extended=true,facing=up": { "model": "slimeology:block/piston_yellow_base", "x": 270 },
+        "extended=true,facing=north": { "model": "slimeology:block/piston_yellow_base" },
+        "extended=true,facing=south": { "model": "slimeology:block/piston_yellow_base", "y": 180 },
+        "extended=true,facing=west": { "model": "slimeology:block/piston_yellow_base", "y": 270 },
+        "extended=true,facing=east": { "model": "slimeology:block/piston_yellow_base", "y": 90 }
+    }
+}

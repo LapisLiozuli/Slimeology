@@ -1,0 +1,8 @@
+{
+    "parent": "block/piston_extended",
+    "textures": {
+        "bottom": "block/piston_bottom",
+        "side": "slimeology:block/piston_white_side_sticky",
+        "inside": "block/piston_inner"
+    }
+}

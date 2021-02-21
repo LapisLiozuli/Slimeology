@@ -1,0 +1,12 @@
+{
+  "type":"minecraft:crafting_shapeless",
+  "ingredients":[
+    {
+      "item":"slimeology:slime_block_cyan"
+    }
+  ],
+  "result":{
+    "item":"slimeology:slime_ball_cyan",
+    "count":9
+  }
+}

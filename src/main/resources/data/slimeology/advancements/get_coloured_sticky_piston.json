@@ -1,0 +1,200 @@
+{
+  "parent": "slimeology:get_coloured_slime_ball",
+  "display": {
+    "icon": {
+      "item": "slimeology:piston_yellow"
+    },
+    "title": {
+      "translate": "advancements.slimeology.get_coloured_sticky_piston.title"
+    },
+    "description": {
+      "translate": "advancements.slimeology.get_coloured_sticky_piston.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "get_white_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_white"
+          }
+        ]
+      }
+    },
+    "get_orange_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_orange"
+          }
+        ]
+      }
+    },
+    "get_magenta_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_magenta"
+          }
+        ]
+      }
+    },
+    "get_light_blue_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_light_blue"
+          }
+        ]
+      }
+    },
+    "get_yellow_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_yellow"
+          }
+        ]
+      }
+    },
+    "get_lime_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_lime"
+          }
+        ]
+      }
+    },
+    "get_pink_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_pink"
+          }
+        ]
+      }
+    },
+    "get_gray_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_gray"
+          }
+        ]
+      }
+    },
+    "get_light_gray_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_light_gray"
+          }
+        ]
+      }
+    },
+    "get_cyan_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_cyan"
+          }
+        ]
+      }
+    },
+    "get_purple_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_purple"
+          }
+        ]
+      }
+    },
+    "get_blue_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_blue"
+          }
+        ]
+      }
+    },
+    "get_brown_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_brown"
+          }
+        ]
+      }
+    },
+    "get_green_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_green"
+          }
+        ]
+      }
+    },
+    "get_red_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_red"
+          }
+        ]
+      }
+    },
+    "get_black_sticky_piston": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "slimeology:piston_black"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_white_sticky_piston",
+      "get_orange_sticky_piston",
+      "get_magenta_sticky_piston",
+      "get_light_blue_sticky_piston",
+      "get_yellow_sticky_piston",
+      "get_lime_sticky_piston",
+      "get_pink_sticky_piston",
+      "get_gray_sticky_piston",
+      "get_light_gray_sticky_piston",
+      "get_cyan_sticky_piston",
+      "get_purple_sticky_piston",
+      "get_blue_sticky_piston",
+      "get_brown_sticky_piston",
+      "get_green_sticky_piston",
+      "get_red_sticky_piston",
+      "get_black_sticky_piston"
+    ]
+  ]
+}

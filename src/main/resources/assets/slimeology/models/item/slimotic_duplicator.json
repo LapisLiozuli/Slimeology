@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "slimeology:items/slimotic_duplicator"
+  }
+}

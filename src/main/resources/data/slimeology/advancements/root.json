@@ -1,0 +1,168 @@
+{
+  "display": {
+    "icon": {
+      "item": "slimeology:slime_red_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.slimeology.root.title"
+    },
+    "description": {
+      "translate": "advancements.slimeology.root.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "slimeology:textures/gui/advancements/slime_block.png"
+  },
+  "criteria": {
+    "slay_slime_white": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_white"
+        }
+      }
+    },
+    "slay_slime_orange": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_orange"
+        }
+      }
+    },
+    "slay_slime_magenta": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_magenta"
+        }
+      }
+    },
+    "slay_slime_light_blue": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_light_blue"
+        }
+      }
+    },
+    "slay_slime_yellow": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_yellow"
+        }
+      }
+    },
+    "slay_slime_lime": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_lime"
+        }
+      }
+    },
+    "slay_slime_pink": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_pink"
+        }
+      }
+    },
+    "slay_slime_gray": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_gray"
+        }
+      }
+    },
+    "slay_slime_light_gray": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_light_gray"
+        }
+      }
+    },
+    "slay_slime_cyan": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_cyan"
+        }
+      }
+    },
+    "slay_slime_purple": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_purple"
+        }
+      }
+    },
+    "slay_slime_blue": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_blue"
+        }
+      }
+    },
+    "slay_slime_brown": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_brown"
+        }
+      }
+    },
+    "slay_slime_green": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_green"
+        }
+      }
+    },
+    "slay_slime_red": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_red"
+        }
+      }
+    },
+    "slay_slime_black": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "slimeology:slime_entity_black"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "slay_slime_white",
+      "slay_slime_orange",
+      "slay_slime_magenta",
+      "slay_slime_light_blue",
+      "slay_slime_yellow",
+      "slay_slime_lime",
+      "slay_slime_pink",
+      "slay_slime_gray",
+      "slay_slime_light_gray",
+      "slay_slime_cyan",
+      "slay_slime_purple",
+      "slay_slime_blue",
+      "slay_slime_brown",
+      "slay_slime_green",
+      "slay_slime_red",
+      "slay_slime_black"
+    ]
+  ]
+}
