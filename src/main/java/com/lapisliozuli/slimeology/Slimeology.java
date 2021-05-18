@@ -1,11 +1,10 @@
 package com.lapisliozuli.slimeology;
 
-import com.lapisliozuli.slimeology.entities.SlimeRenderHandler;
 import com.lapisliozuli.slimeology.registry.RegisterBlocks;
 import com.lapisliozuli.slimeology.registry.RegisterSEC;
 import com.lapisliozuli.slimeology.registry.RegisterSlimyTools;
 import com.lapisliozuli.slimeology.items.*;
-import com.lapisliozuli.slimeology.particles.SlimeEntityColouredParticleFactory;
+//import com.lapisliozuli.slimeology.particles.SlimeEntityColouredParticleFactory;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
