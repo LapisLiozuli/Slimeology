@@ -2,14 +2,17 @@ package com.lapisliozuli.slimeology.entities;
 
 import com.google.common.collect.Ordering;
 import com.lapisliozuli.slimeology.Slimeology;
-import com.lapisliozuli.slimeology.particles.SlimeEntityColouredParticles;
+import com.lapisliozuli.slimeology.items.SlimeBalls;
 import com.lapisliozuli.slimeology.registry.RegisterSEC;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -33,7 +36,7 @@ public class SlimeEntityGreen extends SlimeEntityColoured {
 
     @Override
     protected ParticleEffect getParticles() {
-        return SlimeEntityColouredParticles.SLIME_PARTICLE_GREEN;
+        return new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(SlimeBalls.SLIME_BALL_GREEN));
     }
 
     public static final EntityType<SlimeEntityGreen> SLIME_ENTITY_GREEN = Registry.register(
