@@ -26,8 +26,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PistonBlockEntityRenderer.class)
 public abstract class PistonBlockEntityRendererMixin {
     // Used to help render the animated textures of ColouredStickyPistons.
-    @Shadow abstract void method_3575(BlockPos blockPos, BlockState blockState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, World world, boolean bl, int i);
-
+    @Shadow abstract void method_3575(BlockPos blockPos, BlockState blockState,
+                                      MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider,
+                                      World world, boolean bl, int i);
 
     /**
      * @author: Lapis Liozuli
