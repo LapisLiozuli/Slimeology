@@ -1,8 +1,22 @@
-# Fabric Example Mod
+# Slimeology
 
-## Setup
+## Description
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/slimeology:setup) that relates to the IDE that you are using.
+The study of slime.
+
+## Coloured Slimes
+
+## New Blocks!
+
+### Coloured Slime Blocks and Slimeballs
+
+### Rainbow Slime Block
+
+### Coloured Sticky Pistons
+
+### Slimy Sand
+
+### Slimy Glass
 
 ## License
 
