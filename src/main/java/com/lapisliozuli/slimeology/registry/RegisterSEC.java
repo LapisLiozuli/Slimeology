@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
@@ -69,15 +70,15 @@ public class RegisterSEC {
     }
     public static final Map<EntityType, SpawnRestriction.SpawnPredicate> secSpawnPredicatesMap = spawnPredicateImperative();
 
-    // This method reads the numeric IDs from the configs and returns a list of Biomes.
-    // It also reads a List<Integer> disguised as a String so it's kinda cursed.
+    // This method reads the string IDs from the configs and returns a list of Biomes.
     public static List<Biome> convertConfigIDsToBiome(String stringyListInt) {
         List<Biome> configBiomeList = new ArrayList<>(Collections.emptyList());
-        List<String> numericIDList = Arrays.asList(stringyListInt.split("\\s*,\\s*"));
-        numericIDList.forEach(entry->{
-            configBiomeList.add(Registry.BIOME.get(Integer.parseInt(entry)));
+        // Splits the string by the comma ',' to return a list of strings in the format 'minecraft:biome'
+        List<String> stringIDList = Arrays.asList(stringyListInt.split("\\s*,\\s*"));
+        stringIDList.forEach(entry->{
+            // Converts the string into an Identifier
+            configBiomeList.add(Registry.BIOME.get(Identifier.tryParse(entry)));
         });
-//        System.out.println(configBiomeList);
         return configBiomeList;
     }
 
