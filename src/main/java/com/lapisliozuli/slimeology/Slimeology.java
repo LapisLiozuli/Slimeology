@@ -1,9 +1,9 @@
 package com.lapisliozuli.slimeology;
 
 import com.lapisliozuli.slimeology.registry.RegisterBlocks;
+import com.lapisliozuli.slimeology.registry.RegisterItems;
 import com.lapisliozuli.slimeology.registry.RegisterSEC;
 import com.lapisliozuli.slimeology.registry.RegisterSlimyTools;
-import com.lapisliozuli.slimeology.items.*;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -24,7 +24,8 @@ public class Slimeology implements ModInitializer {
     @Override
     public void onInitialize() {
         // Items and blocks
-        SlimeBalls.registerSlimeBalls();
+//        SlimeBalls.registerSlimeBalls();
+        RegisterItems.registerItems();
         RegisterBlocks.register();
 
         // Allows comments in config file
@@ -33,7 +34,7 @@ public class Slimeology implements ModInitializer {
 
         // For SlimeEntityColoured
         RegisterSEC.registerSlimeologyEntityTypes();
-        SpawnEggSlime.registerSpawnEggSlime();
+//        SpawnEggSlime.registerSpawnEggSlime();
 
         // Non-stackables: Tools and Armour
         RegisterSlimyTools.registerSlimyTools();
