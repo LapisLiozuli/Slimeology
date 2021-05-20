@@ -2,7 +2,7 @@ package com.lapisliozuli.slimeology.entities;
 
 import com.google.common.collect.Ordering;
 import com.lapisliozuli.slimeology.Slimeology;
-import com.lapisliozuli.slimeology.items.SlimeBalls;
+import com.lapisliozuli.slimeology.registry.RegisterItems;
 import com.lapisliozuli.slimeology.registry.RegisterSEC;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -36,7 +36,7 @@ public class SlimeEntityGray extends SlimeEntityColoured {
 
     @Override
     protected ParticleEffect getParticles() {
-        return new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(SlimeBalls.SLIME_BALL_GRAY));
+        return new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(RegisterItems.SLIME_BALL_GRAY));
     }
 
     public static final EntityType<SlimeEntityGray> SLIME_ENTITY_GRAY = Registry.register(

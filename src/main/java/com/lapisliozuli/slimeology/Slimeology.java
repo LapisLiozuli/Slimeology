@@ -24,7 +24,6 @@ public class Slimeology implements ModInitializer {
     @Override
     public void onInitialize() {
         // Items and blocks
-//        SlimeBalls.registerSlimeBalls();
         RegisterItems.registerItems();
         RegisterBlocks.register();
 
@@ -34,7 +33,6 @@ public class Slimeology implements ModInitializer {
 
         // For SlimeEntityColoured
         RegisterSEC.registerSlimeologyEntityTypes();
-//        SpawnEggSlime.registerSpawnEggSlime();
 
         // Non-stackables: Tools and Armour
         RegisterSlimyTools.registerSlimyTools();
