@@ -81,7 +81,7 @@ public class SlimeEntityGreen extends SlimeEntityColoured {
                     && moonCheck
                     && world.getLightLevel(pos) <= random.nextInt(8)) {
                 int secChunkIndex = slimeChunkSeed.nextInt(16);
-                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
+                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(secPointer)) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
                         System.out.println("Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }
