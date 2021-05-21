@@ -82,42 +82,42 @@ public class RegisterSEC {
     }
 
     // This Map assigns a collection of spawnable biomes to each SEC.
-    public static Map<EntityType, List<Biome>> imperative() {
-        final Map<EntityType, List<Biome>> secBiomeSpawnPermissionMap = new HashMap<>();
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_LIGHT_BLUE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECLightBlue));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_YELLOW, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECYellow));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_LIME, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECLime));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_PINK, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECPink));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_GRAY, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECGray));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_LIGHT_GRAY, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECLightGray));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_CYAN, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECCyan));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_PURPLE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECPurple));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_BLUE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlue));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_BROWN, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBrown));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_GREEN, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECGreen));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_RED, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECRed));
-        secBiomeSpawnPermissionMap.put(SLIME_ENTITY_BLACK, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlack));
-        return Collections.unmodifiableMap(secBiomeSpawnPermissionMap);
+    public static Map<EntityType, List<Biome>> allocatedBiomeImperative() {
+        final Map<EntityType, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
+        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
+        secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_LIGHT_BLUE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECLightBlue));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_YELLOW, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECYellow));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_LIME, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECLime));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_PINK, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECPink));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_GRAY, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECGray));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_LIGHT_GRAY, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECLightGray));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_CYAN, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECCyan));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_PURPLE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECPurple));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_BLUE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlue));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_BROWN, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBrown));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_GREEN, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECGreen));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_RED, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECRed));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_BLACK, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlack));
+        return Collections.unmodifiableMap(secAllocatedBiomeMap);
     }
-    public static final Map<EntityType, List<Biome>> secBiomeSpawnPermissionMap = imperative();
+    public static final Map<EntityType, List<Biome>> secAllocatedBiomeMap = allocatedBiomeImperative();
 
-    // This method reads secBiomeSpawnPermissionMap to invert the SECs and biomes.
+    // This method reads secAllocatedBiomeMap to invert the SECs and biomes.
     public static Map<Biome, List<EntityType>> allocateSECToBiome() {
         final Map<Biome, List<EntityType>> biomeAllocatedSECMap = new HashMap<>();
-        for (Map.Entry<EntityType, List<Biome>> entry : secBiomeSpawnPermissionMap.entrySet()) {
-            EntityType k = entry.getKey();
-            List<Biome> v = entry.getValue();
-            for (Biome biomePermitted : v) {
+        for (Map.Entry<EntityType, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
+            EntityType sec = entry.getKey();
+            List<Biome> biome = entry.getValue();
+            for (Biome biomePermitted : biome) {
                 if (biomeAllocatedSECMap.containsKey(biomePermitted)) {
-                    biomeAllocatedSECMap.get(biomePermitted).add(k);
+                    biomeAllocatedSECMap.get(biomePermitted).add(sec);
                 }
                 else {
                     List<EntityType> secCheckList = new ArrayList<EntityType>();
-                    secCheckList.add(k);
+                    secCheckList.add(sec);
                     biomeAllocatedSECMap.put(biomePermitted, secCheckList);
                 }
             }
@@ -179,16 +179,16 @@ public class RegisterSEC {
 
         secSpawnPredicatesMap.forEach(RegisterSEC::registerSpawnRestriction);
 
-        for (Map.Entry<EntityType, List<Biome>> entry : secBiomeSpawnPermissionMap.entrySet()) {
-            EntityType k = entry.getKey();
-            List<Biome> v = entry.getValue();
+        for (Map.Entry<EntityType, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
+            EntityType slime = entry.getKey();
+            List<Biome> biomeList = entry.getValue();
 
             // Checks the biome and adds the callback
             for (Biome biomeReg : Registry.BIOME) {
-                checkBiomeForSpawnEntry(biomeReg, k, v);
+                checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
                 RegistryEntryAddedCallback.event(Registry.BIOME).register(
                         (i, identifier, biome) -> {
-                            RegisterSEC.checkBiomeForSpawnEntry(biomeReg, k, v);
+                            RegisterSEC.checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
                         });
             }
         }
