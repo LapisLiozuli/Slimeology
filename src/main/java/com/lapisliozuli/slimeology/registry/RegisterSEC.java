@@ -36,6 +36,7 @@ import static com.lapisliozuli.slimeology.entities.SlimeEntityBlack.SLIME_ENTITY
 
 
 public class RegisterSEC {
+    // ======================= DATA
     // This list enforces the order of the SECs
     public static List<EntityType> secForcedOrder = Stream.of(
             SLIME_ENTITY_DEBUG,
@@ -46,6 +47,7 @@ public class RegisterSEC {
     ).collect(Collectors.toList());
 
     // This Map links registered SECs with their respective SpawnPredicate
+    // Hopefully can remove after the same canSpawnSEC can be applied to all SECs.
     public static Map<EntityType, SpawnRestriction.SpawnPredicate> spawnPredicateImperative() {
         final Map<EntityType, SpawnRestriction.SpawnPredicate> secSpawnPredicatesMap = new HashMap<>();
         secSpawnPredicatesMap.put(SLIME_ENTITY_DEBUG, SlimeEntityColoured::canSpawnSEC);
@@ -69,19 +71,7 @@ public class RegisterSEC {
     }
     public static final Map<EntityType, SpawnRestriction.SpawnPredicate> secSpawnPredicatesMap = spawnPredicateImperative();
 
-    // This method reads the string IDs from the configs and returns a list of Biomes.
-    public static List<Biome> convertConfigIDsToBiomes(String stringyListInt) {
-        List<Biome> configBiomeList = new ArrayList<>(Collections.emptyList());
-        // Splits the string by the comma ',' to return a list of strings in the format 'minecraft:biome'
-        List<String> stringIDList = Arrays.asList(stringyListInt.split("\\s*,\\s*"));
-        stringIDList.forEach(entry->{
-            // Converts the string into an Identifier
-            configBiomeList.add(Registry.BIOME.get(Identifier.tryParse(entry)));
-        });
-        return configBiomeList;
-    }
-
-    // This Map assigns a collection of spawnable biomes to each SEC.
+   // This Map assigns a collection of spawnable biomes to each SEC.
     public static Map<EntityType, List<Biome>> allocatedBiomeImperative() {
         final Map<EntityType, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
         secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
@@ -105,6 +95,7 @@ public class RegisterSEC {
     }
     public static final Map<EntityType, List<Biome>> secAllocatedBiomeMap = allocatedBiomeImperative();
 
+
     // This method reads secAllocatedBiomeMap to invert the SECs and biomes.
     public static Map<Biome, List<EntityType>> allocateSECToBiome() {
         final Map<Biome, List<EntityType>> biomeAllocatedSECMap = new HashMap<>();
@@ -116,9 +107,9 @@ public class RegisterSEC {
                     biomeAllocatedSECMap.get(biomePermitted).add(sec);
                 }
                 else {
-                    List<EntityType> secCheckList = new ArrayList<EntityType>();
-                    secCheckList.add(sec);
-                    biomeAllocatedSECMap.put(biomePermitted, secCheckList);
+                    List<EntityType> secAllocateList = new ArrayList<EntityType>();
+                    secAllocateList.add(sec);
+                    biomeAllocatedSECMap.put(biomePermitted, secAllocateList);
                 }
             }
         }
@@ -127,6 +118,19 @@ public class RegisterSEC {
     }
     // This Map checks each biome to see which SECs can spawn within it.
     public static final Map<Biome, List<EntityType>> biomeAllocatedSECMap = allocateSECToBiome();
+
+    // ======================= METHODS
+    // This method reads the string IDs from the configs and returns a list of Biomes.
+    public static List<Biome> convertConfigIDsToBiomes(String stringyListInt) {
+        List<Biome> configBiomeList = new ArrayList<>(Collections.emptyList());
+        // Splits the string by the comma ',' to return a list of strings in the format 'minecraft:biome'
+        List<String> stringIDList = Arrays.asList(stringyListInt.split("\\s*,\\s*"));
+        stringIDList.forEach(entry->{
+            // Converts the string into an Identifier
+            configBiomeList.add(Registry.BIOME.get(Identifier.tryParse(entry)));
+        });
+        return configBiomeList;
+    }
 
 
     // Adds SpawnEntry only if the biome is part of the SEC's BiomeList.
