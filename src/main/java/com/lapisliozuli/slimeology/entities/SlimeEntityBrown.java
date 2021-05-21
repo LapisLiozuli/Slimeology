@@ -60,13 +60,13 @@ public class SlimeEntityBrown extends SlimeEntityColoured {
             }
 
             ChunkPos chunkPos = new ChunkPos(pos);
-            List<EntityType> secSiblings = RegisterSEC.biomeSECSpawnCheckMap.get(biome);
-			if (secSiblings == null) {
+            List<EntityType> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biome);
+			if (biomeSiblings == null) {
 				return false;
 			}
-            Collections.sort(secSiblings, Ordering.explicit(RegisterSEC.secOrderedList));
+            Collections.sort(biomeSiblings, Ordering.explicit(RegisterSEC.secForcedOrder));
 
-            int secDyeOrder = RegisterSEC.secOrderedList.indexOf(secPointer);
+            int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(secPointer);
             Random slimeChunkSeed = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((ServerWorldAccess)world).getSeed(), 987234911L);
             boolean bl = slimeChunkSeed.nextInt(10) == 0;
             // Highly configurable spawning conditions
@@ -80,20 +80,20 @@ public class SlimeEntityBrown extends SlimeEntityColoured {
                     && random.nextFloat() <= Slimeology.CONFIG.secSpawning.spawnMultiplier
                     && moonCheck
                     && world.getLightLevel(pos) <= random.nextInt(8)) {
-                int secChunkNumber = slimeChunkSeed.nextInt(16);
-                if (secDyeOrder == secChunkNumber && secSiblings.contains(RegisterSEC.secOrderedList.get(secChunkNumber))) {
+                int secChunkIndex = slimeChunkSeed.nextInt(16);
+                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                        System.out.println("Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkNumber " + secChunkNumber);
+                        System.out.println("Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }
                     return canMobSpawn(type, world, spawnReason, pos, random);}
 
-                else if (!secSiblings.contains(RegisterSEC.secOrderedList.get(secChunkNumber))) {
-                    int secBirthOrder = secSiblings.indexOf(secPointer);
-                    int secChunkReroll = slimeChunkSeed.nextInt(secSiblings.size());
-                    if (secBirthOrder == secChunkReroll) {
+                else if (!biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
+                    int secSiblingIndex = biomeSiblings.indexOf(secPointer);
+                    int secChunkReIndex = slimeChunkSeed.nextInt(biomeSiblings.size());
+                    if (secSiblingIndex == secChunkReIndex) {
                         if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                            System.out.println("Spawning " + secPointer + " in variable Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkReroll " + secChunkReroll);
-                            System.out.println("Allocated colour is " + RegisterSEC.secOrderedList.get(secChunkNumber) + " while secSiblings are " + secSiblings);
+                            System.out.println("Spawning " + secPointer + " in variable Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkReIndex " + secChunkReIndex);
+                            System.out.println("Allocated colour is " + RegisterSEC.secForcedOrder.get(secChunkIndex) + " while biomeSiblings are " + biomeSiblings);
                         }
                         return canMobSpawn(type, world, spawnReason, pos, random);
                     }

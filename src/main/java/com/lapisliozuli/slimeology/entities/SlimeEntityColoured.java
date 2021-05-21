@@ -73,55 +73,71 @@ public class SlimeEntityColoured extends SlimeEntity {
                     .dimensions(EntityDimensions.changing(2.04f, 2.04f))
                     .trackable(160,4).build());
 
-    // Need a pointer to the Registry.register() variable
+    // Need a pointer to the Registry.register() variable.
     private static final EntityType secPointer = SLIME_ENTITY_DEBUG;
 
 
     public static boolean canSpawnSEC(EntityType<? extends SlimeEntityColoured> type, WorldAccess world, SpawnReason spawnReason,
                                       BlockPos pos, Random random) {
         if (world.getDifficulty() != Difficulty.PEACEFUL) {
+            // Find the biome of the position.
             Biome biome = world.getBiome(pos);
-
             if (!(world instanceof ServerWorldAccess)) {
                 return false;
             }
-
             ChunkPos chunkPos = new ChunkPos(pos);
-            List<EntityType> secSiblings = RegisterSEC.biomeSECSpawnCheckMap.get(biome);
-            if (secSiblings == null) {
+
+            // Get the list of coloured slimes that can spawn within the biome.
+            List<EntityType> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biome);
+            if (biomeSiblings == null) {
                 return false;
             }
-            Collections.sort(secSiblings, Ordering.explicit(RegisterSEC.secOrderedList));
+            // Sort the biomeSiblings based on the order given in secForcedOrder.
+            Collections.sort(biomeSiblings, Ordering.explicit(RegisterSEC.secForcedOrder));
 
-            int secDyeOrder = RegisterSEC.secOrderedList.indexOf(secPointer);
+            // secDyeIndex is the index of the SEC within secForcedOrder.
+            int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(secPointer);
             Random slimeChunkSeed = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((ServerWorldAccess)world).getSeed(), 987234911L);
+            // bl will always be the same because the seed and number of calls are the same.
+            // 10% of chunks become slime chunks.
             boolean bl = slimeChunkSeed.nextInt(10) == 0;
-            // Highly configurable spawning conditions
+
+            // Highly configurable spawning conditions.
             boolean moonCheck = random.nextFloat() < world.getMoonSize();
+            // Can ignore moon so that moonCheck always returns true.
             if (Slimeology.CONFIG.secSpawning.ignoreMoon) {
                 moonCheck = true;
             }
+
+            // Executing the checks for canMobSpawn().
             if (bl
                     && pos.getY() > Slimeology.CONFIG.secSpawning.heightFloor
                     && pos.getY() < Slimeology.CONFIG.secSpawning.heightCap
                     && random.nextFloat() <= Slimeology.CONFIG.secSpawning.spawnMultiplier
                     && moonCheck
                     && world.getLightLevel(pos) <= random.nextInt(8)) {
-                int secChunkNumber = slimeChunkSeed.nextInt(16);
-                if (secDyeOrder == secChunkNumber && secSiblings.contains(RegisterSEC.secOrderedList.get(secChunkNumber))) {
+                // Same as with bl, up to 16 for 16 colours.
+                int secChunkIndex = slimeChunkSeed.nextInt(16);
+                // First check if the SEC's index matches the chunk index.
+                // Then check if the SEC has been allocated for spawning within the biome.
+                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                        System.out.println("Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkNumber " + secChunkNumber);
+                        System.out.println("Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }
                     return canMobSpawn(type, world, spawnReason, pos, random);
                 }
 
-                else if (!secSiblings.contains(RegisterSEC.secOrderedList.get(secChunkNumber))) {
-                    int secBirthOrder = secSiblings.indexOf(secPointer);
-                    int secChunkReroll = slimeChunkSeed.nextInt(secSiblings.size());
-                    if (secBirthOrder == secChunkReroll) {
+                // Else, check if the spawnable slimes for that biome contains the SEC allocated based on the chunk number.
+                else if (!biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
+                    // Find the index of the SEC within spawnable slimes.
+                    int secSiblingIndex = biomeSiblings.indexOf(secPointer);
+                    // Uses the slime chunk seed to generate a number in the length of biomeSiblings.
+                    int secChunkReIndex = slimeChunkSeed.nextInt(biomeSiblings.size());
+                    // If the new randomly generated number matches the index, spawning will occur.
+                    if (secSiblingIndex == secChunkReIndex) {
                         if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                            System.out.println("Spawning " + secPointer + " in variable Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkReroll " + secChunkReroll);
-                            System.out.println("Allocated colour is " + RegisterSEC.secOrderedList.get(secChunkNumber) + " while secSiblings are " + secSiblings);
+                            System.out.println("Spawning " + secPointer + " in variable Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkReIndex " + secChunkReIndex);
+                            System.out.println("Allocated colour is " + RegisterSEC.secForcedOrder.get(secChunkIndex) + " while biomeSiblings are " + biomeSiblings);
                         }
                         return canMobSpawn(type, world, spawnReason, pos, random);
                     }

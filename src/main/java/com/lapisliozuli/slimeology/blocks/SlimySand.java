@@ -91,6 +91,7 @@ public class SlimySand extends FallingBlock {
         super.onSteppedOn(world, pos, entity);
     }
 
+
     public static void registerSlimySand() {
         Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, "slimy_sand"), SLIMY_SAND);
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slimy_sand"),

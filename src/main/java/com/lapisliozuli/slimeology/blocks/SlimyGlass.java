@@ -24,6 +24,8 @@ public class SlimyGlass extends AbstractGlassBlock {
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slimy_glass"),
                 new BlockItem(SLIMY_GLASS, new Item.Settings().group(Slimeology.SLIMEOLOGY)));
     }
+
+
     public static void renderSlimyGlass() {
         BlockRenderLayerMap.INSTANCE.putBlock(SLIMY_GLASS, RenderLayer.getTranslucent());
     }
