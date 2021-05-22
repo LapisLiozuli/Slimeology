@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTables;
 import net.minecraft.particle.ItemStackParticleEffect;
@@ -28,7 +29,19 @@ import java.util.*;
 
 // Copied from MagmaCubeEntity
 public class SlimeEntityColoured extends SlimeEntity {
-    public SlimeEntityColoured(final EntityType<? extends SlimeEntityColoured> arg, final World arg2) {
+    private ItemConvertible slimeParticle = RegisterItems.SLIME_BALL_DEBUG;
+//    // Basic constructor without any modifications.
+//    public SlimeEntityColoured(final EntityType<? extends SlimeEntityColoured> arg, final World arg2) {
+//        super(arg, arg2);
+//    }
+
+    // Constructor with additional particle and SEC variable as parameters.
+    public SlimeEntityColoured(
+            final EntityType<? extends SlimeEntityColoured> arg,
+            final World arg2) {
+//            final World arg2,
+//            final ItemConvertible slimeParticle,
+//            final SlimeEntityColoured secSelf) {
         super(arg, arg2);
     }
 
@@ -48,7 +61,7 @@ public class SlimeEntityColoured extends SlimeEntity {
 
     @Override
     protected ParticleEffect getParticles() {
-        return new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(RegisterItems.SLIME_BALL_DEBUG));
+        return new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(slimeParticle));
     }
 
     @Override
@@ -131,7 +144,7 @@ public class SlimeEntityColoured extends SlimeEntity {
                 // If this SEC's index doesn't match the chunk index, then check if the SEC is included within the SECs allocated to the position's (not chunk's) biome.
                 // But if this check also fails for this SEC, then no spawning occurs. That's fine because another type of SEC should pass the check and spawn.
                 else if (!biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
-                    // Find the index of the SEC within spawnable slimes.
+                    // Find the index of the SEC within the list of biome-spawnable slimes.
                     int secSiblingIndex = biomeSiblings.indexOf(secPointer);
                     // Optional 3rd call of nextInt(). Uses the slime chunk seed to generate an index within the length-range of biomeSiblings.
                     int secChunkReIndex = slimeChunkSeed.nextInt(biomeSiblings.size());
