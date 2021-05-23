@@ -91,7 +91,7 @@ public class RegisterSEC {
    // This Map assigns a collection of spawnable biomes to each SEC.
     public static Map<EntityType, List<Biome>> allocatedBiomeImperative() {
         final Map<EntityType, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
-        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
+//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
@@ -180,7 +180,7 @@ public class RegisterSEC {
                 SlimeEntityColoured::canSpawnSEC);
         for (Biome biomeReg : Registry.BIOME) {
             EntityType k = SLIME_ENTITY_DEBUG;
-            List<Biome> v = convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlack);
+            List<Biome> v = convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite + ", " + Slimeology.CONFIG.secBiomes.biomesForSECYellow);
             checkBiomeForSpawnEntry(biomeReg, k, v);
             RegistryEntryAddedCallback.event(Registry.BIOME).register(
                     (i, identifier, biome) -> {
