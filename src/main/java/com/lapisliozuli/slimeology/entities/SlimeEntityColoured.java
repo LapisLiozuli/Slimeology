@@ -29,21 +29,35 @@ import java.util.*;
 
 // Copied from MagmaCubeEntity
 public class SlimeEntityColoured extends SlimeEntity {
-    private ItemConvertible slimeParticle = RegisterItems.SLIME_BALL_DEBUG;
-//    // Basic constructor without any modifications.
-//    public SlimeEntityColoured(final EntityType<? extends SlimeEntityColoured> arg, final World arg2) {
-//        super(arg, arg2);
-//    }
-
-    // Constructor with additional particle and SEC variable as parameters.
-    public SlimeEntityColoured(
-            final EntityType<? extends SlimeEntityColoured> arg,
-            final World arg2) {
-//            final World arg2,
-//            final ItemConvertible slimeParticle,
-//            final SlimeEntityColoured secSelf) {
+    // Basic constructor without any modifications.
+    public SlimeEntityColoured(final EntityType<? extends SlimeEntityColoured> arg, final World arg2) {
         super(arg, arg2);
     }
+
+    private ItemConvertible slimeParticle = RegisterItems.SLIME_BALL_DEBUG;
+//    private ItemConvertible slimeParticle;
+//    private static EntityType<SlimeEntityColoured> secPointer;
+//
+//    // Constructor with additional particle and SEC variable as parameters.
+//    public SlimeEntityColoured(
+//            final EntityType<? extends SlimeEntityColoured> arg,
+//            final World arg2,
+//            final ItemConvertible slimeParticleInput,
+//            final EntityType<SlimeEntityColoured> secInput) {
+//        super(arg, arg2);
+//        this.slimeParticle = slimeParticleInput;
+//        secPointer = secInput;
+//    }
+
+    public static final EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(Slimeology.MOD_ID, "slime_entity_debug"),
+            FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, SlimeEntityColoured::new)
+                    .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+                    .trackable(160,4).build());
+
+    // Need a pointer to the Registry.register() variable.
+    private static final EntityType secPointer = SLIME_ENTITY_DEBUG;
 
     public static boolean canSlimeEntityColouredSpawn(final EntityType<SlimeEntityColoured> type, final WorldAccess world, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
         return world.getDifficulty() != Difficulty.PEACEFUL;
@@ -78,16 +92,6 @@ public class SlimeEntityColoured extends SlimeEntity {
     protected boolean canAttack() {
         return this.canMoveVoluntarily();
     }
-
-    public static final EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = Registry.register(
-            Registry.ENTITY_TYPE,
-            new Identifier(Slimeology.MOD_ID, "slime_entity_debug"),
-            FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, SlimeEntityColoured::new)
-                    .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                    .trackable(160,4).build());
-
-    // Need a pointer to the Registry.register() variable.
-    private static final EntityType secPointer = SLIME_ENTITY_DEBUG;
 
 
     public static boolean canSpawnSEC(EntityType<? extends SlimeEntityColoured> type, WorldAccess world, SpawnReason spawnReason,
