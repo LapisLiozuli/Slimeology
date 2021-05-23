@@ -27,8 +27,7 @@ public class RegisterItems {
     public static final Item SLIME_BALL_BLACK = new Item(new Item.Settings().group(Slimeology.SLIMEOLOGY));
 
     public static final Item SLIME_DEBUG_SPAWN_EGG = new SpawnEggItem(RegisterSEC.SLIME_ENTITY_DEBUG, 0xFF00FF, 0x000000, new Item.Settings().group(Slimeology.SLIMEOLOGY));
-//    public static final Item SLIME_DEBUG_SPAWN_EGG = new SpawnEggItem(SlimeEntityColoured.SLIME_ENTITY_DEBUG, 0xFF00FF, 0x000000, new Item.Settings().group(Slimeology.SLIMEOLOGY));
-//    public static final Item SLIME_WHITE_SPAWN_EGG = new SpawnEggItem(SlimeEntityWhite.SLIME_ENTITY_WHITE, 0xF8F8F8, 0xDCDCDC, new Item.Settings().group(Slimeology.SLIMEOLOGY));
+    public static final Item SLIME_WHITE_SPAWN_EGG = new SpawnEggItem(RegisterSEC.SLIME_ENTITY_WHITE, 0xF8F8F8, 0xDCDCDC, new Item.Settings().group(Slimeology.SLIMEOLOGY));
 //    public static final Item SLIME_ORANGE_SPAWN_EGG = new SpawnEggItem(SlimeEntityOrange.SLIME_ENTITY_ORANGE, 0xFB771F, 0xD75E00, new Item.Settings().group(Slimeology.SLIMEOLOGY));
 //    public static final Item SLIME_MAGENTA_SPAWN_EGG = new SpawnEggItem(SlimeEntityMagenta.SLIME_ENTITY_MAGENTA, 0xD24BC9, 0xA52C99, new Item.Settings().group(Slimeology.SLIMEOLOGY));
 //    public static final Item SLIME_LIGHT_BLUE_SPAWN_EGG = new SpawnEggItem(SlimeEntityLightBlue.SLIME_ENTITY_LIGHT_BLUE, 0x45B0E6, 0x1891B6, new Item.Settings().group(Slimeology.SLIMEOLOGY));
@@ -66,7 +65,7 @@ public class RegisterItems {
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_ball_black"), SLIME_BALL_BLACK);
 
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_debug_spawn_egg"), SLIME_DEBUG_SPAWN_EGG);
-//        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_white_spawn_egg"), SLIME_WHITE_SPAWN_EGG);
+        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_white_spawn_egg"), SLIME_WHITE_SPAWN_EGG);
 //        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_orange_spawn_egg"), SLIME_ORANGE_SPAWN_EGG);
 //        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_magenta_spawn_egg"), SLIME_MAGENTA_SPAWN_EGG);
 //        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_light_blue_spawn_egg"), SLIME_LIGHT_BLUE_SPAWN_EGG);

@@ -6,8 +6,7 @@ public class SlimeRenderHandler {
 
     public static void registerSlimeEntityColoured() {
         SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(RegisterSEC.SLIME_ENTITY_DEBUG, "slime_entity_debug");
-//        SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(SlimeEntityColoured.SLIME_ENTITY_DEBUG, "slime_entity_debug");
-//        SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(SlimeEntityWhite.SLIME_ENTITY_WHITE, "slime_entity_white");
+        SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(RegisterSEC.SLIME_ENTITY_WHITE, "slime_entity_white");
 //        SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(SlimeEntityOrange.SLIME_ENTITY_ORANGE, "slime_entity_orange");
 //        SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(SlimeEntityMagenta.SLIME_ENTITY_MAGENTA, "slime_entity_magenta");
 //        SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(SlimeEntityLightBlue.SLIME_ENTITY_LIGHT_BLUE, "slime_entity_light_blue");

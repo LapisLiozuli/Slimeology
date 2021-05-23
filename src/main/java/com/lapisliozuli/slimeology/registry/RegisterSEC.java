@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
@@ -40,14 +41,32 @@ public class RegisterSEC {
 
     // Initialise the variable first.
     public static EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG;
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_WHITE;
     // Then put the SEC variable into a map with the paths, particle and itself as an input?
+
+//    public static EntityType<SlimeEntityColoured> bulkRegisterFETB(EntityType<SlimeEntityColoured> secFETB, String sec_path, Item slimeParticle) {
+//        return Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, sec_path),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, slimeParticle, secFETB))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//    }
 
     // Try to input parameters for SEC class.
     static {
+//        SLIME_ENTITY_DEBUG = bulkRegisterFETB(SLIME_ENTITY_DEBUG, "slime_entity_debug", RegisterItems.SLIME_BALL_DEBUG);
         SLIME_ENTITY_DEBUG = Registry.register(
                 Registry.ENTITY_TYPE,
                 new Identifier(Slimeology.MOD_ID, "slime_entity_debug"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (arg, arg2) -> new SlimeEntityColoured(arg, arg2, RegisterItems.SLIME_BALL_DEBUG, SLIME_ENTITY_DEBUG))
+                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_DEBUG, SLIME_ENTITY_DEBUG))
+                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+                        .trackable(160, 4).build());
+
+         SLIME_ENTITY_WHITE = Registry.register(
+                Registry.ENTITY_TYPE,
+                new Identifier(Slimeology.MOD_ID, "slime_entity_white"),
+                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_WHITE, SLIME_ENTITY_WHITE))
                         .dimensions(EntityDimensions.changing(2.04f, 2.04f))
                         .trackable(160, 4).build());
     }
@@ -91,7 +110,8 @@ public class RegisterSEC {
    // This Map assigns a collection of spawnable biomes to each SEC.
     public static Map<EntityType, List<Biome>> allocatedBiomeImperative() {
         final Map<EntityType, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
-//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
+                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills"));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
@@ -173,6 +193,7 @@ public class RegisterSEC {
     public static void registerSlimeologyEntityTypes() {
         // Debug Slime only
         FabricDefaultAttributeRegistry.register(SLIME_ENTITY_DEBUG, HostileEntity.createHostileAttributes());
+        FabricDefaultAttributeRegistry.register(SLIME_ENTITY_WHITE, HostileEntity.createHostileAttributes());
         SpawnRestrictionMixin.register(
                 SLIME_ENTITY_DEBUG,
                 SpawnRestriction.Location.ON_GROUND,
@@ -180,7 +201,8 @@ public class RegisterSEC {
                 SlimeEntityColoured::canSpawnSEC);
         for (Biome biomeReg : Registry.BIOME) {
             EntityType k = SLIME_ENTITY_DEBUG;
-            List<Biome> v = convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite + ", " + Slimeology.CONFIG.secBiomes.biomesForSECYellow);
+            List<Biome> v = convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
+                    "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
             checkBiomeForSpawnEntry(biomeReg, k, v);
             RegistryEntryAddedCallback.event(Registry.BIOME).register(
                     (i, identifier, biome) -> {
