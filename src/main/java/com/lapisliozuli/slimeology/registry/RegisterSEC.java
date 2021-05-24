@@ -170,48 +170,48 @@ public class RegisterSEC {
 
 
     public static void registerSlimeologyEntityTypes() {
-        // Debug Slime only
-        FabricDefaultAttributeRegistry.register(SLIME_ENTITY_DEBUG, HostileEntity.createHostileAttributes());
-        SpawnRestrictionMixin.register(
-                SLIME_ENTITY_DEBUG,
-                SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                SlimeEntityColoured::canSpawnSEC);
-        for (Biome biomeReg : Registry.BIOME) {
-            EntityType k = SLIME_ENTITY_DEBUG;
-            List<Biome> v = convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlack);
-            checkBiomeForSpawnEntry(biomeReg, k, v);
-            RegistryEntryAddedCallback.event(Registry.BIOME).register(
-                    (i, identifier, biome) -> {
-                        RegisterSEC.checkBiomeForSpawnEntry(biomeReg, k, v);
-                    });
-        }
-
-//        secForcedOrder.forEach(entry->{
-//            FabricDefaultAttributeRegistry.register(entry, HostileEntity.createHostileAttributes());
-////            // Basic version: SECs spawn in all Biomes.
-////            for (Biome biome : Registry.BIOME) {
-////
-////                biome.getEntitySpawnList(entry.getSpawnGroup())
-////                        .add(new Biome.SpawnEntry(entry, 100, 4, 4));
-////            }
-//        });
-//
-//        secSpawnPredicatesMap.forEach(RegisterSEC::registerSpawnRestriction);
-//
-//        for (Map.Entry<EntityType, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
-//            EntityType slime = entry.getKey();
-//            List<Biome> biomeList = entry.getValue();
-//
-//            // Checks the biome and adds the callback
-//            for (Biome biomeReg : Registry.BIOME) {
-//                checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
-//                RegistryEntryAddedCallback.event(Registry.BIOME).register(
-//                        (i, identifier, biome) -> {
-//                            RegisterSEC.checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
-//                        });
-//            }
+//        // Debug Slime only
+//        FabricDefaultAttributeRegistry.register(SLIME_ENTITY_DEBUG, HostileEntity.createHostileAttributes());
+//        SpawnRestrictionMixin.register(
+//                SLIME_ENTITY_DEBUG,
+//                SpawnRestriction.Location.ON_GROUND,
+//                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+//                SlimeEntityColoured::canSpawnSEC);
+//        for (Biome biomeReg : Registry.BIOME) {
+//            EntityType k = SLIME_ENTITY_DEBUG;
+//            List<Biome> v = convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlack);
+//            checkBiomeForSpawnEntry(biomeReg, k, v);
+//            RegistryEntryAddedCallback.event(Registry.BIOME).register(
+//                    (i, identifier, biome) -> {
+//                        RegisterSEC.checkBiomeForSpawnEntry(biomeReg, k, v);
+//                    });
 //        }
+
+        secForcedOrder.forEach(entry->{
+            FabricDefaultAttributeRegistry.register(entry, HostileEntity.createHostileAttributes());
+//            // Basic version: SECs spawn in all Biomes.
+//            for (Biome biome : Registry.BIOME) {
+//
+//                biome.getEntitySpawnList(entry.getSpawnGroup())
+//                        .add(new Biome.SpawnEntry(entry, 100, 4, 4));
+//            }
+        });
+
+        secSpawnPredicatesMap.forEach(RegisterSEC::registerSpawnRestriction);
+
+        for (Map.Entry<EntityType, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
+            EntityType slime = entry.getKey();
+            List<Biome> biomeList = entry.getValue();
+
+            // Checks the biome and adds the callback
+            for (Biome biomeReg : Registry.BIOME) {
+                checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
+                RegistryEntryAddedCallback.event(Registry.BIOME).register(
+                        (i, identifier, biome) -> {
+                            RegisterSEC.checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
+                        });
+            }
+        }
 
     }
 }

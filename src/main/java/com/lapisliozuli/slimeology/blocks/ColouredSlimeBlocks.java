@@ -1,6 +1,7 @@
 package com.lapisliozuli.slimeology.blocks;
 
 import com.lapisliozuli.slimeology.Slimeology;
+import com.lapisliozuli.slimeology.items.BleachingBrush;
 import com.lapisliozuli.slimeology.items.SlimyToolBase;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
@@ -8,15 +9,26 @@ import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.UniformLootTableRange;
 import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 
 import java.util.*;
 
@@ -25,6 +37,8 @@ public class ColouredSlimeBlocks extends SlimeBlock {
     public ColouredSlimeBlocks() {
             super(FabricBlockSettings.copyOf(Blocks.SLIME_BLOCK).nonOpaque());
     }
+
+    public Item csbDyeItem = Items.BLACK_DYE;
 
     // Mass declare variables of the same type
     public static final ColouredSlimeBlocks SLIME_BLOCK_DEBUG = new ColouredSlimeBlocks(),
@@ -70,6 +84,29 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         return Collections.unmodifiableMap(colouredSlimeBlocksMap);
     }
     public static final Map<String, ColouredSlimeBlocks> colouredSlimeBlocksMap = imperative();
+
+
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack itemStack = player.getStackInHand(hand);
+        if (itemStack.getItem() == BleachingBrush.BLEACHING_BRUSH) {
+            if (!world.isClient) {
+                Direction direction = hit.getSide();
+                Direction direction2 = direction.getAxis() == Direction.Axis.Y ? player.getHorizontalFacing().getOpposite() : direction;
+                world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.setBlockState(pos, (BlockState)Blocks.SLIME_BLOCK.getDefaultState(), 11);
+                ItemEntity itemEntity = new ItemEntity(world, (double)pos.getX() + 0.5D + (double)direction2.getOffsetX() * 0.65D, (double)pos.getY() + 0.1D, (double)pos.getZ() + 0.5D + (double)direction2.getOffsetZ() * 0.65D, new ItemStack(csbDyeItem, 4));
+                itemEntity.setVelocity(0.05D * (double)direction2.getOffsetX() + world.random.nextDouble() * 0.02D, 0.05D, 0.05D * (double)direction2.getOffsetZ() + world.random.nextDouble() * 0.02D);
+                world.spawnEntity(itemEntity);
+                itemStack.damage(1, player, (playerEntity) -> {
+                    playerEntity.sendToolBreakStatus(hand);
+                });
+            }
+
+            return ActionResult.success(world.isClient);
+        } else {
+            return super.onUse(state, world, pos, player, hand, hit);
+        }
+    }
 
     public static List<BlockItem> csbBlockItemsList = new ArrayList<>(Collections.emptyList());;
 
