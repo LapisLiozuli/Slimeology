@@ -292,8 +292,46 @@ public class RegisterSEC {
                 spawnPredicate);
     }
 
+    public static void regSpawn(EntityType<SlimeEntityColoured> inputSEC, String biomeList) {
+        FabricDefaultAttributeRegistry.register(inputSEC, HostileEntity.createHostileAttributes());
+
+        SpawnRestrictionMixin.register(
+                inputSEC,
+                SpawnRestriction.Location.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                SlimeEntityColoured::canSpawnSEC);
+
+        for (Biome biomeReg : Registry.BIOME) {
+            EntityType<SlimeEntityColoured> k = inputSEC;
+            List<Biome> v = convertConfigIDsToBiomes(biomeList);
+            checkBiomeForSpawnEntry(biomeReg, k, v);
+            RegistryEntryAddedCallback.event(Registry.BIOME).register(
+                    (i, identifier, biome) -> {
+                        RegisterSEC.checkBiomeForSpawnEntry(biomeReg, k, v);
+                    });
+        }
+    }
 
     public static void registerSlimeologyEntityTypes() {
+        regSpawn(SLIME_ENTITY_DEBUG, "minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
+                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
+        regSpawn(SLIME_ENTITY_WHITE, Slimeology.CONFIG.secBiomes.biomesForSECWhite);
+        regSpawn(SLIME_ENTITY_ORANGE, Slimeology.CONFIG.secBiomes.biomesForSECOrange);
+        regSpawn(SLIME_ENTITY_MAGENTA, Slimeology.CONFIG.secBiomes.biomesForSECMagenta);
+        regSpawn(SLIME_ENTITY_LIGHT_BLUE, Slimeology.CONFIG.secBiomes.biomesForSECLightBlue);
+        regSpawn(SLIME_ENTITY_YELLOW, Slimeology.CONFIG.secBiomes.biomesForSECYellow);
+        regSpawn(SLIME_ENTITY_LIME, Slimeology.CONFIG.secBiomes.biomesForSECLime);
+        regSpawn(SLIME_ENTITY_PINK, Slimeology.CONFIG.secBiomes.biomesForSECPink);
+        regSpawn(SLIME_ENTITY_GRAY, Slimeology.CONFIG.secBiomes.biomesForSECGray);
+        regSpawn(SLIME_ENTITY_LIGHT_GRAY, Slimeology.CONFIG.secBiomes.biomesForSECLightGray);
+        regSpawn(SLIME_ENTITY_CYAN, Slimeology.CONFIG.secBiomes.biomesForSECCyan);
+        regSpawn(SLIME_ENTITY_PURPLE, Slimeology.CONFIG.secBiomes.biomesForSECPurple);
+        regSpawn(SLIME_ENTITY_BLUE, Slimeology.CONFIG.secBiomes.biomesForSECBlue);
+        regSpawn(SLIME_ENTITY_BROWN, Slimeology.CONFIG.secBiomes.biomesForSECBrown);
+        regSpawn(SLIME_ENTITY_GREEN, Slimeology.CONFIG.secBiomes.biomesForSECGreen);
+        regSpawn(SLIME_ENTITY_RED, Slimeology.CONFIG.secBiomes.biomesForSECRed);
+        regSpawn(SLIME_ENTITY_BLACK, Slimeology.CONFIG.secBiomes.biomesForSECBlack);
+
 //        // Debug Slime only
 //        FabricDefaultAttributeRegistry.register(SLIME_ENTITY_DEBUG, HostileEntity.createHostileAttributes());
 //        FabricDefaultAttributeRegistry.register(SLIME_ENTITY_WHITE, HostileEntity.createHostileAttributes());
@@ -313,25 +351,25 @@ public class RegisterSEC {
 //                    });
 //        }
 
-        secForcedOrder.forEach(entry->{
-            FabricDefaultAttributeRegistry.register(entry, HostileEntity.createHostileAttributes());
-        });
-
-        secSpawnPredicatesMap.forEach(RegisterSEC::registerSpawnRestriction);
-
-        for (Map.Entry<EntityType, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
-            EntityType slime = entry.getKey();
-            List<Biome> biomeList = entry.getValue();
-
-            // Checks the biome and adds the callback
-            for (Biome biomeReg : Registry.BIOME) {
-                checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
-                RegistryEntryAddedCallback.event(Registry.BIOME).register(
-                        (i, identifier, biome) -> {
-                            RegisterSEC.checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
-                        });
-            }
-        }
+//        secForcedOrder.forEach(entry->{
+//            FabricDefaultAttributeRegistry.register(entry, HostileEntity.createHostileAttributes());
+//        });
+//
+//        secSpawnPredicatesMap.forEach(RegisterSEC::registerSpawnRestriction);
+//
+//        for (Map.Entry<EntityType, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
+//            EntityType slime = entry.getKey();
+//            List<Biome> biomeList = entry.getValue();
+//
+//            // Checks the biome and adds the callback
+//            for (Biome biomeReg : Registry.BIOME) {
+//                checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
+//                RegistryEntryAddedCallback.event(Registry.BIOME).register(
+//                        (i, identifier, biome) -> {
+//                            RegisterSEC.checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
+//                        });
+//            }
+//        }
 
     }
 }
