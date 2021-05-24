@@ -192,7 +192,7 @@ public class RegisterSEC {
 
     // ======================= DATA
     // This list enforces the order of the SECs
-    public static List<EntityType> secForcedOrder = Stream.of(
+    public static List<EntityType<SlimeEntityColoured>> secForcedOrder = Stream.of(
 //            SLIME_ENTITY_DEBUG
             SLIME_ENTITY_DEBUG,
             SLIME_ENTITY_WHITE, SLIME_ENTITY_ORANGE, SLIME_ENTITY_MAGENTA, SLIME_ENTITY_LIGHT_BLUE,
