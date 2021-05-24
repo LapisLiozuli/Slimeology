@@ -37,16 +37,18 @@ public class SlimeEntityColoured extends SlimeEntity {
 
     private ItemConvertible slimeParticle;
     private static EntityType<SlimeEntityColoured> secPointer;
+    private static int secDyeIndex;
 
     // Constructor with additional particle and SEC variable as parameters.
     public SlimeEntityColoured(
             final EntityType<? extends SlimeEntityColoured> arg,
             final World arg2,
             final ItemConvertible slimeParticleInput,
-            final EntityType<SlimeEntityColoured> secInput) {
+//            final EntityType<SlimeEntityColoured> secInput) {
+            final int inputIndex) {
         super(arg, arg2);
         this.slimeParticle = slimeParticleInput;
-        secPointer = secInput;
+        secDyeIndex = inputIndex;
     }
 
 //    public static final EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = Registry.register(
@@ -113,7 +115,7 @@ public class SlimeEntityColoured extends SlimeEntity {
             Collections.sort(biomeSiblings, Ordering.explicit(RegisterSEC.secForcedOrder));
 
             // secDyeIndex is the index of the SEC within secForcedOrder.
-            int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(secPointer);
+//            int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(secPointer);
             Random slimeChunkSeed = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((ServerWorldAccess)world).getSeed(), 987234911L);
             // bl will always be the same because the seed and number of calls are the same.
             // On this 1st call of nextInt(), 10% of chunks become slime chunks.

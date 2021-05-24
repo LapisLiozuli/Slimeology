@@ -19,158 +19,176 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RegisterSEC {
-
-    // Initialise the SLIME_ENTITY first.
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_WHITE;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_ORANGE;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_MAGENTA;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_BLUE;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_YELLOW;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIME;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PINK;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GRAY;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_GRAY;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_CYAN;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PURPLE;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLUE;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BROWN;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GREEN;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_RED;
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLACK;
-
-//    public static EntityType<SlimeEntityColoured> bulkRegisterFETB(EntityType<SlimeEntityColoured> secFETB, String sec_path, Item slimeParticle) {
-//        return Registry.register(
-//                Registry.ENTITY_TYPE,
-//                new Identifier(Slimeology.MOD_ID, sec_path),
-//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, slimeParticle, secFETB))
-//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-//                        .trackable(160, 4).build());
-//    }
-
-    // Static initialiser block to allow reference of self as a parameter.
-    static {
-//        SLIME_ENTITY_DEBUG = bulkRegisterFETB(SLIME_ENTITY_DEBUG, "slime_entity_debug", RegisterItems.SLIME_BALL_DEBUG);
-        SLIME_ENTITY_DEBUG = Registry.register(
+    public static EntityType<SlimeEntityColoured> bulkRegisterFETB(int inputIndex, String sec_path, Item slimeParticle) {
+        return Registry.register(
                 Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_debug"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_DEBUG, SLIME_ENTITY_DEBUG))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-         SLIME_ENTITY_WHITE = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_white"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_WHITE, SLIME_ENTITY_WHITE))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-
-        SLIME_ENTITY_ORANGE = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_orange"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_ORANGE, SLIME_ENTITY_ORANGE))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_MAGENTA = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_magenta"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_MAGENTA, SLIME_ENTITY_MAGENTA))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_LIGHT_BLUE = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_light_blue"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_LIGHT_BLUE, SLIME_ENTITY_LIGHT_BLUE))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_YELLOW = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_yellow"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_YELLOW, SLIME_ENTITY_YELLOW))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_LIME = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_lime"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_LIME, SLIME_ENTITY_LIME))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_PINK = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_pink"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_PINK, SLIME_ENTITY_PINK))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_GRAY = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_gray"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_GRAY, SLIME_ENTITY_GRAY))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_LIGHT_GRAY = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_light_gray"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_LIGHT_GRAY, SLIME_ENTITY_LIGHT_GRAY))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_CYAN = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_cyan"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_CYAN, SLIME_ENTITY_CYAN))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_PURPLE = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_purple"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_PURPLE, SLIME_ENTITY_PURPLE))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_BLUE = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_blue"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_BLUE, SLIME_ENTITY_BLUE))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_BROWN = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_brown"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_BROWN, SLIME_ENTITY_BROWN))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_GREEN = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_green"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_GREEN, SLIME_ENTITY_GREEN))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_RED = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_red"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_RED, SLIME_ENTITY_RED))
-                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                        .trackable(160, 4).build());
-
-        SLIME_ENTITY_BLACK = Registry.register(
-                Registry.ENTITY_TYPE,
-                new Identifier(Slimeology.MOD_ID, "slime_entity_black"),
-                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_BLACK, SLIME_ENTITY_BLACK))
+                new Identifier(Slimeology.MOD_ID, sec_path),
+                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, slimeParticle, inputIndex))
                         .dimensions(EntityDimensions.changing(2.04f, 2.04f))
                         .trackable(160, 4).build());
     }
+
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = bulkRegisterFETB(0, "slime_entity_debug", RegisterItems.SLIME_BALL_DEBUG);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_WHITE = bulkRegisterFETB(1, "slime_entity_white", RegisterItems.SLIME_BALL_WHITE);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_ORANGE = bulkRegisterFETB(2, "slime_entity_orange", RegisterItems.SLIME_BALL_ORANGE);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_MAGENTA = bulkRegisterFETB(3, "slime_entity_magenta", RegisterItems.SLIME_BALL_MAGENTA);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_BLUE = bulkRegisterFETB(4, "slime_entity_light_blue", RegisterItems.SLIME_BALL_LIGHT_BLUE);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_YELLOW = bulkRegisterFETB(5, "slime_entity_yellow", RegisterItems.SLIME_BALL_YELLOW);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIME = bulkRegisterFETB(6, "slime_entity_lime", RegisterItems.SLIME_BALL_LIME);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PINK = bulkRegisterFETB(7, "slime_entity_pink", RegisterItems.SLIME_BALL_PINK);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GRAY = bulkRegisterFETB(8, "slime_entity_gray", RegisterItems.SLIME_BALL_GRAY);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_GRAY = bulkRegisterFETB(9, "slime_entity_light_gray", RegisterItems.SLIME_BALL_LIGHT_GRAY);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_CYAN = bulkRegisterFETB(10, "slime_entity_cyan", RegisterItems.SLIME_BALL_CYAN);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PURPLE = bulkRegisterFETB(11, "slime_entity_purple", RegisterItems.SLIME_BALL_PURPLE);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLUE = bulkRegisterFETB(12, "slime_entity_blue", RegisterItems.SLIME_BALL_BLUE);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BROWN = bulkRegisterFETB(13, "slime_entity_brown", RegisterItems.SLIME_BALL_BROWN);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GREEN = bulkRegisterFETB(14, "slime_entity_green", RegisterItems.SLIME_BALL_GREEN);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_RED = bulkRegisterFETB(15, "slime_entity_red", RegisterItems.SLIME_BALL_RED);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLACK = bulkRegisterFETB(16, "slime_entity_black", RegisterItems.SLIME_BALL_BLACK);
+
+//    public EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = Registry.register(
+//            Registry.ENTITY_TYPE,
+//            new Identifier(Slimeology.MOD_ID, "slime_entity_debug"),
+//            FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_DEBUG, 0))
+//                    .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                    .trackable(160, 4).build());
+
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_WHITE;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_ORANGE;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_MAGENTA;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_BLUE;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_YELLOW;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIME;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PINK;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GRAY;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_GRAY;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_CYAN;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PURPLE;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLUE;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BROWN;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GREEN;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_RED;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLACK;
+
+
+    // Static initialiser block to allow reference of self as a parameter.
+//    static {
+////        SLIME_ENTITY_DEBUG = bulkRegisterFETB(SLIME_ENTITY_DEBUG, "slime_entity_debug", RegisterItems.SLIME_BALL_DEBUG);
+//
+//
+//         SLIME_ENTITY_WHITE = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_white"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_WHITE, SLIME_ENTITY_WHITE))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//
+//        SLIME_ENTITY_ORANGE = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_orange"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_ORANGE, SLIME_ENTITY_ORANGE))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_MAGENTA = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_magenta"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_MAGENTA, SLIME_ENTITY_MAGENTA))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_LIGHT_BLUE = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_light_blue"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_LIGHT_BLUE, SLIME_ENTITY_LIGHT_BLUE))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_YELLOW = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_yellow"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_YELLOW, SLIME_ENTITY_YELLOW))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_LIME = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_lime"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_LIME, SLIME_ENTITY_LIME))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_PINK = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_pink"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_PINK, SLIME_ENTITY_PINK))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_GRAY = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_gray"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_GRAY, SLIME_ENTITY_GRAY))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_LIGHT_GRAY = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_light_gray"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_LIGHT_GRAY, SLIME_ENTITY_LIGHT_GRAY))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_CYAN = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_cyan"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_CYAN, SLIME_ENTITY_CYAN))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_PURPLE = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_purple"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_PURPLE, SLIME_ENTITY_PURPLE))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_BLUE = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_blue"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_BLUE, SLIME_ENTITY_BLUE))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_BROWN = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_brown"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_BROWN, SLIME_ENTITY_BROWN))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_GREEN = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_green"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_GREEN, SLIME_ENTITY_GREEN))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_RED = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_red"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_RED, SLIME_ENTITY_RED))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//
+//        SLIME_ENTITY_BLACK = Registry.register(
+//                Registry.ENTITY_TYPE,
+//                new Identifier(Slimeology.MOD_ID, "slime_entity_black"),
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, RegisterItems.SLIME_BALL_BLACK, SLIME_ENTITY_BLACK))
+//                        .dimensions(EntityDimensions.changing(2.04f, 2.04f))
+//                        .trackable(160, 4).build());
+//    }
 
     // ======================= DATA
     // This list enforces the order of the SECs
@@ -190,7 +208,7 @@ public class RegisterSEC {
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
 //                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills"));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
-//        secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
+        secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_LIGHT_BLUE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECLightBlue));
