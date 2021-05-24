@@ -48,8 +48,7 @@ public class RegisterSEC {
 //                        .trackable(160, 4).build());
 //    }
 
-    // Then put the SEC variable into a map with the paths, particle and itself as an input?
-    // Try to input parameters for SEC class.
+    // Static initialiser block to allow reference of self as a parameter.
     static {
 //        SLIME_ENTITY_DEBUG = bulkRegisterFETB(SLIME_ENTITY_DEBUG, "slime_entity_debug", RegisterItems.SLIME_BALL_DEBUG);
         SLIME_ENTITY_DEBUG = Registry.register(
@@ -184,36 +183,12 @@ public class RegisterSEC {
             SLIME_ENTITY_BROWN, SLIME_ENTITY_GREEN, SLIME_ENTITY_RED, SLIME_ENTITY_BLACK
     ).collect(Collectors.toList());
 
-    // This Map links registered SECs with their respective SpawnPredicate
-    // Hopefully can remove after the same canSpawnSEC can be applied to all SECs.
-    public static Map<EntityType, SpawnRestriction.SpawnPredicate> spawnPredicateImperative() {
-        final Map<EntityType, SpawnRestriction.SpawnPredicate> secSpawnPredicatesMap = new HashMap<>();
-        secSpawnPredicatesMap.put(SLIME_ENTITY_DEBUG, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_WHITE, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_ORANGE, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_MAGENTA, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_LIGHT_BLUE, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_YELLOW, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_LIME, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_PINK, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_GRAY, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_LIGHT_GRAY, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_CYAN, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_PURPLE, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_BLUE, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_BROWN, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_GREEN, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_RED, SlimeEntityColoured::canSpawnSEC);
-        secSpawnPredicatesMap.put(SLIME_ENTITY_BLACK, SlimeEntityColoured::canSpawnSEC);
-        return Collections.unmodifiableMap(secSpawnPredicatesMap);
-    }
-    public static final Map<EntityType, SpawnRestriction.SpawnPredicate> secSpawnPredicatesMap = spawnPredicateImperative();
 
    // This Map assigns a collection of spawnable biomes to each SEC.
     public static Map<EntityType, List<Biome>> allocatedBiomeImperative() {
         final Map<EntityType, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
-        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
-                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills"));
+//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
+//                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills"));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
@@ -282,16 +257,6 @@ public class RegisterSEC {
     }
 
 
-    // Stops SECs from spawning in mid-air, and also limits their spawning using canSpawnSEC()
-    public static void registerSpawnRestriction(EntityType type, SpawnRestriction.SpawnPredicate spawnPredicate) {
-        SpawnRestrictionMixin.register(
-                type,
-                SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                // This is the only place where canSpawnSEC is called, and maybe affect chunk spawning.
-                spawnPredicate);
-    }
-
     public static void regSpawn(EntityType<SlimeEntityColoured> inputSEC, String biomeList) {
         FabricDefaultAttributeRegistry.register(inputSEC, HostileEntity.createHostileAttributes());
 
@@ -312,6 +277,7 @@ public class RegisterSEC {
         }
     }
 
+
     public static void registerSlimeologyEntityTypes() {
         regSpawn(SLIME_ENTITY_DEBUG, "minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
                 "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
@@ -331,45 +297,5 @@ public class RegisterSEC {
         regSpawn(SLIME_ENTITY_GREEN, Slimeology.CONFIG.secBiomes.biomesForSECGreen);
         regSpawn(SLIME_ENTITY_RED, Slimeology.CONFIG.secBiomes.biomesForSECRed);
         regSpawn(SLIME_ENTITY_BLACK, Slimeology.CONFIG.secBiomes.biomesForSECBlack);
-
-//        // Debug Slime only
-//        FabricDefaultAttributeRegistry.register(SLIME_ENTITY_DEBUG, HostileEntity.createHostileAttributes());
-//        FabricDefaultAttributeRegistry.register(SLIME_ENTITY_WHITE, HostileEntity.createHostileAttributes());
-//        SpawnRestrictionMixin.register(
-//                SLIME_ENTITY_DEBUG,
-//                SpawnRestriction.Location.ON_GROUND,
-//                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-//                SlimeEntityColoured::canSpawnSEC);
-//        for (Biome biomeReg : Registry.BIOME) {
-//            EntityType k = SLIME_ENTITY_DEBUG;
-//            List<Biome> v = convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
-//                    "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
-//            checkBiomeForSpawnEntry(biomeReg, k, v);
-//            RegistryEntryAddedCallback.event(Registry.BIOME).register(
-//                    (i, identifier, biome) -> {
-//                        RegisterSEC.checkBiomeForSpawnEntry(biomeReg, k, v);
-//                    });
-//        }
-
-//        secForcedOrder.forEach(entry->{
-//            FabricDefaultAttributeRegistry.register(entry, HostileEntity.createHostileAttributes());
-//        });
-//
-//        secSpawnPredicatesMap.forEach(RegisterSEC::registerSpawnRestriction);
-//
-//        for (Map.Entry<EntityType, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
-//            EntityType slime = entry.getKey();
-//            List<Biome> biomeList = entry.getValue();
-//
-//            // Checks the biome and adds the callback
-//            for (Biome biomeReg : Registry.BIOME) {
-//                checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
-//                RegistryEntryAddedCallback.event(Registry.BIOME).register(
-//                        (i, identifier, biome) -> {
-//                            RegisterSEC.checkBiomeForSpawnEntry(biomeReg, slime, biomeList);
-//                        });
-//            }
-//        }
-
     }
 }
