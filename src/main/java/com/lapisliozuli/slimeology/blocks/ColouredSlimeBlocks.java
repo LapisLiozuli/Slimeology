@@ -44,8 +44,6 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         this.csbDyeItem = csbDyeItem;
     }
 
-//    public Item csbDyeItem = Items.BLACK_DYE;
-
     // Mass declare variables of the same type
     public static final ColouredSlimeBlocks SLIME_BLOCK_DEBUG = new ColouredSlimeBlocks(RegisterItems.SLIME_BALL_DEBUG),
                                     SLIME_BLOCK_WHITE = new ColouredSlimeBlocks(Items.WHITE_DYE),
