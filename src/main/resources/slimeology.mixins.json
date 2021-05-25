@@ -7,7 +7,8 @@
     "PistonHandlerInjectMixin",
     "SpawnRestrictionMixin",
     "PushEntitiesMixin",
-    "PistonBlockEntityRendererMixin"
+    "PistonBlockEntityRendererMixin",
+    "CauldronWashMixin"
   ],
   "client": [
   ],
