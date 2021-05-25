@@ -97,7 +97,6 @@ public class SlimeEntityColoured extends SlimeEntity {
             Collections.sort(biomeSiblings, Ordering.explicit(RegisterSEC.secForcedOrder));
 
             // secDyeIndex is the index of the SEC within secForcedOrder.
-//            int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(secPointer);
             EntityType<SlimeEntityColoured> secPointer = RegisterSEC.secForcedOrder.get(secDyeIndex);
             Random slimeChunkSeed = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((ServerWorldAccess)world).getSeed(), 987234911L);
             // bl will always be the same because the seed and number of calls are the same.
