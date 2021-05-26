@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-          "item": "minecraft:sand"
+          "item": "slimeology:slimy_sand"
           }
         ]
       }

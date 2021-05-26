@@ -6,6 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -40,6 +42,7 @@ public abstract class CauldronWashMixin {
                 if ((ColouredSlimeBlocks.colouredSlimeBlocksMap.containsValue(block)) && !world.isClient()) {
                     ItemStack itemStack5 = new ItemStack(Blocks.SLIME_BLOCK, 1);
                     player.setStackInHand(hand, itemStack5);
+                    world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_SLIME_BLOCK_STEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     this.setLevel(world, pos, state, i - 1);
 //                    return ActionResult.SUCCESS;
                 }
