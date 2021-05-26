@@ -29,35 +29,19 @@ import java.util.*;
 
 // Copied from MagmaCubeEntity
 public class SlimeEntityColoured extends SlimeEntity {
-    // Basic constructor without any modifications.
-    public SlimeEntityColoured(final EntityType<? extends SlimeEntityColoured> arg, final World arg2) {
+    private ItemConvertible slimeParticle;
+    private static int secDyeIndex;
+
+    // Constructor with additional particle and SEC variable as parameters.
+    public SlimeEntityColoured(
+            final EntityType<? extends SlimeEntityColoured> arg,
+            final World arg2,
+            final ItemConvertible slimeParticleInput,
+            final int inputIndex) {
         super(arg, arg2);
+        this.slimeParticle = slimeParticleInput;
+        secDyeIndex = inputIndex;
     }
-
-    private ItemConvertible slimeParticle = RegisterItems.SLIME_BALL_DEBUG;
-//    private ItemConvertible slimeParticle;
-//    private static EntityType<SlimeEntityColoured> secPointer;
-//
-//    // Constructor with additional particle and SEC variable as parameters.
-//    public SlimeEntityColoured(
-//            final EntityType<? extends SlimeEntityColoured> arg,
-//            final World arg2,
-//            final ItemConvertible slimeParticleInput,
-//            final EntityType<SlimeEntityColoured> secInput) {
-//        super(arg, arg2);
-//        this.slimeParticle = slimeParticleInput;
-//        secPointer = secInput;
-//    }
-
-    public static final EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = Registry.register(
-            Registry.ENTITY_TYPE,
-            new Identifier(Slimeology.MOD_ID, "slime_entity_debug"),
-            FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, SlimeEntityColoured::new)
-                    .dimensions(EntityDimensions.changing(2.04f, 2.04f))
-                    .trackable(160,4).build());
-
-    // Need a pointer to the Registry.register() variable.
-    private static final EntityType secPointer = SLIME_ENTITY_DEBUG;
 
     public static boolean canSlimeEntityColouredSpawn(final EntityType<SlimeEntityColoured> type, final WorldAccess world, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
         return world.getDifficulty() != Difficulty.PEACEFUL;
@@ -105,7 +89,7 @@ public class SlimeEntityColoured extends SlimeEntity {
             ChunkPos chunkPos = new ChunkPos(pos);
 
             // Get the list of coloured slimes that can spawn within the biome.
-            List<EntityType> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biome);
+            List<EntityType<SlimeEntityColoured>> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biome);
             if (biomeSiblings == null) {
                 return false;
             }
@@ -113,7 +97,7 @@ public class SlimeEntityColoured extends SlimeEntity {
             Collections.sort(biomeSiblings, Ordering.explicit(RegisterSEC.secForcedOrder));
 
             // secDyeIndex is the index of the SEC within secForcedOrder.
-            int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(secPointer);
+            EntityType<SlimeEntityColoured> secPointer = RegisterSEC.secForcedOrder.get(secDyeIndex);
             Random slimeChunkSeed = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((ServerWorldAccess)world).getSeed(), 987234911L);
             // bl will always be the same because the seed and number of calls are the same.
             // On this 1st call of nextInt(), 10% of chunks become slime chunks.
@@ -137,8 +121,8 @@ public class SlimeEntityColoured extends SlimeEntity {
                 int secChunkIndex = slimeChunkSeed.nextInt(16);
 
                 // First check if the SEC's index matches the chunk index. Then check if the SEC has been allocated for spawning within the biome.
-//                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
                 if (secDyeIndex == secChunkIndex && biomeSiblings.contains(secPointer)) {
+//                if (secDyeIndex == secDyeIndex) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
                         System.out.println("Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }

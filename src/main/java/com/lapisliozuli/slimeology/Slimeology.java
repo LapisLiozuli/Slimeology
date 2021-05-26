@@ -1,5 +1,6 @@
 package com.lapisliozuli.slimeology;
 
+import com.lapisliozuli.slimeology.items.SlimeBalls;
 import com.lapisliozuli.slimeology.registry.RegisterBlocks;
 import com.lapisliozuli.slimeology.registry.RegisterItems;
 import com.lapisliozuli.slimeology.registry.RegisterSEC;
@@ -24,7 +25,8 @@ public class Slimeology implements ModInitializer {
     @Override
     public void onInitialize() {
         // Items and blocks
-        RegisterItems.registerItems();
+        // Have to register Slimeballs before SECs.
+        SlimeBalls.registerSlimeBalls();
         RegisterBlocks.register();
 
         // Allows comments in config file
@@ -33,6 +35,8 @@ public class Slimeology implements ModInitializer {
 
         // For SlimeEntityColoured
         RegisterSEC.registerSlimeologyEntityTypes();
+        // Have to register SECs before Spawn Eggs.
+        RegisterItems.registerItems();
 
         // Non-stackables: Tools and Armour
         RegisterSlimyTools.registerSlimyTools();
