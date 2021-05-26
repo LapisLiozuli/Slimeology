@@ -1,14 +1,13 @@
 package com.lapisliozuli.slimeology.registry;
 
 import com.lapisliozuli.slimeology.Slimeology;
-import com.lapisliozuli.slimeology.entities.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class RegisterItems {
-    public static final Item SLIME_DEBUG_SPAWN_EGG = new SpawnEggItem(RegisterSEC.SLIME_ENTITY_DEBUG, 0xFF00FF, 0x000000, new Item.Settings().group(Slimeology.SLIMEOLOGY));
+//    public static final Item SLIME_DEBUG_SPAWN_EGG = new SpawnEggItem(RegisterSEC.SLIME_ENTITY_DEBUG, 0xFF00FF, 0x000000, new Item.Settings().group(Slimeology.SLIMEOLOGY));
     public static final Item SLIME_WHITE_SPAWN_EGG = new SpawnEggItem(RegisterSEC.SLIME_ENTITY_WHITE, 0xF8F8F8, 0xDCDCDC, new Item.Settings().group(Slimeology.SLIMEOLOGY));
     public static final Item SLIME_ORANGE_SPAWN_EGG = new SpawnEggItem(RegisterSEC.SLIME_ENTITY_ORANGE, 0xFB771F, 0xD75E00, new Item.Settings().group(Slimeology.SLIMEOLOGY));
     public static final Item SLIME_MAGENTA_SPAWN_EGG = new SpawnEggItem(RegisterSEC.SLIME_ENTITY_MAGENTA, 0xD24BC9, 0xA52C99, new Item.Settings().group(Slimeology.SLIMEOLOGY));
@@ -29,7 +28,7 @@ public class RegisterItems {
 
 
     public static void registerItems() {
-        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_debug_spawn_egg"), SLIME_DEBUG_SPAWN_EGG);
+//        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_debug_spawn_egg"), SLIME_DEBUG_SPAWN_EGG);
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_white_spawn_egg"), SLIME_WHITE_SPAWN_EGG);
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_orange_spawn_egg"), SLIME_ORANGE_SPAWN_EGG);
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_magenta_spawn_egg"), SLIME_MAGENTA_SPAWN_EGG);

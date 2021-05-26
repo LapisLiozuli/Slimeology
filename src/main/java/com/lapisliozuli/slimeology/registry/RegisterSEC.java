@@ -29,30 +29,30 @@ public class RegisterSEC {
                         .trackable(160, 4).build());
     }
 
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = bulkRegisterFETB("slime_entity_debug", SlimeBalls.SLIME_BALL_DEBUG, 0);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_WHITE = bulkRegisterFETB("slime_entity_white", SlimeBalls.SLIME_BALL_WHITE,1);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_ORANGE = bulkRegisterFETB("slime_entity_orange", SlimeBalls.SLIME_BALL_ORANGE, 2);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_MAGENTA = bulkRegisterFETB("slime_entity_magenta", SlimeBalls.SLIME_BALL_MAGENTA, 3);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_BLUE = bulkRegisterFETB("slime_entity_light_blue", SlimeBalls.SLIME_BALL_LIGHT_BLUE, 4);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_YELLOW = bulkRegisterFETB("slime_entity_yellow", SlimeBalls.SLIME_BALL_YELLOW, 5);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIME = bulkRegisterFETB("slime_entity_lime", SlimeBalls.SLIME_BALL_LIME, 6);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PINK = bulkRegisterFETB("slime_entity_pink", SlimeBalls.SLIME_BALL_PINK, 7);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GRAY = bulkRegisterFETB("slime_entity_gray", SlimeBalls.SLIME_BALL_GRAY, 8);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_GRAY = bulkRegisterFETB("slime_entity_light_gray", SlimeBalls.SLIME_BALL_LIGHT_GRAY, 9);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_CYAN = bulkRegisterFETB("slime_entity_cyan", SlimeBalls.SLIME_BALL_CYAN, 10);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PURPLE = bulkRegisterFETB("slime_entity_purple", SlimeBalls.SLIME_BALL_PURPLE, 11);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLUE = bulkRegisterFETB("slime_entity_blue", SlimeBalls.SLIME_BALL_BLUE, 12);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BROWN = bulkRegisterFETB("slime_entity_brown", SlimeBalls.SLIME_BALL_BROWN, 13);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GREEN = bulkRegisterFETB("slime_entity_green", SlimeBalls.SLIME_BALL_GREEN, 14);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_RED = bulkRegisterFETB("slime_entity_red", SlimeBalls.SLIME_BALL_RED, 15);
-    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLACK = bulkRegisterFETB("slime_entity_black", SlimeBalls.SLIME_BALL_BLACK, 16);
-
+    public static int debugSlime = 1;
+//    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_DEBUG = bulkRegisterFETB("slime_entity_debug", SlimeBalls.SLIME_BALL_DEBUG, 0);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_WHITE = bulkRegisterFETB("slime_entity_white", SlimeBalls.SLIME_BALL_WHITE,1 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_ORANGE = bulkRegisterFETB("slime_entity_orange", SlimeBalls.SLIME_BALL_ORANGE, 2 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_MAGENTA = bulkRegisterFETB("slime_entity_magenta", SlimeBalls.SLIME_BALL_MAGENTA, 3 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_BLUE = bulkRegisterFETB("slime_entity_light_blue", SlimeBalls.SLIME_BALL_LIGHT_BLUE, 4 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_YELLOW = bulkRegisterFETB("slime_entity_yellow", SlimeBalls.SLIME_BALL_YELLOW, 5 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIME = bulkRegisterFETB("slime_entity_lime", SlimeBalls.SLIME_BALL_LIME, 6 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PINK = bulkRegisterFETB("slime_entity_pink", SlimeBalls.SLIME_BALL_PINK, 7 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GRAY = bulkRegisterFETB("slime_entity_gray", SlimeBalls.SLIME_BALL_GRAY, 8 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_LIGHT_GRAY = bulkRegisterFETB("slime_entity_light_gray", SlimeBalls.SLIME_BALL_LIGHT_GRAY, 9 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_CYAN = bulkRegisterFETB("slime_entity_cyan", SlimeBalls.SLIME_BALL_CYAN, 10 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_PURPLE = bulkRegisterFETB("slime_entity_purple", SlimeBalls.SLIME_BALL_PURPLE, 11 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLUE = bulkRegisterFETB("slime_entity_blue", SlimeBalls.SLIME_BALL_BLUE, 12 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BROWN = bulkRegisterFETB("slime_entity_brown", SlimeBalls.SLIME_BALL_BROWN, 13 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_GREEN = bulkRegisterFETB("slime_entity_green", SlimeBalls.SLIME_BALL_GREEN, 14 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_RED = bulkRegisterFETB("slime_entity_red", SlimeBalls.SLIME_BALL_RED, 15 - debugSlime);
+    public static EntityType<SlimeEntityColoured> SLIME_ENTITY_BLACK = bulkRegisterFETB("slime_entity_black", SlimeBalls.SLIME_BALL_BLACK, 16 - debugSlime);
 
     // ======================= DATA
     // This list enforces the order of the SECs
     public static List<EntityType<SlimeEntityColoured>> secForcedOrder = Stream.of(
 //            SLIME_ENTITY_DEBUG
-            SLIME_ENTITY_DEBUG,
+//            SLIME_ENTITY_DEBUG,
             SLIME_ENTITY_WHITE, SLIME_ENTITY_ORANGE, SLIME_ENTITY_MAGENTA, SLIME_ENTITY_LIGHT_BLUE,
             SLIME_ENTITY_YELLOW, SLIME_ENTITY_LIME, SLIME_ENTITY_PINK, SLIME_ENTITY_GRAY,
             SLIME_ENTITY_LIGHT_GRAY, SLIME_ENTITY_CYAN, SLIME_ENTITY_PURPLE, SLIME_ENTITY_BLUE,
@@ -65,7 +65,7 @@ public class RegisterSEC {
         final Map<EntityType<SlimeEntityColoured>, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
 //        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
 //                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills"));
-        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
+//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
         secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
         secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
         secAllocatedBiomeMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
@@ -159,7 +159,7 @@ public class RegisterSEC {
 //        regSpawn(SLIME_ENTITY_DEBUG, "minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
 //                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
         // This actually disabled biome spawning for the Debug Slime without crashing.
-        regSpawn(SLIME_ENTITY_DEBUG, "");
+//        regSpawn(SLIME_ENTITY_DEBUG, "");
         regSpawn(SLIME_ENTITY_WHITE, Slimeology.CONFIG.secBiomes.biomesForSECWhite);
         regSpawn(SLIME_ENTITY_ORANGE, Slimeology.CONFIG.secBiomes.biomesForSECOrange);
         regSpawn(SLIME_ENTITY_MAGENTA, Slimeology.CONFIG.secBiomes.biomesForSECMagenta);
