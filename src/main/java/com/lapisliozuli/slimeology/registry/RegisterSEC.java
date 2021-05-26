@@ -158,7 +158,8 @@ public class RegisterSEC {
 
 //        regSpawn(SLIME_ENTITY_DEBUG, "minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
 //                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
-        regSpawn(SLIME_ENTITY_WHITE, "");
+        // This actually disabled biome spawning for the Debug Slime without crashing.
+        regSpawn(SLIME_ENTITY_DEBUG, "");
         regSpawn(SLIME_ENTITY_WHITE, Slimeology.CONFIG.secBiomes.biomesForSECWhite);
         regSpawn(SLIME_ENTITY_ORANGE, Slimeology.CONFIG.secBiomes.biomesForSECOrange);
         regSpawn(SLIME_ENTITY_MAGENTA, Slimeology.CONFIG.secBiomes.biomesForSECMagenta);
