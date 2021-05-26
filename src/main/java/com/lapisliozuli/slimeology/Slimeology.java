@@ -25,7 +25,7 @@ public class Slimeology implements ModInitializer {
     @Override
     public void onInitialize() {
         // Items and blocks
-//        RegisterItems.registerItems();
+        // Have to register Slimeballs before SECs.
         SlimeBalls.registerSlimeBalls();
         RegisterBlocks.register();
 
@@ -35,6 +35,7 @@ public class Slimeology implements ModInitializer {
 
         // For SlimeEntityColoured
         RegisterSEC.registerSlimeologyEntityTypes();
+        // Have to register SECs before Spawn Eggs.
         RegisterItems.registerItems();
 
         // Non-stackables: Tools and Armour
