@@ -2,6 +2,7 @@ package com.lapisliozuli.slimeology.blocks;
 
 import com.lapisliozuli.slimeology.Slimeology;
 import com.lapisliozuli.slimeology.items.BleachingBrush;
+import com.lapisliozuli.slimeology.items.SlimeBalls;
 import com.lapisliozuli.slimeology.items.SlimyToolBase;
 import com.lapisliozuli.slimeology.registry.RegisterItems;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -45,7 +46,7 @@ public class ColouredSlimeBlocks extends SlimeBlock {
     }
 
     // Mass declare variables of the same type
-    public static final ColouredSlimeBlocks SLIME_BLOCK_DEBUG = new ColouredSlimeBlocks(RegisterItems.SLIME_BALL_DEBUG),
+    public static final ColouredSlimeBlocks SLIME_BLOCK_DEBUG = new ColouredSlimeBlocks(SlimeBalls.SLIME_BALL_DEBUG),
                                     SLIME_BLOCK_WHITE = new ColouredSlimeBlocks(Items.WHITE_DYE),
                                     SLIME_BLOCK_ORANGE = new ColouredSlimeBlocks(Items.ORANGE_DYE),
                                     SLIME_BLOCK_MAGENTA = new ColouredSlimeBlocks(Items.MAGENTA_DYE),
