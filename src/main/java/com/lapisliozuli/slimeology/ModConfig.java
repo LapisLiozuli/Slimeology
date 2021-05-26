@@ -41,7 +41,7 @@ public final class ModConfig implements ConfigData {
 
         // Tweak the multiplier. Default 0.5F
         @Comment("Sets the multiplier ranging from 0.0 to 1.0. Vanilla uses 0.5.")
-        public float spawnMultiplier = 0.5F;
+        public float spawnMultiplier = 1.0F;
 
         // Switch for the debug statements in canSpawnSEC(). Default false.
         // Seems better to check if an option is true rather than false.

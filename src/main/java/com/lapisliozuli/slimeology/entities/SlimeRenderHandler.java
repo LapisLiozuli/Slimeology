@@ -22,7 +22,5 @@ public class SlimeRenderHandler {
         SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(RegisterSEC.SLIME_ENTITY_GREEN, "slime_entity_green");
         SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(RegisterSEC.SLIME_ENTITY_RED, "slime_entity_red");
         SlimeEntityColouredRenderer.registerSlimeEntityColouredRender(RegisterSEC.SLIME_ENTITY_BLACK, "slime_entity_black");
-
-
     }
 }
