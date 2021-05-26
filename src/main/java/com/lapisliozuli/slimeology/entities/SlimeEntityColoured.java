@@ -122,7 +122,6 @@ public class SlimeEntityColoured extends SlimeEntity {
 
                 // First check if the SEC's index matches the chunk index. Then check if the SEC has been allocated for spawning within the biome.
                 if (secDyeIndex == secChunkIndex && biomeSiblings.contains(secPointer)) {
-//                if (secDyeIndex == secDyeIndex) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
                         System.out.println("Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }
