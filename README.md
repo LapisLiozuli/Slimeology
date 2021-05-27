@@ -4,11 +4,11 @@
 
 Explore the world in search of more varieties of slime than ever! Enjoy an expanded block palette for both building and redstoning! 
 
-![Block Palette](https://imgur.com/tveBoRu.png)
-
 Custom advancements will guide you along every step of the way. 
 
 Requires Auto Config to run.
+
+![Block Palette](https://imgur.com/tveBoRu.png)
 
 ## Coloured Slimes
 
@@ -19,7 +19,6 @@ The natural slimy interstitia have strengthened, allowing these new slimes to sp
 [Coloured Slimes video](https://youtu.be/SQmxVdc2A2Y)
 
 ![Coloured Slimes](https://imgur.com/C30IONE.jpg)
-
 
 ## Coloured Slime Blocks and Coloured Slimeballs
 
@@ -38,7 +37,6 @@ A Coloured Slime Block can be crafted by into 9 Coloured Slimeballs as well.
 ![Coloured Slime Blocks](https://imgur.com/WshAzIv.png)
 ![Coloured Slimeballs](https://imgur.com/svhnyg0.png)
 ![csb_piston1](https://imgur.com/h8bSVao.gif)
-![]()
 
 ### Rainbow Slime Block
 
@@ -70,11 +68,11 @@ Then place some Coloured Slime Blocks directly around water as if you were farmi
 
 ![bleaching_brush and csbs](https://imgur.com/JeG8KQD.png)
 
-Then right-click to clean the Coloured Slime Block and scrape out a dye! Again, you wonder if there’s a more efficient way to extract dyes from Coloured Slime Blocks.
-
-[Bleaching Brush video](https://youtu.be/kN5n-oiB5ek)
+Then right-click to clean the Coloured Slime Block and scrape out a dye! Again, you wonder if there’s a more efficient way to extract dyes from Coloured Slime Blocks.\
 
 (You may ask, but how do I get a normal Slimeball without the Bleaching Brush? Well, Coloured Slimes spawn in slime chunks in the first place.)
+
+[Bleaching Brush video](https://youtu.be/kN5n-oiB5ek)
 
 ## Slimy Sand
 
@@ -96,13 +94,11 @@ Smelt Slimy Sand in a furnace to obtain a new type of glass with a slimy texture
 
 ![Slimy Glass](https://imgur.com/johUnhA.png)
 
-
 ## Coloured Sticky Pistons
 
 Crafted with a Coloured Slimeball and a Piston. However, the coloured slime spreads out more than vanilla slime over the piston head, staining the top as well as the sides. It could be useful for organising redstone contraptions. Coloured Sticky Pistons stick to all blocks.
 
 ![3) coloured slimeball + piston > csp](https://imgur.com/NlkUNIx.png)
-
 
 ![Coloured Sticky Pistons, top view](https://imgur.com/DZFYIAP.png)
 
