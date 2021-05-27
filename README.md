@@ -20,8 +20,11 @@ The natural slimy interstitia have strengthened, allowing these new slimes to sp
 
 More sticky blocks for jumping! For building! For redstoning! They can do everything a vanilla Slime Block can do like bouncing stuff, sticking to stuff, launching entities and transmitting redstone. They will stick to other blocks or their own colours when moved by a piston, but won’t stick to different colours or to Honey Blocks.
 
+[Launching Anvils with Coloured Slime Blocks](https://youtu.be/Lit6fEUx8gI)
 ![Coloured Slime Blocks](https://imgur.com/WshAzIv.png)
 ![Coloured Slimeballs](https://imgur.com/svhnyg0.png)
+![csb_piston1](https://imgur.com/h8bSVao.gif)
+![]()
 
 ### Rainbow Slime Block
 
@@ -29,11 +32,15 @@ A block that sticks to everything, even other Coloured Slime Blocks and Honey Bl
 
 ![Rainbow Slime Block, side view](https://imgur.com/ZtDplFd.png)
 ![Rainbow Slime Block, isometric view](https://imgur.com/DZQ5zKB.png)
-![RSB Piston w CSB](https://user-images.githubusercontent.com/70147943/119810883-0d1ca200-bf19-11eb-8b11-40c02dd77635.mp4)
+![rainbow1](https://imgur.com/BaYAZsT.gif)
+![rainbow2](https://imgur.com/jADcI4h.gif)
+![rainbow3](https://imgur.com/5vRhmpk.gif)
 
 ### Cauldron Washing
 
 Just like Shulker Box washing! If you want to obtain the vanilla Slime Block, fill a Cauldron with water and right-click it to wash away the colour from the Coloured Slime Block. It’s functional, but you wonder if there’s a better way.
+
+[Cauldron Washing video](https://youtu.be/laWfDx1SpoM)
 
 ### Bleaching Brush
 
@@ -41,13 +48,24 @@ If you’ve collected a lot of Coloured Slime Blocks and wish that you could mak
 
 (You may ask, but how do I get a normal Slimeball without the Bleaching Brush? Well, Coloured Slimes spawn in slime chunks in the first place.)
 
+[Bleaching Brush video](https://youtu.be/kN5n-oiB5ek)
+
 ## Slimy Sand
 
 Saturating a Sand Block with Slime combines the falling behaviour of Sand with the stickiness of the Slime Block. When placed next to a floating block, the Slimy Sand will fall down while dragging down the adjacent block until either block stops falling. A new convenient way of block transportation, or even block breaking.
 
+
+![slimysand_glass](https://imgur.com/K3QBeFo.png)
+![Slimy Sand Wall](https://imgur.com/DQ0KTpL.png)
+![slimysand1](https://imgur.com/VGVerlP.gif)
+![slimysand2](https://imgur.com/vT1JMcG.gif)
+![slimysand3](https://imgur.com/5g0IiVf.gif)
+
 ## Slimy Glass
 
 Smelt Slimy Sand in a furnace to obtain a new type of glass with a slimy texture and sticky properties. Useful if Slime Blocks aren’t transparent enough, or if you want a little more variety in windows.
+![Slimy Glass](https://imgur.com/johUnhA.png)
+
 
 ## Coloured Sticky Pistons
 
