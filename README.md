@@ -23,14 +23,13 @@ More sticky blocks for jumping! For building! For redstoning! They can do everyt
 ![Coloured Slime Blocks](https://imgur.com/WshAzIv.png)
 ![Coloured Slimeballs](https://imgur.com/svhnyg0.png)
 
-
 ### Rainbow Slime Block
 
 A block that sticks to everything, even other Coloured Slime Blocks and Honey Blocks. Might be quite useful, but user beware. Obtained by converting 9 of any type of Coloured Slime Block in a crafting grid.
 
 ![Rainbow Slime Block, side view](https://imgur.com/ZtDplFd.png)
-
 ![Rainbow Slime Block, isometric view](https://imgur.com/DZQ5zKB.png)
+https://user-images.githubusercontent.com/70147943/119810883-0d1ca200-bf19-11eb-8b11-40c02dd77635.mp4
 
 ### Cauldron Washing
 
