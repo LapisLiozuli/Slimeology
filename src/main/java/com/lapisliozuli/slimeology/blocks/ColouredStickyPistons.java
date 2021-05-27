@@ -41,7 +41,7 @@ public class ColouredStickyPistons extends PistonBlock {
     public ColouredStickyPistons() {
         super(true, FabricBlockSettings.copyOf(Blocks.STICKY_PISTON));
     }
-    public static final ColouredStickyPistons STICKY_PISTON_DEBUG = new ColouredStickyPistons();
+//    public static final ColouredStickyPistons STICKY_PISTON_DEBUG = new ColouredStickyPistons();
     public static final ColouredStickyPistons STICKY_PISTON_WHITE = new ColouredStickyPistons(),
             STICKY_PISTON_ORANGE = new ColouredStickyPistons(),
             STICKY_PISTON_MAGENTA = new ColouredStickyPistons(),
@@ -61,7 +61,7 @@ public class ColouredStickyPistons extends PistonBlock {
 
     public static Map<String, ColouredStickyPistons> imperative() {
         final Map<String, ColouredStickyPistons> ColouredStickyPistonsMap = new HashMap<>();
-        ColouredStickyPistonsMap.put("piston_debug", STICKY_PISTON_DEBUG);
+//        ColouredStickyPistonsMap.put("piston_debug", STICKY_PISTON_DEBUG);
         ColouredStickyPistonsMap.put("piston_white", STICKY_PISTON_WHITE);
         ColouredStickyPistonsMap.put("piston_orange", STICKY_PISTON_ORANGE);
         ColouredStickyPistonsMap.put("piston_magenta", STICKY_PISTON_MAGENTA);

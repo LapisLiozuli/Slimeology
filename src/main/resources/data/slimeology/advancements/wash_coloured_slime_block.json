@@ -2,7 +2,7 @@
   "parent": "slimeology:get_coloured_slime_block",
   "display": {
     "icon": {
-      "item": "slimeology:bleaching_brush"
+      "item": "minecraft:cauldron"
     },
     "title": {
       "translate": "advancements.slimeology.wash_coloured_slime_block.title"
@@ -12,24 +12,27 @@
     },
     "frame": "task",
     "show_toast": true,
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {
-    "get_bleaching_brush": {
-      "trigger": "minecraft:inventory_changed",
+    "wash_slime_block_white": {
+      "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "items": [
-          {
-          "item": "slimeology:bleaching_brush"
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
           }
-        ]
+        },
+        "item": {
+          "item": "slimeology:slime_block_white"
+        }
       }
     }
   },
   "requirements": [
     [
-      "get_bleaching_brush"
+      "wash_slime_block_white"
     ]
   ]
 }

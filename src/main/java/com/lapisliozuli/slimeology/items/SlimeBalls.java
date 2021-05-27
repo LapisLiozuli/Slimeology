@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class SlimeBalls {
-    public static final Item SLIME_BALL_DEBUG = new Item(new Item.Settings().group(Slimeology.SLIMEOLOGY));
+//    public static final Item SLIME_BALL_DEBUG = new Item(new Item.Settings().group(Slimeology.SLIMEOLOGY));
     public static final Item SLIME_BALL_WHITE = new Item(new Item.Settings().group(Slimeology.SLIMEOLOGY));
     public static final Item SLIME_BALL_ORANGE = new Item(new Item.Settings().group(Slimeology.SLIMEOLOGY));
     public static final Item SLIME_BALL_MAGENTA = new Item(new Item.Settings().group(Slimeology.SLIMEOLOGY));
@@ -25,7 +25,7 @@ public class SlimeBalls {
     public static final Item SLIME_BALL_BLACK = new Item(new Item.Settings().group(Slimeology.SLIMEOLOGY));
 
     public static void registerSlimeBalls() {
-        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_ball_debug"), SLIME_BALL_DEBUG);
+//        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_ball_debug"), SLIME_BALL_DEBUG);
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_ball_white"), SLIME_BALL_WHITE);
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_ball_orange"), SLIME_BALL_ORANGE);
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, "slime_ball_magenta"), SLIME_BALL_MAGENTA);

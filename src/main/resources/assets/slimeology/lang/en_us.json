@@ -116,8 +116,8 @@
   "advancements.slimeology.get_coloured_slime_block.description":"Not quite the Slime Block you know",
   "advancements.slimeology.get_coloured_slime_ball.title":"Gintama",
   "advancements.slimeology.get_coloured_slime_ball.description":"Slimy Souls",
-  "advancements.slimeology.wash_coloured_slime_block.title":"A Quick Scrub",
-  "advancements.slimeology.wash_coloured_slime_block.description":"Some scrubbing can get you slime blocks in a pinch",
+  "advancements.slimeology.bleach_coloured_slime_block_for_dye.title":"A Quick Scrub",
+  "advancements.slimeology.bleach_coloured_slime_block_for_dye.description":"Some scrubbing can get you dyes in a pinch",
   "advancements.slimeology.get_coloured_sticky_piston.title":"Pulled Along",
   "advancements.slimeology.get_coloured_sticky_piston.description":"This might be useful for building or for keeping track of contraptions",
   "advancements.slimeology.get_slimy_sand.title":"Do You Believe in Gravity?",
@@ -125,5 +125,7 @@
   "advancements.slimeology.get_slimy_glass.title":"Reading into the Stains",
   "advancements.slimeology.get_slimy_glass.description":"A blotchy kind of glass",
   "advancements.slimeology.get_rainbow_slime_block.title":"Chase the Rainbow",
-  "advancements.slimeology.get_rainbow_slime_block.description":"The power to bind"
+  "advancements.slimeology.get_rainbow_slime_block.description":"The power to bind",
+  "advancements.slimeology.wash_coloured_slime_block.title":"Immersion",
+  "advancements.slimeology.wash_coloured_slime_block.description":"Obtain a Slime Block by washing"
 }

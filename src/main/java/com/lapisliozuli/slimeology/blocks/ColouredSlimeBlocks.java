@@ -46,8 +46,8 @@ public class ColouredSlimeBlocks extends SlimeBlock {
     }
 
     // Mass declare variables of the same type
-    public static final ColouredSlimeBlocks SLIME_BLOCK_DEBUG = new ColouredSlimeBlocks(SlimeBalls.SLIME_BALL_DEBUG),
-                                    SLIME_BLOCK_WHITE = new ColouredSlimeBlocks(Items.WHITE_DYE),
+//    public static final ColouredSlimeBlocks SLIME_BLOCK_DEBUG = new ColouredSlimeBlocks(SlimeBalls.SLIME_BALL_DEBUG);
+    public static final ColouredSlimeBlocks SLIME_BLOCK_WHITE = new ColouredSlimeBlocks(Items.WHITE_DYE),
                                     SLIME_BLOCK_ORANGE = new ColouredSlimeBlocks(Items.ORANGE_DYE),
                                     SLIME_BLOCK_MAGENTA = new ColouredSlimeBlocks(Items.MAGENTA_DYE),
                                     SLIME_BLOCK_LIGHT_BLUE = new ColouredSlimeBlocks(Items.LIGHT_BLUE_DYE),
@@ -69,7 +69,7 @@ public class ColouredSlimeBlocks extends SlimeBlock {
     // Puts all Slimeblocks into a map for bulk handling.
     public static Map<String, ColouredSlimeBlocks> imperative() {
         final Map<String, ColouredSlimeBlocks> colouredSlimeBlocksMap = new HashMap<>();
-        colouredSlimeBlocksMap.put("slime_block_debug", SLIME_BLOCK_DEBUG);
+//        colouredSlimeBlocksMap.put("slime_block_debug", SLIME_BLOCK_DEBUG);
         colouredSlimeBlocksMap.put("slime_block_white", SLIME_BLOCK_WHITE);
         colouredSlimeBlocksMap.put("slime_block_orange", SLIME_BLOCK_ORANGE);
         colouredSlimeBlocksMap.put("slime_block_magenta", SLIME_BLOCK_MAGENTA);
