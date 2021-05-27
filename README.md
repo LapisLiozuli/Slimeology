@@ -1,4 +1,4 @@
-# Slimeology 
+# Slimeology: The Discovery of Slime
 
 ## Primer
 
