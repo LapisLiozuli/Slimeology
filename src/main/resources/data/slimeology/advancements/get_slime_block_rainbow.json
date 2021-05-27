@@ -5,10 +5,10 @@
       "item": "slimeology:slime_block_rainbow"
     },
     "title": {
-      "translate": "advancements.slimeology.get_rainbow_slime_block.title"
+      "translate": "advancements.slimeology.get_slime_block_rainbow.title"
     },
     "description": {
-      "translate": "advancements.slimeology.get_rainbow_slime_block.description"
+      "translate": "advancements.slimeology.get_slime_block_rainbow.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,7 +16,7 @@
     "hidden": false
   },
   "criteria": {
-    "get_rainbow_slime_block": {
+    "get_slime_block_rainbow": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -29,7 +29,7 @@
   },
   "requirements": [
     [
-      "get_rainbow_slime_block"
+      "get_slime_block_rainbow"
     ]
   ]
 }

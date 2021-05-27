@@ -430,16 +430,43 @@ public class ColouredStickyPistons extends PistonBlock {
         EXTENDED_DOWN_SHAPE = Block.createCuboidShape(0.0D, 4.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     }
 
+    // Same as csbRegister. May want to repackage the method.
+    public static void cspRegister(ColouredStickyPistons colouredStickyPistons, String path) {
+        // Block Register.
+        Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, path), colouredStickyPistons);
+        // Creative item menu tab.
+        BlockItem cspBlockItem = new BlockItem(colouredStickyPistons, new Item.Settings().group(Slimeology.SLIMEOLOGY));
+        // Item Register.
+        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, path), cspBlockItem);
+    }
 
     public static void registerColouredStickyPistons() {
-        ColouredStickyPistonsMap.forEach((k,v) ->
-                Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, k), v));
+        cspRegister(STICKY_PISTON_WHITE, "piston_white");
+        cspRegister(STICKY_PISTON_ORANGE, "piston_orange");
+        cspRegister(STICKY_PISTON_MAGENTA, "piston_magenta");
+        cspRegister(STICKY_PISTON_LIGHT_BLUE, "piston_light_blue");
+        cspRegister(STICKY_PISTON_YELLOW, "piston_yellow");
+        cspRegister(STICKY_PISTON_LIME, "piston_lime");
+        cspRegister(STICKY_PISTON_PINK, "piston_pink");
+        cspRegister(STICKY_PISTON_GRAY, "piston_gray");
+        cspRegister(STICKY_PISTON_LIGHT_GRAY, "piston_light_gray");
+        cspRegister(STICKY_PISTON_CYAN, "piston_cyan");
+        cspRegister(STICKY_PISTON_PURPLE, "piston_purple");
+        cspRegister(STICKY_PISTON_BLUE, "piston_blue");
+        cspRegister(STICKY_PISTON_BROWN, "piston_brown");
+        cspRegister(STICKY_PISTON_GREEN, "piston_green");
+        cspRegister(STICKY_PISTON_RED, "piston_red");
+        cspRegister(STICKY_PISTON_BLACK, "piston_black");
 
-        // Add the CSP BlockItems to a List.
-        for (Map.Entry<String, ColouredStickyPistons> iden : ColouredStickyPistonsMap.entrySet()) {
-            BlockItem cspBlockItem;
-            cspBlockItem = new BlockItem(iden.getValue(), new Item.Settings().group(Slimeology.SLIMEOLOGY));
-            Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, iden.getKey()), cspBlockItem);
-        }
+//        // Previous code which resulted in random order of BlockItems in creative menu.
+//        ColouredStickyPistonsMap.forEach((k,v) ->
+//                Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, k), v));
+//
+//        // Add the CSP BlockItems to a List.
+//        for (Map.Entry<String, ColouredStickyPistons> iden : ColouredStickyPistonsMap.entrySet()) {
+//            BlockItem cspBlockItem;
+//            cspBlockItem = new BlockItem(iden.getValue(), new Item.Settings().group(Slimeology.SLIMEOLOGY));
+//            Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, iden.getKey()), cspBlockItem);
+//        }
     }
 }

@@ -39,6 +39,7 @@ import java.util.*;
 
 public class ColouredSlimeBlocks extends SlimeBlock {
     private Item csbDyeItem;
+    public static List<BlockItem> csbBlockItemsList = new ArrayList<>(Collections.emptyList());
 
     public ColouredSlimeBlocks(Item csbDyeItem) {
             super(FabricBlockSettings.copyOf(Blocks.SLIME_BLOCK).nonOpaque());
@@ -136,23 +137,58 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         return true;
     }
 
-    public static List<BlockItem> csbBlockItemsList = new ArrayList<>(Collections.emptyList());;
-
 //    // The block loot table can store conditions, but it's not strictly necessary to allow the block to drop itself in item form.
 //    private static final Identifier SLIME_BLOCK_LOOT_TABLE_ID = new Identifier("minecraft", "blocks/slime_block");
 
+
+    public static List<BlockItem> csbRegister(ColouredSlimeBlocks colouredSlimeBlock, String path, List<BlockItem> csbBlockItemsList) {
+        // Block Register.
+        Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, path), colouredSlimeBlock);
+        // Creative item menu tab.
+        BlockItem csbBlockItem = new BlockItem(colouredSlimeBlock, new Item.Settings().group(Slimeology.SLIMEOLOGY));
+        // Item Register.
+        Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, path), csbBlockItem);
+        // Add to list.
+        csbBlockItemsList.add(csbBlockItem);
+
+//        // Render
+//        BlockRenderLayerMap.INSTANCE.putBlock(colouredSlimeBlock, RenderLayer.getTranslucent());
+
+        return csbBlockItemsList;
+    }
+
+
     public static void registerSlimeBlocks() {
-        colouredSlimeBlocksMap.forEach((k,v) ->
-                Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, k), v));
+        csbRegister(SLIME_BLOCK_WHITE, "slime_block_white", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_ORANGE, "slime_block_orange", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_MAGENTA, "slime_block_magenta", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_LIGHT_BLUE, "slime_block_light_blue", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_YELLOW, "slime_block_yellow", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_LIME, "slime_block_lime", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_PINK, "slime_block_pink", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_GRAY, "slime_block_gray", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_LIGHT_GRAY, "slime_block_light_gray", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_CYAN, "slime_block_cyan", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_PURPLE, "slime_block_purple", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_BLUE, "slime_block_blue", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_BROWN, "slime_block_brown", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_GREEN, "slime_block_green", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_RED, "slime_block_red", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_BLACK, "slime_block_black", csbBlockItemsList);
+        csbRegister(SLIME_BLOCK_RAINBOW, "slime_block_rainbow", csbBlockItemsList);
 
-        // Add the CSB BlockItems to a List.
-        for (Map.Entry<String, ColouredSlimeBlocks> iden : colouredSlimeBlocksMap.entrySet()) {
-            BlockItem csbBlockItem;
-            csbBlockItem = new BlockItem(iden.getValue(), new Item.Settings().group(Slimeology.SLIMEOLOGY));
-            Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, iden.getKey()), csbBlockItem);
-            csbBlockItemsList.add(csbBlockItem);
-
-        }
+//        // Previous code which resulted in random order of BlockItems in creative menu.
+//        // Register each CSB.
+//        colouredSlimeBlocksMap.forEach((k,v) ->
+//                Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, k), v));
+//
+//        // Add the CSB BlockItems to a List.
+//        for (Map.Entry<String, ColouredSlimeBlocks> iden : colouredSlimeBlocksMap.entrySet()) {
+//            BlockItem csbBlockItem;
+//            csbBlockItem = new BlockItem(iden.getValue(), new Item.Settings().group(Slimeology.SLIMEOLOGY));
+//            Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, iden.getKey()), csbBlockItem);
+//            csbBlockItemsList.add(csbBlockItem);
+//        }
 
 //        // Shouldn't this code be under the SlimyToolBase (Slimotic Duplicator)?
 //        // Sets loot table of Slime Block when broken by Slimotic Duplicator to drop extra slimeballs.

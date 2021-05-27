@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:slime_block",
-    "slimeology:slime_block_debug",
     "slimeology:slime_block_white",
     "slimeology:slime_block_orange",
     "slimeology:slime_block_magenta",

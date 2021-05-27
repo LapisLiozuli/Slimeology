@@ -28,11 +28,221 @@
           "item": "slimeology:slime_block_white"
         }
       }
+    },
+    "wash_slime_block_orange": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_orange"
+        }
+      }
+    },
+    "wash_slime_block_magenta": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_magenta"
+        }
+      }
+    },
+    "wash_slime_block_light_blue": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_light_blue"
+        }
+      }
+    },
+    "wash_slime_block_yellow": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_yellow"
+        }
+      }
+    },
+    "wash_slime_block_lime": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_lime"
+        }
+      }
+    },
+    "wash_slime_block_pink": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_pink"
+        }
+      }
+    },
+    "wash_slime_block_gray": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_gray"
+        }
+      }
+    },
+    "wash_slime_block_light_gray": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_light_gray"
+        }
+      }
+    },
+    "wash_slime_block_cyan": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_cyan"
+        }
+      }
+    },
+    "wash_slime_block_purple": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_purple"
+        }
+      }
+    },
+    "wash_slime_block_blue": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_blue"
+        }
+      }
+    },
+    "wash_slime_block_brown": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_brown"
+        }
+      }
+    },
+    "wash_slime_block_green": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_green"
+        }
+      }
+    },
+    "wash_slime_block_red": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_red"
+        }
+      }
+    },
+    "wash_slime_block_black": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:cauldron"
+          }
+        },
+        "item": {
+          "item": "slimeology:slime_block_black"
+        }
+      }
     }
   },
   "requirements": [
     [
-      "wash_slime_block_white"
+      "wash_slime_block_white",
+      "wash_slime_block_orange",
+      "wash_slime_block_magenta",
+      "wash_slime_block_light_blue",
+      "wash_slime_block_yellow",
+      "wash_slime_block_lime",
+      "wash_slime_block_pink",
+      "wash_slime_block_gray",
+      "wash_slime_block_light_gray",
+      "wash_slime_block_cyan",
+      "wash_slime_block_purple",
+      "wash_slime_block_blue",
+      "wash_slime_block_brown",
+      "wash_slime_block_green",
+      "wash_slime_block_red",
+      "wash_slime_block_black"
     ]
   ]
 }
