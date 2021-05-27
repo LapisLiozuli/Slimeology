@@ -29,7 +29,7 @@ A block that sticks to everything, even other Coloured Slime Blocks and Honey Bl
 
 ![Rainbow Slime Block, side view](https://imgur.com/ZtDplFd.png)
 ![Rainbow Slime Block, isometric view](https://imgur.com/DZQ5zKB.png)
-![](https://user-images.githubusercontent.com/70147943/119810883-0d1ca200-bf19-11eb-8b11-40c02dd77635.mp4)
+![RSB Piston w CSB](https://user-images.githubusercontent.com/70147943/119810883-0d1ca200-bf19-11eb-8b11-40c02dd77635.mp4)
 
 ### Cauldron Washing
 
