@@ -4,7 +4,7 @@
 
 Explore the world in search of more varieties of slime than ever! Enjoy an expanded block palette for both building and redstoning! 
 
-![Block Palette](https://imgur.com/tveBoRu)
+![Block Palette](https://imgur.com/tveBoRu.png)
 
 Custom advancements will guide you along every step of the way. 
 
@@ -20,17 +20,17 @@ The natural slimy interstitia have strengthened, allowing these new slimes to sp
 
 More sticky blocks for jumping! For building! For redstoning! They can do everything a vanilla Slime Block can do like bouncing stuff, sticking to stuff, launching entities and transmitting redstone. They will stick to other blocks or their own colours when moved by a piston, but won’t stick to different colours or to Honey Blocks.
 
-![Coloured Slime Blocks](https://imgur.com/WshAzIv)
-![Coloured Slimeballs](https://imgur.com/svhnyg0)
+![Coloured Slime Blocks](https://imgur.com/WshAzIv.png)
+![Coloured Slimeballs](https://imgur.com/svhnyg0.png)
 
 
 ### Rainbow Slime Block
 
 A block that sticks to everything, even other Coloured Slime Blocks and Honey Blocks. Might be quite useful, but user beware. Obtained by converting 9 of any type of Coloured Slime Block in a crafting grid.
 
-![Rainbow Slime Block, side view](https://imgur.com/ZtDplFd)
+![Rainbow Slime Block, side view](https://imgur.com/ZtDplFd.png)
 
-![Rainbow Slime Block, isometric view](https://imgur.com/DZQ5zKB)
+![Rainbow Slime Block, isometric view](https://imgur.com/DZQ5zKB.png)
 
 ### Cauldron Washing
 
@@ -54,9 +54,7 @@ Smelt Slimy Sand in a furnace to obtain a new type of glass with a slimy texture
 
 Crafted with a Coloured Slimeball and a Piston. However, the coloured slime spreads out more than vanilla slime over the piston head, staining the top as well as the sides. It could be useful for organising redstone contraptions. Coloured Sticky Pistons stick to all blocks.
 
-![Coloured Sticky Pistons, top view](https://imgur.com/DZFYIAP)
-
-Side view
+![Coloured Sticky Pistons, top view](https://imgur.com/DZFYIAP.png)
 
 ## Upcoming
 
