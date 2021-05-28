@@ -84,7 +84,8 @@ Saturating a Sand Block with Slime combines the falling behaviour of Sand with t
 ![Slimy Sand Wall](https://imgur.com/DQ0KTpL.png)
 ![slimysand1](https://imgur.com/VGVerlP.gif)
 ![slimysand2](https://imgur.com/vT1JMcG.gif)
-![slimysand3](https://imgur.com/5g0IiVf.gif)
+![slimysand4](https://imgur.com/5g0IiVf.gif)
+![slimy_sand_03](https://imgur.com/D8X4b8b.gif)
 
 ## Slimy Glass
 
@@ -98,7 +99,7 @@ Smelt Slimy Sand in a furnace to obtain a new type of glass with a slimy texture
 
 Crafted with a Coloured Slimeball and a Piston. However, the coloured slime spreads out more than vanilla slime over the piston head, staining the top as well as the sides. It could be useful for organising redstone contraptions. Coloured Sticky Pistons stick to all blocks.
 
-![3) coloured slimeball + piston > csp](https://imgur.com/NlkUNIx.png)
+![3) coloured slimeball + piston > csp](https://imgur.com/RdCMtYW.png)
 
 ![Coloured Sticky Pistons, top view](https://imgur.com/DZFYIAP.png)
 
