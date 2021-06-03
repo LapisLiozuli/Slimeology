@@ -30,17 +30,17 @@ import java.util.*;
 // Copied from MagmaCubeEntity
 public class SlimeEntityColoured extends SlimeEntity {
     private ItemConvertible slimeParticle;
-    private static int secDyeIndex;
+//    private static int secDyeIndex;
 
     // Constructor with additional particle and SEC variable as parameters.
     public SlimeEntityColoured(
             final EntityType<? extends SlimeEntityColoured> arg,
             final World arg2,
-            final ItemConvertible slimeParticleInput,
-            final int inputIndex) {
+            final ItemConvertible slimeParticleInput) {
+//            final int inputIndex) {
         super(arg, arg2);
         this.slimeParticle = slimeParticleInput;
-        secDyeIndex = inputIndex;
+//        secDyeIndex = inputIndex;
     }
 
     public static boolean canSlimeEntityColouredSpawn(final EntityType<SlimeEntityColoured> type, final WorldAccess world, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
@@ -97,7 +97,8 @@ public class SlimeEntityColoured extends SlimeEntity {
             Collections.sort(biomeSiblings, Ordering.explicit(RegisterSEC.secForcedOrder));
 
             // secDyeIndex is the index of the SEC within secForcedOrder.
-            EntityType<SlimeEntityColoured> secPointer = RegisterSEC.secForcedOrder.get(secDyeIndex);
+//            EntityType<SlimeEntityColoured> secPointer = RegisterSEC.secForcedOrder.get(secDyeIndex);
+            int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(type);
             Random slimeChunkSeed = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((ServerWorldAccess)world).getSeed(), 987234911L);
             // bl will always be the same because the seed and number of calls are the same.
             // On this 1st call of nextInt(), 10% of chunks become slime chunks.
@@ -112,7 +113,7 @@ public class SlimeEntityColoured extends SlimeEntity {
 
             // Executing the checks for canMobSpawn() to run. Based off slime spawning in swamps.
             if (bl
-                    && pos.getY() > Slimeology.CONFIG.secSpawning.heightFloor
+                        && pos.getY() > Slimeology.CONFIG.secSpawning.heightFloor
                     && pos.getY() < Slimeology.CONFIG.secSpawning.heightCap
                     && random.nextFloat() <= Slimeology.CONFIG.secSpawning.spawnMultiplier
                     && moonCheck
@@ -121,9 +122,9 @@ public class SlimeEntityColoured extends SlimeEntity {
                 int secChunkIndex = slimeChunkSeed.nextInt(16);
 
                 // First check if the SEC's index matches the chunk index. Then check if the SEC has been allocated for spawning within the biome.
-                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(secPointer)) {
+                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(type)) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                        System.out.println("SLIMEOLOGY: Spawning " + secPointer + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
+                        System.out.println("SLIMEOLOGY: Spawning " + type + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }
                     return canMobSpawn(type, world, spawnReason, pos, random);
                 }
@@ -132,13 +133,13 @@ public class SlimeEntityColoured extends SlimeEntity {
                 // But if this check also fails for this SEC, then no spawning occurs. That's fine because another type of SEC should pass the check and spawn.
                 else if (!biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
                     // Find the index of the SEC within the list of biome-spawnable slimes.
-                    int secSiblingIndex = biomeSiblings.indexOf(secPointer);
+                    int secSiblingIndex = biomeSiblings.indexOf(type);
                     // Optional 3rd call of nextInt(). Uses the slime chunk seed to generate an index within the length-range of biomeSiblings.
                     int secChunkReIndex = slimeChunkSeed.nextInt(biomeSiblings.size());
                     // If the new randomly generated number matches the index, spawning will occur.
                     if (secSiblingIndex == secChunkReIndex) {
                         if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                            System.out.println("SLIMEOLOGY: Spawning " + secPointer + " in variable Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkReIndex " + secChunkReIndex);
+                            System.out.println("SLIMEOLOGY: Spawning " + type + " in variable Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkReIndex " + secChunkReIndex);
                             System.out.println("SLIMEOLOGY: Allocated colour is " + RegisterSEC.secForcedOrder.get(secChunkIndex) + " while biomeSiblings are " + biomeSiblings);
                         }
                         return canMobSpawn(type, world, spawnReason, pos, random);
