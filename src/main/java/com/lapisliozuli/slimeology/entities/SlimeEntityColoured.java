@@ -89,7 +89,8 @@ public class SlimeEntityColoured extends SlimeEntity {
             ChunkPos chunkPos = new ChunkPos(pos);
 
             // Get the list of coloured slimes that can spawn within the biome.
-            List<EntityType<SlimeEntityColoured>> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biome);
+//            List<EntityType<SlimeEntityColoured>> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biome);
+            List<EntityType<SlimeEntityColoured>> biomeSiblings = null;
             if (biomeSiblings == null) {
                 return false;
             }
