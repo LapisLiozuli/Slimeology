@@ -147,8 +147,8 @@ public class RegisterSEC {
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 SlimeEntityColoured::canSpawnSEC);
 
-//        List<Biome> biomeList = convertConfigIDsToBiomes(stringSECToBiomeList);
-        List<Biome> biomeList = new ArrayList<Biome>(Biome.BIOMES);
+        List<Biome> biomeList = convertConfigIDsToBiomes(stringSECToBiomeList);
+//        List<Biome> biomeList = new ArrayList<Biome>(Biome.BIOMES);
 
         // Iterate over the Registry of Biomes
         for (Biome biomeReg : Registry.BIOME) {
@@ -162,7 +162,6 @@ public class RegisterSEC {
 
 
     public static void registerSlimeologyEntityTypes() {
-
 //        regSpawn(SLIME_ENTITY_DEBUG, "minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
 //                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
         // This actually disabled biome spawning for the Debug Slime without crashing.

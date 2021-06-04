@@ -122,7 +122,9 @@ public class SlimeEntityColoured extends SlimeEntity {
                 int secChunkIndex = slimeChunkSeed.nextInt(16);
 
                 // First check if the SEC's index matches the chunk index. Then check if the SEC has been allocated for spawning within the biome.
-                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(type)) {
+//                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(type)) {
+//                if (biomeSiblings.contains(type)) {
+                if (secDyeIndex == secChunkIndex) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
                         System.out.println("SLIMEOLOGY: Spawning " + type + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }
@@ -149,5 +151,4 @@ public class SlimeEntityColoured extends SlimeEntity {
         }
         return false;
     }
-
 }
