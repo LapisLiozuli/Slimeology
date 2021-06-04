@@ -133,7 +133,9 @@ public class RegisterSEC {
     public static void checkBiomeForSpawnEntry(Biome biome, EntityType type, List<Biome> biomeList) {
         if (biomeList.contains(biome)) {
             biome.getEntitySpawnList(type.getSpawnGroup())
-                    .add(new Biome.SpawnEntry(type, 1000, 4, 4));
+                    // Might allow weight to be adjust for individual slimes at some point. Just include weight as an input.
+//                    .add(new Biome.SpawnEntry(type, Slimeology.CONFIG.secSpawning.spawnWeight, 4, 4));
+                    .add(new Biome.SpawnEntry(type, 1000000, 4, 4));
         }
     }
 
@@ -148,7 +150,6 @@ public class RegisterSEC {
                 SlimeEntityColoured::canSpawnSEC);
 
         List<Biome> biomeList = convertConfigIDsToBiomes(stringSECToBiomeList);
-//        List<Biome> biomeList = new ArrayList<Biome>(Biome.BIOMES);
 
         // Iterate over the Registry of Biomes
         for (Biome biomeReg : Registry.BIOME) {
@@ -162,9 +163,7 @@ public class RegisterSEC {
 
 
     public static void registerSlimeologyEntityTypes() {
-//        regSpawn(SLIME_ENTITY_DEBUG, "minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
-//                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills");
-        // This actually disabled biome spawning for the Debug Slime without crashing.
+//        // This actually disabled biome spawning for the Debug Slime without crashing.
 //        regSpawn(SLIME_ENTITY_DEBUG, "");
         regSpawn(SLIME_ENTITY_WHITE, Slimeology.CONFIG.secBiomes.biomesForSECWhite);
         regSpawn(SLIME_ENTITY_ORANGE, Slimeology.CONFIG.secBiomes.biomesForSECOrange);

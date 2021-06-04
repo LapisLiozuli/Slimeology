@@ -122,15 +122,14 @@ public class SlimeEntityColoured extends SlimeEntity {
                 int secChunkIndex = slimeChunkSeed.nextInt(16);
 
                 // First check if the SEC's index matches the chunk index. Then check if the SEC has been allocated for spawning within the biome.
-//                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(type)) {
-//                if (biomeSiblings.contains(type)) {
-                if (secDyeIndex == secChunkIndex) {
+                if (secDyeIndex == secChunkIndex && biomeSiblings.contains(type)) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
                         System.out.println("SLIMEOLOGY: Spawning " + type + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
                     }
                     return canMobSpawn(type, world, spawnReason, pos, random);
                 }
 
+                // Check if secChunkIndex would spawn an allocated SEC.
                 // If this SEC's index doesn't match the chunk index, then check if the SEC is included within the SECs allocated to the position's (not chunk's) biome.
                 // But if this check also fails for this SEC, then no spawning occurs. That's fine because another type of SEC should pass the check and spawn.
                 else if (!biomeSiblings.contains(RegisterSEC.secForcedOrder.get(secChunkIndex))) {
