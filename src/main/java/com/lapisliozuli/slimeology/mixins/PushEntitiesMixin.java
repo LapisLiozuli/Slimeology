@@ -85,7 +85,7 @@ public abstract class PushEntitiesMixin extends BlockEntity {
         VoxelShape voxelShape = this.getHeadBlockState().getCollisionShape(this.world, this.getPos());
         if (!voxelShape.isEmpty()) {
             Box box = this.offsetHeadBox(voxelShape.getBoundingBox());
-            List<Entity> list = this.world.getEntities((Entity)null, Boxes.stretch(box, direction, d).union(box));
+            List<Entity> list = this.world.getOtherEntities((Entity)null, Boxes.stretch(box, direction, d).union(box));
             if (!list.isEmpty()) {
                 List<Box> list2 = voxelShape.getBoundingBoxes();
                 // Check for both Slime Block and CSB
