@@ -45,7 +45,7 @@ public final class ModConfig implements ConfigData {
 
         // Tweak the SpawnEntry weight. Default 1000 based on own testing.
         @Comment("Sets the spawning weight. 1000 works based on testing. 100 is weight for zombies and other hostile mobs. 1,000,000 crowds out other hostile mobs.")
-        public int spawnWeight = 1000;
+        public int spawnWeight = 500;
 
         // Switch for the debug statements in canSpawnSEC(). Default false.
         // Seems better to check if an option is true rather than false.
