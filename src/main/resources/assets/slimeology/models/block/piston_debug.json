@@ -1,8 +1,0 @@
-{
-    "parent": "block/template_piston",
-    "textures": {
-        "platform": "slimeology:block/piston_debug_top_sticky",
-        "bottom": "block/piston_bottom",
-        "side": "slimeology:block/piston_debug_side_sticky"
-    }
-}

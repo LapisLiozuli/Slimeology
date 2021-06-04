@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "slimeology:items/slime_ball_debug"
-  }
-}
