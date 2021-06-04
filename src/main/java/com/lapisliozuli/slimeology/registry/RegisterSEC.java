@@ -134,8 +134,7 @@ public class RegisterSEC {
         if (biomeList.contains(biome)) {
             biome.getEntitySpawnList(type.getSpawnGroup())
                     // Might allow weight to be adjust for individual slimes at some point. Just include weight as an input.
-//                    .add(new Biome.SpawnEntry(type, Slimeology.CONFIG.secSpawning.spawnWeight, 4, 4));
-                    .add(new Biome.SpawnEntry(type, 1000000, 4, 4));
+                    .add(new Biome.SpawnEntry(type, Slimeology.CONFIG.secSpawning.spawnWeight, 4, 4));
         }
     }
 
