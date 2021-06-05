@@ -76,7 +76,7 @@ public class SlimeEntityColoured extends SlimeEntity {
         if (world.getDifficulty() != Difficulty.PEACEFUL) {
             // Find the biome of the position.
             Biome biome = world.getBiome(pos);
-            RegistryKey<Biome> biomeRegistryKey = world.getBiomeKey(pos).get();
+            RegistryKey<Biome> biomeRegistryKey = world.method_31081(pos).get();
             if (!(world instanceof ServerWorldAccess)) {
                 return false;
             }
