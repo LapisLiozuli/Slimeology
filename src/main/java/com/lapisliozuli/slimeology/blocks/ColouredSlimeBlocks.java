@@ -2,9 +2,7 @@ package com.lapisliozuli.slimeology.blocks;
 
 import com.lapisliozuli.slimeology.Slimeology;
 import com.lapisliozuli.slimeology.items.BleachingBrush;
-import com.lapisliozuli.slimeology.items.SlimeBalls;
 import com.lapisliozuli.slimeology.items.SlimyToolBase;
-import com.lapisliozuli.slimeology.registry.RegisterItems;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
@@ -40,6 +38,8 @@ import java.util.*;
 public class ColouredSlimeBlocks extends SlimeBlock {
     private Item csbDyeItem;
     public static List<BlockItem> csbBlockItemsList = new ArrayList<>(Collections.emptyList());
+//    // The block loot table can store conditions, but it's not strictly necessary to allow the block to drop itself in item form.
+//    private static final Identifier SLIME_BLOCK_LOOT_TABLE_ID = new Identifier("minecraft", "blocks/slime_block");
 
     public ColouredSlimeBlocks(Item csbDyeItem) {
             super(FabricBlockSettings.copyOf(Blocks.SLIME_BLOCK).nonOpaque());
@@ -137,8 +137,6 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         return true;
     }
 
-//    // The block loot table can store conditions, but it's not strictly necessary to allow the block to drop itself in item form.
-//    private static final Identifier SLIME_BLOCK_LOOT_TABLE_ID = new Identifier("minecraft", "blocks/slime_block");
 
 
     public static List<BlockItem> csbRegister(ColouredSlimeBlocks colouredSlimeBlock, String path, List<BlockItem> csbBlockItemsList) {
@@ -150,10 +148,6 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, path), csbBlockItem);
         // Add to list.
         csbBlockItemsList.add(csbBlockItem);
-
-//        // Render
-//        BlockRenderLayerMap.INSTANCE.putBlock(colouredSlimeBlock, RenderLayer.getTranslucent());
-
         return csbBlockItemsList;
     }
 
@@ -176,19 +170,6 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         csbRegister(SLIME_BLOCK_RED, "slime_block_red", csbBlockItemsList);
         csbRegister(SLIME_BLOCK_BLACK, "slime_block_black", csbBlockItemsList);
         csbRegister(SLIME_BLOCK_RAINBOW, "slime_block_rainbow", csbBlockItemsList);
-
-//        // Previous code which resulted in random order of BlockItems in creative menu.
-//        // Register each CSB.
-//        colouredSlimeBlocksMap.forEach((k,v) ->
-//                Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, k), v));
-//
-//        // Add the CSB BlockItems to a List.
-//        for (Map.Entry<String, ColouredSlimeBlocks> iden : colouredSlimeBlocksMap.entrySet()) {
-//            BlockItem csbBlockItem;
-//            csbBlockItem = new BlockItem(iden.getValue(), new Item.Settings().group(Slimeology.SLIMEOLOGY));
-//            Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, iden.getKey()), csbBlockItem);
-//            csbBlockItemsList.add(csbBlockItem);
-//        }
 
 //        // Shouldn't this code be under the SlimyToolBase (Slimotic Duplicator)?
 //        // Sets loot table of Slime Block when broken by Slimotic Duplicator to drop extra slimeballs.
