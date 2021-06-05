@@ -6,7 +6,9 @@ Explore the world in search of more varieties of slime than ever! Enjoy an expan
 
 Custom advancements will guide you along every step of the way. 
 
-Requires Auto Config to run.
+Requires Auto Config 3.3.1 to run.
+
+Supports 1.16.1, 1.16.3, 1.16.4 and 1.16.5. 1.16.2 support may be added in future.
 
 Chinese translation included (zh_cn).
 
