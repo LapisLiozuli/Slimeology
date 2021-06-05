@@ -3,12 +3,8 @@ package com.lapisliozuli.slimeology.entities;
 
 import com.google.common.collect.Ordering;
 import com.lapisliozuli.slimeology.Slimeology;
-import com.lapisliozuli.slimeology.registry.RegisterItems;
 import com.lapisliozuli.slimeology.registry.RegisterSEC;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.item.ItemConvertible;
@@ -20,7 +16,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkRandom;
@@ -83,14 +80,16 @@ public class SlimeEntityColoured extends SlimeEntity {
         if (world.getDifficulty() != Difficulty.PEACEFUL) {
             // Find the biome of the position.
             Biome biome = world.getBiome(pos);
+            RegistryKey<Biome> biomeRegistryKey = world.method_31081(pos).get();
+//            RegistryKey<Biome> biomeRegistryKey = BuiltinRegistries.BIOME.getKey(biome).get();
             if (!(world instanceof ServerWorldAccess)) {
                 return false;
             }
             ChunkPos chunkPos = new ChunkPos(pos);
 
             // Get the list of coloured slimes that can spawn within the biome.
-//            List<EntityType<SlimeEntityColoured>> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biome);
-            List<EntityType<SlimeEntityColoured>> biomeSiblings = null;
+            List<EntityType<SlimeEntityColoured>> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biomeRegistryKey);
+//            List<EntityType<SlimeEntityColoured>> biomeSiblings = null;
             if (biomeSiblings == null) {
                 return false;
             }
@@ -98,7 +97,6 @@ public class SlimeEntityColoured extends SlimeEntity {
             Collections.sort(biomeSiblings, Ordering.explicit(RegisterSEC.secForcedOrder));
 
             // secDyeIndex is the index of the SEC within secForcedOrder.
-//            EntityType<SlimeEntityColoured> secPointer = RegisterSEC.secForcedOrder.get(secDyeIndex);
             int secDyeIndex = RegisterSEC.secForcedOrder.indexOf(type);
 
             Random slimeChunkSeed = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((StructureWorldAccess)world).getSeed(), 987234911L);
@@ -126,7 +124,7 @@ public class SlimeEntityColoured extends SlimeEntity {
                 // First check if the SEC's index matches the chunk index. Then check if the SEC has been allocated for spawning within the biome.
                 if (secDyeIndex == secChunkIndex && biomeSiblings.contains(type)) {
                     if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                        System.out.println("SLIMEOLOGY: Spawning " + type + " in core Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkIndex " + secChunkIndex);
+                        System.out.println("SLIMEOLOGY: Spawning " + type + " in core Slime Chunk " + chunkPos + " for biome " + biomeRegistryKey + " using secChunkIndex " + secChunkIndex);
                     }
                     return canMobSpawn(type, world, spawnReason, pos, random);
                 }
@@ -142,7 +140,7 @@ public class SlimeEntityColoured extends SlimeEntity {
                     // If the new randomly generated number matches the index, spawning will occur.
                     if (secSiblingIndex == secChunkReIndex) {
                         if (Slimeology.CONFIG.secSpawning.spawnReporting) {
-                            System.out.println("SLIMEOLOGY: Spawning " + type + " in variable Slime Chunk " + chunkPos + " for biome " + biome + " using secChunkReIndex " + secChunkReIndex);
+                            System.out.println("SLIMEOLOGY: Spawning " + type + " in variable Slime Chunk " + chunkPos + " for biome " + biomeRegistryKey + " using secChunkReIndex " + secChunkReIndex);
                             System.out.println("SLIMEOLOGY: Allocated colour is " + RegisterSEC.secForcedOrder.get(secChunkIndex) + " while biomeSiblings are " + biomeSiblings);
                         }
                         return canMobSpawn(type, world, spawnReason, pos, random);
