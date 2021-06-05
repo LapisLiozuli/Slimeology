@@ -8,6 +8,8 @@ Custom advancements will guide you along every step of the way.
 
 Requires Auto Config to run.
 
+Chinese translation included (zh_cn).
+
 ![Block Palette](https://imgur.com/tveBoRu.png)
 
 ## Coloured Slimes
