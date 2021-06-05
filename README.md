@@ -19,6 +19,9 @@ The natural slimy interstitia have strengthened, allowing these new slimes to sp
 [Coloured Slimes video](https://youtu.be/SQmxVdc2A2Y)
 
 ![Coloured Slimes](https://imgur.com/C30IONE.jpg)
+![colslimecombo_01](https://imgur.com/sOJ5cS1.png)
+![colslimescombo_02](https://imgur.com/qeMfokG.png)
+![colslimecombo_03](https://imgur.com/OVFnqfw.png)
 
 ## Coloured Slime Blocks and Coloured Slimeballs
 
