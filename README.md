@@ -111,6 +111,7 @@ Crafted with a Coloured Slimeball and a Piston. However, the coloured slime spre
 - Slimy Bricks
 - Slime-derived foodstuffs
 - A more effective method of separating Coloured Slime Blocks into vanilla Slime Blocks and dyes
+- Dyeing vanilla Slime Blocks into Coloured Slime Blocks
 - MAYBE: Slimy Armour
 
 ## License
