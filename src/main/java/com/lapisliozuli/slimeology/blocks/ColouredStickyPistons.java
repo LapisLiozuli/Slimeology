@@ -457,16 +457,5 @@ public class ColouredStickyPistons extends PistonBlock {
         cspRegister(STICKY_PISTON_GREEN, "piston_green");
         cspRegister(STICKY_PISTON_RED, "piston_red");
         cspRegister(STICKY_PISTON_BLACK, "piston_black");
-
-//        // Previous code which resulted in random order of BlockItems in creative menu.
-//        ColouredStickyPistonsMap.forEach((k,v) ->
-//                Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, k), v));
-//
-//        // Add the CSP BlockItems to a List.
-//        for (Map.Entry<String, ColouredStickyPistons> iden : ColouredStickyPistonsMap.entrySet()) {
-//            BlockItem cspBlockItem;
-//            cspBlockItem = new BlockItem(iden.getValue(), new Item.Settings().group(Slimeology.SLIMEOLOGY));
-//            Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, iden.getKey()), cspBlockItem);
-//        }
     }
 }

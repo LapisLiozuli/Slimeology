@@ -16,7 +16,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
@@ -27,17 +26,14 @@ import java.util.*;
 // Copied from MagmaCubeEntity
 public class SlimeEntityColoured extends SlimeEntity {
     private ItemConvertible slimeParticle;
-//    private static int secDyeIndex;
 
     // Constructor with additional particle and SEC variable as parameters.
     public SlimeEntityColoured(
             final EntityType<? extends SlimeEntityColoured> arg,
             final World arg2,
             final ItemConvertible slimeParticleInput) {
-//            final int inputIndex) {
         super(arg, arg2);
         this.slimeParticle = slimeParticleInput;
-//        secDyeIndex = inputIndex;
     }
 
     public static boolean canSlimeEntityColouredSpawn(final EntityType<SlimeEntityColoured> type, final WorldAccess world, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
@@ -81,7 +77,6 @@ public class SlimeEntityColoured extends SlimeEntity {
             // Find the biome of the position.
             Biome biome = world.getBiome(pos);
             RegistryKey<Biome> biomeRegistryKey = world.method_31081(pos).get();
-//            RegistryKey<Biome> biomeRegistryKey = BuiltinRegistries.BIOME.getKey(biome).get();
             if (!(world instanceof ServerWorldAccess)) {
                 return false;
             }
@@ -89,7 +84,6 @@ public class SlimeEntityColoured extends SlimeEntity {
 
             // Get the list of coloured slimes that can spawn within the biome.
             List<EntityType<SlimeEntityColoured>> biomeSiblings = RegisterSEC.biomeAllocatedSECMap.get(biomeRegistryKey);
-//            List<EntityType<SlimeEntityColoured>> biomeSiblings = null;
             if (biomeSiblings == null) {
                 return false;
             }

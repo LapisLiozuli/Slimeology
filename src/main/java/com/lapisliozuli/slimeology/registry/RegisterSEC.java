@@ -3,29 +3,21 @@ package com.lapisliozuli.slimeology.registry;
 import com.lapisliozuli.slimeology.items.SlimeBalls;
 import com.lapisliozuli.slimeology.Slimeology;
 import com.lapisliozuli.slimeology.entities.*;
-import com.lapisliozuli.slimeology.mixins.SpawnRestrictionMixin;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
-import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.impl.object.builder.FabricEntityType;
 import net.fabricmc.fabric.mixin.biome.BuiltinBiomesAccessor;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BuiltinBiomes;
-import net.minecraft.world.biome.SpawnSettings;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -122,42 +114,14 @@ public class RegisterSEC {
     // ======================= METHODS
     // This method reads the string IDs from the configs and returns a list of Biomes.
     public static List<RegistryKey<Biome>> convertConfigIDsToBiomes(String stringyListInt) {
-//        List<Biome> configBiomeKeyList = new ArrayList<>(Collections.emptyList());
         List<RegistryKey<Biome>> configBiomeKeyList = new ArrayList<>(Collections.emptyList());
         // Splits the string by the comma ',' to return a list of strings in the format 'minecraft:biome'
         List<String> stringIDList = Arrays.asList(stringyListInt.split("\\s*,\\s*"));
         stringIDList.forEach(entry->{
             // Converts the string "namespace:biome" into a RegistryKey<Biome>.
-//            configBiomeKeyList.add(BuiltinRegistries.BIOME.get(Identifier.tryParse(entry)));
-            Identifier adfad = Identifier.tryParse(entry);
-            Biome asdf = BuiltinRegistries.BIOME.get(adfad);
-            Optional fgsgdfof = BuiltinRegistries.BIOME.getKey(asdf);
-            Object adfdsfa = fgsgdfof.get();
-            Class<?> fiogf = adfdsfa.getClass();
             configBiomeKeyList.add(BuiltinRegistries.BIOME.getKey(BuiltinRegistries.BIOME.get(Identifier.tryParse(entry))).get());
         });
         return configBiomeKeyList;
-    }
-
-
-    // Adds SpawnEntry only if the biome is part of the SEC's BiomeList.
-    public static void checkBiomeForSpawnEntry(RegistryKey<Biome> biomeReg, EntityType type, String sec_path) {
-        // How to get the BiomeKey from a Biome?
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(biomeReg), SpawnGroup.MONSTER, type, Slimeology.CONFIG.secSpawning.spawnWeight,4, 4);
-
-//        BiomeModifications.create(Identifier.tryParse(sec_path))
-//                .add(ModificationPhase.ADDITIONS,
-//                        BiomeSelectors.includeByKey(biomeReg),
-////                        BiomeSelectors.foundInOverworld().and(context -> {
-////                            Identifier id = context.getBiomeKey().getValue();
-////                            return id.getNamespace().equals("minecraft")
-////                                    && (id.getPath().equals("forest")
-////                                    || id.getPath().equals("flower_forest")
-////                                    || id.getPath().startsWith("dark_forest"));
-////                        }),
-//                        (context) -> {
-//                            context.getSpawnSettings().addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(type, Slimeology.CONFIG.secSpawning.spawnWeight,4, 4));
-//                        });
     }
 
 
@@ -173,34 +137,16 @@ public class RegisterSEC {
         List<RegistryKey<Biome>> biomeRegKeyList = convertConfigIDsToBiomes(stringSECToBiomeList);
 
         // Iterate over the Registry of Biomes
-//        for (Biome biomeReg : BuiltinRegistries.BIOME) {
         for (RegistryKey<Biome> biomeReg : BuiltinBiomesAccessor.getBY_RAW_ID().values()) {
             // Only runs if the allocated list of biomes contains the selected biome.
             if (biomeRegKeyList.contains(biomeReg)) {
                 BiomeModifications.addSpawn(BiomeSelectors.includeByKey(biomeReg), SpawnGroup.MONSTER, inputSEC, Slimeology.CONFIG.secSpawning.spawnWeight,4, 4);
-//                checkBiomeForSpawnEntry(biomeReg, inputSEC, sec_path);
-//            BiomeModifications.addSpawn(BiomeSelectors.all(), SpawnGroup.MONSTER, inputSEC, Slimeology.CONFIG.secSpawning.spawnWeight,4, 4);
-//            RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register(
-//                    (i, identifier, biome) -> {
-//                        RegisterSEC.checkBiomeForSpawnEntry(biomeReg, inputSEC, biomeList);
-//                    });
             }
         }
     }
 
 
     public static void registerSlimeologyEntityTypes() {
-        System.out.println(BuiltinRegistries.BIOME.getIds());
-        Optional hi = BuiltinRegistries.BIOME.getKey(BuiltinRegistries.BIOME.get(Identifier.tryParse("minecraft:plains")));
-//        Optional hi = BuiltinRegistries.BIOME.getKey(BuiltinBiomes.fromRawId(21));
-        System.out.println(hi.get());
-//        System.out.println(BuiltinRegistries.BIOME.getKey(BuiltinRegistries.BIOME.get(Identifier.tryParse("minecraft:plains"))));
-        System.out.println(BuiltinRegistries.BIOME.get(Identifier.tryParse("minecraft:plains")).getClass());
-//        System.out.println(BuiltinBiomesAccessor.getBY_RAW_ID().values());
-//
-//        System.out.println(BuiltinRegistries.BIOME.get(new Identifier("minecraft", "plains")).getClass());
-//        System.out.println(BuiltinRegistries.BIOME.get(Identifier.tryParse("minecraft:plains")).getClass());
-//        // This actually disabled biome spawning for the Debug Slime without crashing.
 //        regSpawn(SLIME_ENTITY_DEBUG, Slimeology.CONFIG.secBiomes.biomesForSECDebug, "slime_entity_debug");
         regSpawn(SLIME_ENTITY_WHITE, Slimeology.CONFIG.secBiomes.biomesForSECWhite, "slime_entity_white");
         regSpawn(SLIME_ENTITY_ORANGE, Slimeology.CONFIG.secBiomes.biomesForSECOrange, "slime_entity_orange");

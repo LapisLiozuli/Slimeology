@@ -174,19 +174,6 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         csbRegister(SLIME_BLOCK_BLACK, "slime_block_black", csbBlockItemsList);
         csbRegister(SLIME_BLOCK_RAINBOW, "slime_block_rainbow", csbBlockItemsList);
 
-//        // Previous code which resulted in random order of BlockItems in creative menu.
-//        // Register each CSB.
-//        colouredSlimeBlocksMap.forEach((k,v) ->
-//                Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, k), v));
-//
-//        // Add the CSB BlockItems to a List.
-//        for (Map.Entry<String, ColouredSlimeBlocks> iden : colouredSlimeBlocksMap.entrySet()) {
-//            BlockItem csbBlockItem;
-//            csbBlockItem = new BlockItem(iden.getValue(), new Item.Settings().group(Slimeology.SLIMEOLOGY));
-//            Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, iden.getKey()), csbBlockItem);
-//            csbBlockItemsList.add(csbBlockItem);
-//        }
-//
 //        // Shouldn't this code be under the SlimyToolBase (Slimotic Duplicator)?
 //        // Sets loot table of Slime Block when broken by Slimotic Duplicator to drop extra slimeballs.
 //        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, supplier, setter) -> {
