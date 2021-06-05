@@ -3,6 +3,7 @@ package com.lapisliozuli.slimeology.registry;
 import com.lapisliozuli.slimeology.items.SlimeBalls;
 import com.lapisliozuli.slimeology.Slimeology;
 import com.lapisliozuli.slimeology.entities.*;
+import com.lapisliozuli.slimeology.mixins.SpawnRestrictionMixin;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -20,12 +21,10 @@ import java.util.stream.Stream;
 
 public class RegisterSEC {
     public static EntityType<SlimeEntityColoured> bulkRegisterFETB(String sec_path, Item slimeParticle) {
-//    public static EntityType<SlimeEntityColoured> bulkRegisterFETB(String sec_path, Item slimeParticle, int inputIndex) {
         return Registry.register(
                 Registry.ENTITY_TYPE,
                 new Identifier(Slimeology.MOD_ID, sec_path),
                 FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, slimeParticle))
-//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, slimeParticle, inputIndex))
                         .dimensions(EntityDimensions.changing(2.04f, 2.04f))
                         .trackable(160, 4).build());
     }
@@ -64,9 +63,7 @@ public class RegisterSEC {
     // This Map assigns a collection of spawnable biomes to each SEC.
     public static Map<EntityType<SlimeEntityColoured>, List<Biome>> allocatedBiomeImperative() {
         final Map<EntityType<SlimeEntityColoured>, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
-//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
-//                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills"));
-//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
+//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECDebug));
         secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
         secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
         secAllocatedBiomeMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
