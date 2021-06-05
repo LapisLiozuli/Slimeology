@@ -38,7 +38,6 @@ public abstract class CauldronWashMixin {
             int i = (Integer) state.get(LEVEL);
             if (i > 0 && item instanceof BlockItem) {
                 Block block = ((BlockItem) item).getBlock();
-//                if (block instanceof ColouredSlimeBlocks && !world.isClient()) {
                 if ((ColouredSlimeBlocks.colouredSlimeBlocksMap.containsValue(block)) && !world.isClient()) {
                     ItemStack itemStack5 = new ItemStack(Blocks.SLIME_BLOCK, 1);
                     player.setStackInHand(hand, itemStack5);

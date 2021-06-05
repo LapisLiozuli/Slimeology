@@ -38,18 +38,15 @@ public class SlimySand extends FallingBlock {
             world.spawnEntity(fallingBlockEntity);
 
             List<BlockPos> neighbouringBlockPos = checksSideBlocks(world, pos);
-            System.out.println(neighbouringBlockPos);
-            if (neighbouringBlockPos != null) {
-                neighbouringBlockPos.forEach(neighbourPos -> {
-                    if (canFallThrough(world.getBlockState(neighbourPos.down())) && neighbourPos.getY() >= 0) {
-                        FallingBlockEntity neighbourFBE = new FallingBlockEntity(world,
-                                (double) neighbourPos.getX() + 0.5D, (double) neighbourPos.getY(),
-                                (double) neighbourPos.getZ() + 0.5D, world.getBlockState(neighbourPos));
-                        this.configureFallingBlockEntity(neighbourFBE);
-                        world.spawnEntity(neighbourFBE);
-                    }
-                });
-            }
+            neighbouringBlockPos.forEach(neighbourPos -> {
+                if (canFallThrough(world.getBlockState(neighbourPos.down())) && neighbourPos.getY() >= 0) {
+                    FallingBlockEntity neighbourFBE = new FallingBlockEntity(world,
+                            (double) neighbourPos.getX() + 0.5D, (double) neighbourPos.getY(),
+                            (double) neighbourPos.getZ() + 0.5D, world.getBlockState(neighbourPos));
+                    this.configureFallingBlockEntity(neighbourFBE);
+                    world.spawnEntity(neighbourFBE);
+                }
+            });
         }
     }
 

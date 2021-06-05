@@ -138,7 +138,6 @@ public class ColouredSlimeBlocks extends SlimeBlock {
     }
 
 
-
     public static List<BlockItem> csbRegister(ColouredSlimeBlocks colouredSlimeBlock, String path, List<BlockItem> csbBlockItemsList) {
         // Block Register.
         Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, path), colouredSlimeBlock);

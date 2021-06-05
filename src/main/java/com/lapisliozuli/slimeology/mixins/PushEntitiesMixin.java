@@ -16,14 +16,9 @@ import net.minecraft.util.math.Boxes;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Iterator;
 import java.util.List;
@@ -85,7 +80,7 @@ public abstract class PushEntitiesMixin extends BlockEntity {
         VoxelShape voxelShape = this.getHeadBlockState().getCollisionShape(this.world, this.getPos());
         if (!voxelShape.isEmpty()) {
             Box box = this.offsetHeadBox(voxelShape.getBoundingBox());
-            List<Entity> list = this.world.getEntities((Entity)null, Boxes.stretch(box, direction, d).union(box));
+            List<Entity> list = this.world.getOtherEntities((Entity)null, Boxes.stretch(box, direction, d).union(box));
             if (!list.isEmpty()) {
                 List<Box> list2 = voxelShape.getBoundingBoxes();
                 // Check for both Slime Block and CSB
@@ -151,6 +146,4 @@ public abstract class PushEntitiesMixin extends BlockEntity {
             }
         }
     }
-
-
 }

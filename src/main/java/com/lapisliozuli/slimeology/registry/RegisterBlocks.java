@@ -1,7 +1,6 @@
 package com.lapisliozuli.slimeology.registry;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.lapisliozuli.slimeology.blocks.*;
 import net.minecraft.block.Block;
