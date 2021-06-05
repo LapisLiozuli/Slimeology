@@ -10,10 +10,10 @@
   ],
   "contact": {
     "homepage": "",
-    "sources": ""
+    "sources": "https://github.com/LapisLiozuli/Slimeology"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/slimeology/textures/block/slime_block_rainbow.png",
 
   "environment": "*",
