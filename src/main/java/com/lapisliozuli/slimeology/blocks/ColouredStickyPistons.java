@@ -232,7 +232,7 @@ public class ColouredStickyPistons extends PistonBlock {
             world.setBlockState(pos, blockState, 20);
             world.setBlockEntity(pos, PistonExtensionBlock.createBlockEntityPiston((BlockState)this.getDefaultState().with(FACING, Direction.byId(data & 7)), direction, false, true));
             world.updateNeighbors(pos, blockState.getBlock());
-            blockState.updateNeighbors(world, pos, 2);
+            blockState.method_30101(world, pos, 2);
             if (this.sticky) {
                 BlockPos blockPos = pos.add(direction.getOffsetX() * 2, direction.getOffsetY() * 2, direction.getOffsetZ() * 2);
                 BlockState blockState2 = world.getBlockState(blockPos);
@@ -379,9 +379,9 @@ public class ColouredStickyPistons extends PistonBlock {
                 Map.Entry<BlockPos, BlockState> entry = (Map.Entry)var25.next();
                 blockPos7 = (BlockPos)entry.getKey();
                 BlockState blockState7 = (BlockState)entry.getValue();
-                blockState7.prepare(world, blockPos7, 2);
-                blockState6.updateNeighbors(world, blockPos7, 2);
-                blockState6.prepare(world, blockPos7, 2);
+                blockState7.method_30102(world, blockPos7, 2);
+                blockState6.method_30101(world, blockPos7, 2);
+                blockState6.method_30102(world, blockPos7, 2);
             }
 
             j = 0;
@@ -390,7 +390,7 @@ public class ColouredStickyPistons extends PistonBlock {
             for(n = list3.size() - 1; n >= 0; --n) {
                 blockState8 = blockStates[j++];
                 blockPos7 = (BlockPos)list3.get(n);
-                blockState8.prepare(world, blockPos7, 2);
+                blockState8.method_30102(world, blockPos7, 2);
                 world.updateNeighborsAlways(blockPos7, blockState8.getBlock());
             }
 
