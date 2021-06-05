@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "PistonHandlerInjectMixin",
-    "SpawnRestrictionMixin",
     "PushEntitiesMixin",
     "PistonBlockEntityRendererMixin",
     "CauldronWashMixin"
