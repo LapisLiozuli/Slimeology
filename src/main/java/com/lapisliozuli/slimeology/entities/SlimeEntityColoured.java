@@ -107,7 +107,7 @@ public class SlimeEntityColoured extends SlimeEntity {
 
             // Executing the checks for canMobSpawn() to run. Based off slime spawning in swamps.
             if (bl
-                        && pos.getY() > Slimeology.CONFIG.secSpawning.heightFloor
+                    && pos.getY() > Slimeology.CONFIG.secSpawning.heightFloor
                     && pos.getY() < Slimeology.CONFIG.secSpawning.heightCap
                     && random.nextFloat() <= Slimeology.CONFIG.secSpawning.spawnMultiplier
                     && moonCheck
