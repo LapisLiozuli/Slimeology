@@ -3,19 +3,14 @@ package com.lapisliozuli.slimeology.registry;
 import com.lapisliozuli.slimeology.items.SlimeBalls;
 import com.lapisliozuli.slimeology.Slimeology;
 import com.lapisliozuli.slimeology.entities.*;
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.mixin.biome.BuiltinBiomesAccessor;
-import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 
@@ -25,10 +20,12 @@ import java.util.stream.Stream;
 
 public class RegisterSEC {
     public static EntityType<SlimeEntityColoured> bulkRegisterFETB(String sec_path, Item slimeParticle) {
+//    public static EntityType<SlimeEntityColoured> bulkRegisterFETB(String sec_path, Item slimeParticle, int inputIndex) {
         return Registry.register(
                 Registry.ENTITY_TYPE,
                 new Identifier(Slimeology.MOD_ID, sec_path),
                 FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, slimeParticle))
+//                FabricEntityTypeBuilder.<SlimeEntityColoured>create(SpawnGroup.MONSTER, (type, world) -> new SlimeEntityColoured(type, world, slimeParticle, inputIndex))
                         .dimensions(EntityDimensions.changing(2.04f, 2.04f))
                         .trackable(160, 4).build());
     }
@@ -55,6 +52,7 @@ public class RegisterSEC {
     // ======================= DATA
     // This list enforces the order of the SECs
     public static List<EntityType<SlimeEntityColoured>> secForcedOrder = Stream.of(
+//            SLIME_ENTITY_DEBUG
 //            SLIME_ENTITY_DEBUG,
             SLIME_ENTITY_WHITE, SLIME_ENTITY_ORANGE, SLIME_ENTITY_MAGENTA, SLIME_ENTITY_LIGHT_BLUE,
             SLIME_ENTITY_YELLOW, SLIME_ENTITY_LIME, SLIME_ENTITY_PINK, SLIME_ENTITY_GRAY,
@@ -64,9 +62,11 @@ public class RegisterSEC {
 
 
     // This Map assigns a collection of spawnable biomes to each SEC.
-    public static Map<EntityType<SlimeEntityColoured>, List<RegistryKey<Biome>>> allocatedBiomeImperative() {
-        final Map<EntityType<SlimeEntityColoured>, List<RegistryKey<Biome>>> secAllocatedBiomeMap = new HashMap<>();
-//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECDebug));
+    public static Map<EntityType<SlimeEntityColoured>, List<Biome>> allocatedBiomeImperative() {
+        final Map<EntityType<SlimeEntityColoured>, List<Biome>> secAllocatedBiomeMap = new HashMap<>();
+//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, convertConfigIDsToBiomes("minecraft:forest, minecraft:snowy_tundra, minecraft:snowy_mountains, minecraft:snowy_beach, " +
+//                "minecraft:snowy_taiga_hills, minecraft:snowy_taiga_mountains, minecraft:plains, minecraft:desert, minecraft:desert_hills"));
+//        secAllocatedBiomeMap.put(SLIME_ENTITY_DEBUG, Collections.emptyList());
         secAllocatedBiomeMap.put(SLIME_ENTITY_WHITE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECWhite));
         secAllocatedBiomeMap.put(SLIME_ENTITY_ORANGE, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECOrange));
         secAllocatedBiomeMap.put(SLIME_ENTITY_MAGENTA, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECMagenta));
@@ -85,85 +85,96 @@ public class RegisterSEC {
         secAllocatedBiomeMap.put(SLIME_ENTITY_BLACK, convertConfigIDsToBiomes(Slimeology.CONFIG.secBiomes.biomesForSECBlack));
         return Collections.unmodifiableMap(secAllocatedBiomeMap);
     }
-    public static final Map<EntityType<SlimeEntityColoured>, List<RegistryKey<Biome>>> secAllocatedBiomeMap = allocatedBiomeImperative();
+    public static final Map<EntityType<SlimeEntityColoured>, List<Biome>> secAllocatedBiomeMap = allocatedBiomeImperative();
 
 
     // This method reads secAllocatedBiomeMap to invert the SECs and biomes.
-    public static Map<RegistryKey<Biome>, List<EntityType<SlimeEntityColoured>>> allocateSECToBiome() {
-        final Map<RegistryKey<Biome>, List<EntityType<SlimeEntityColoured>>> biomeAllocatedSECMap = new HashMap<>();
-        for (Map.Entry<EntityType<SlimeEntityColoured>, List<RegistryKey<Biome>>> entry : secAllocatedBiomeMap.entrySet()) {
+    public static Map<Biome, List<EntityType<SlimeEntityColoured>>> allocateSECToBiome() {
+        final Map<Biome, List<EntityType<SlimeEntityColoured>>> biomeAllocatedSECMap = new HashMap<>();
+        for (Map.Entry<EntityType<SlimeEntityColoured>, List<Biome>> entry : secAllocatedBiomeMap.entrySet()) {
             EntityType sec = entry.getKey();
-            List<RegistryKey<Biome>> biomeRegKey = entry.getValue();
-            for (RegistryKey<Biome> brkPermitted : biomeRegKey) {
-                if (biomeAllocatedSECMap.containsKey(brkPermitted)) {
-                    biomeAllocatedSECMap.get(brkPermitted).add(sec);
+            List<Biome> biome = entry.getValue();
+            for (Biome biomePermitted : biome) {
+                if (biomeAllocatedSECMap.containsKey(biomePermitted)) {
+                    biomeAllocatedSECMap.get(biomePermitted).add(sec);
                 }
                 else {
                     List<EntityType<SlimeEntityColoured>> secAllocateList = new ArrayList<EntityType<SlimeEntityColoured>>();
                     secAllocateList.add(sec);
-                    biomeAllocatedSECMap.put(brkPermitted, secAllocateList);
+                    biomeAllocatedSECMap.put(biomePermitted, secAllocateList);
                 }
             }
         }
         // Probably also computationally demanding.
-        return (Map<RegistryKey<Biome>, List<EntityType<SlimeEntityColoured>>>) Collections.unmodifiableMap(biomeAllocatedSECMap);
+        return Collections.unmodifiableMap(biomeAllocatedSECMap);
     }
     // This Map checks each biome to see which SECs can spawn within it.
-    public static final Map<RegistryKey<Biome>, List<EntityType<SlimeEntityColoured>>> biomeAllocatedSECMap = allocateSECToBiome();
+    public static final Map<Biome, List<EntityType<SlimeEntityColoured>>> biomeAllocatedSECMap = allocateSECToBiome();
 
     // ======================= METHODS
     // This method reads the string IDs from the configs and returns a list of Biomes.
-    public static List<RegistryKey<Biome>> convertConfigIDsToBiomes(String stringyListInt) {
-        List<RegistryKey<Biome>> configBiomeKeyList = new ArrayList<>(Collections.emptyList());
+    public static List<Biome> convertConfigIDsToBiomes(String stringyListInt) {
+        List<Biome> configBiomeList = new ArrayList<>(Collections.emptyList());
         // Splits the string by the comma ',' to return a list of strings in the format 'minecraft:biome'
         List<String> stringIDList = Arrays.asList(stringyListInt.split("\\s*,\\s*"));
         stringIDList.forEach(entry->{
-            // Converts the string "namespace:biome" into a RegistryKey<Biome>.
-            configBiomeKeyList.add(BuiltinRegistries.BIOME.getKey(BuiltinRegistries.BIOME.get(Identifier.tryParse(entry))).get());
+            // Converts the string into an Identifier
+            configBiomeList.add(Registry.BIOME.get(Identifier.tryParse(entry)));
         });
-        return configBiomeKeyList;
+        return configBiomeList;
     }
 
 
-    public static void regSpawn(EntityType<SlimeEntityColoured> inputSEC, String stringSECToBiomeList, String sec_path) {
+    // Adds SpawnEntry only if the biome is part of the SEC's BiomeList.
+    public static void checkBiomeForSpawnEntry(Biome biome, EntityType type, List<Biome> biomeList) {
+        if (biomeList.contains(biome)) {
+            biome.getEntitySpawnList(type.getSpawnGroup())
+                    // Might allow weight to be adjust for individual slimes at some point. Just include weight as an input.
+                    .add(new Biome.SpawnEntry(type, Slimeology.CONFIG.secSpawning.spawnWeight, 4, 4));
+        }
+    }
+
+
+    public static void regSpawn(EntityType<SlimeEntityColoured> inputSEC, String stringSECToBiomeList) {
         FabricDefaultAttributeRegistry.register(inputSEC, HostileEntity.createHostileAttributes());
 
-        SpawnRestrictionAccessor.callRegister(
+        SpawnRestrictionMixin.register(
                 inputSEC,
                 SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 SlimeEntityColoured::canSpawnSEC);
 
-        List<RegistryKey<Biome>> biomeRegKeyList = convertConfigIDsToBiomes(stringSECToBiomeList);
+        List<Biome> biomeList = convertConfigIDsToBiomes(stringSECToBiomeList);
 
         // Iterate over the Registry of Biomes
-        for (RegistryKey<Biome> biomeReg : BuiltinBiomesAccessor.getBY_RAW_ID().values()) {
-            // Only runs if the allocated list of biomes contains the selected biome.
-            if (biomeRegKeyList.contains(biomeReg)) {
-                BiomeModifications.addSpawn(BiomeSelectors.includeByKey(biomeReg), SpawnGroup.MONSTER, inputSEC, Slimeology.CONFIG.secSpawning.spawnWeight,4, 4);
-            }
+        for (Biome biomeReg : Registry.BIOME) {
+            checkBiomeForSpawnEntry(biomeReg, inputSEC, biomeList);
+            RegistryEntryAddedCallback.event(Registry.BIOME).register(
+                    (i, identifier, biome) -> {
+                        RegisterSEC.checkBiomeForSpawnEntry(biomeReg, inputSEC, biomeList);
+                    });
         }
     }
 
 
     public static void registerSlimeologyEntityTypes() {
-//        regSpawn(SLIME_ENTITY_DEBUG, Slimeology.CONFIG.secBiomes.biomesForSECDebug, "slime_entity_debug");
-        regSpawn(SLIME_ENTITY_WHITE, Slimeology.CONFIG.secBiomes.biomesForSECWhite, "slime_entity_white");
-        regSpawn(SLIME_ENTITY_ORANGE, Slimeology.CONFIG.secBiomes.biomesForSECOrange, "slime_entity_orange");
-        regSpawn(SLIME_ENTITY_MAGENTA, Slimeology.CONFIG.secBiomes.biomesForSECMagenta, "slime_entity_magenta");
-        regSpawn(SLIME_ENTITY_LIGHT_BLUE, Slimeology.CONFIG.secBiomes.biomesForSECLightBlue, "slime_entity_light_blue");
-        regSpawn(SLIME_ENTITY_YELLOW, Slimeology.CONFIG.secBiomes.biomesForSECYellow, "slime_entity_yellow");
-        regSpawn(SLIME_ENTITY_LIME, Slimeology.CONFIG.secBiomes.biomesForSECLime, "slime_entity_lime");
-        regSpawn(SLIME_ENTITY_PINK, Slimeology.CONFIG.secBiomes.biomesForSECPink, "slime_entity_pink");
-        regSpawn(SLIME_ENTITY_GRAY, Slimeology.CONFIG.secBiomes.biomesForSECGray, "slime_entity_gray");
-        regSpawn(SLIME_ENTITY_LIGHT_GRAY, Slimeology.CONFIG.secBiomes.biomesForSECLightGray, "slime_entity_light_gray");
-        regSpawn(SLIME_ENTITY_CYAN, Slimeology.CONFIG.secBiomes.biomesForSECCyan, "slime_entity_cyan");
-        regSpawn(SLIME_ENTITY_PURPLE, Slimeology.CONFIG.secBiomes.biomesForSECPurple, "slime_entity_purple");
-        regSpawn(SLIME_ENTITY_BLUE, Slimeology.CONFIG.secBiomes.biomesForSECBlue, "slime_entity_blue");
-        regSpawn(SLIME_ENTITY_BROWN, Slimeology.CONFIG.secBiomes.biomesForSECBrown, "slime_entity_brown");
-        regSpawn(SLIME_ENTITY_GREEN, Slimeology.CONFIG.secBiomes.biomesForSECGreen, "slime_entity_green");
-        regSpawn(SLIME_ENTITY_RED, Slimeology.CONFIG.secBiomes.biomesForSECRed, "slime_entity_red");
-        regSpawn(SLIME_ENTITY_BLACK, Slimeology.CONFIG.secBiomes.biomesForSECBlack, "slime_entity_black");
-
+//        // This actually disabled biome spawning for the Debug Slime without crashing.
+//        regSpawn(SLIME_ENTITY_DEBUG, "");
+        regSpawn(SLIME_ENTITY_WHITE, Slimeology.CONFIG.secBiomes.biomesForSECWhite);
+        regSpawn(SLIME_ENTITY_ORANGE, Slimeology.CONFIG.secBiomes.biomesForSECOrange);
+        regSpawn(SLIME_ENTITY_MAGENTA, Slimeology.CONFIG.secBiomes.biomesForSECMagenta);
+        regSpawn(SLIME_ENTITY_LIGHT_BLUE, Slimeology.CONFIG.secBiomes.biomesForSECLightBlue);
+        regSpawn(SLIME_ENTITY_YELLOW, Slimeology.CONFIG.secBiomes.biomesForSECYellow);
+        regSpawn(SLIME_ENTITY_LIME, Slimeology.CONFIG.secBiomes.biomesForSECLime);
+        regSpawn(SLIME_ENTITY_PINK, Slimeology.CONFIG.secBiomes.biomesForSECPink);
+        regSpawn(SLIME_ENTITY_GRAY, Slimeology.CONFIG.secBiomes.biomesForSECGray);
+        regSpawn(SLIME_ENTITY_LIGHT_GRAY, Slimeology.CONFIG.secBiomes.biomesForSECLightGray);
+        regSpawn(SLIME_ENTITY_CYAN, Slimeology.CONFIG.secBiomes.biomesForSECCyan);
+        regSpawn(SLIME_ENTITY_PURPLE, Slimeology.CONFIG.secBiomes.biomesForSECPurple);
+        regSpawn(SLIME_ENTITY_BLUE, Slimeology.CONFIG.secBiomes.biomesForSECBlue);
+        regSpawn(SLIME_ENTITY_BROWN, Slimeology.CONFIG.secBiomes.biomesForSECBrown);
+        regSpawn(SLIME_ENTITY_GREEN, Slimeology.CONFIG.secBiomes.biomesForSECGreen);
+        regSpawn(SLIME_ENTITY_RED, Slimeology.CONFIG.secBiomes.biomesForSECRed);
+        regSpawn(SLIME_ENTITY_BLACK, Slimeology.CONFIG.secBiomes.biomesForSECBlack);
     }
 }
