@@ -1,5 +1,8 @@
 package com.lapisliozuli.slimeology.entities;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -7,27 +10,36 @@ import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.model.EntityModelLoader;
+import net.minecraft.client.render.entity.model.SlimeEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 
-public class SlimeColouredOverlayFeatureRenderer<T extends LivingEntity> extends FeatureRenderer<T, SlimeEntityColouredModel<T>>
-{
+@Environment(EnvType.CLIENT)
+public class SlimeColouredOverlayFeatureRenderer<T extends LivingEntity> extends FeatureRenderer<T, SlimeEntityColouredModel<T>> {
     private final EntityModel<T> model;
 
-    public SlimeColouredOverlayFeatureRenderer(final FeatureRendererContext<T, SlimeEntityColouredModel<T>> arg) {
-        super(arg);
-        this.model = new SlimeEntityColouredModel<T>(0);
+    public SlimeColouredOverlayFeatureRenderer(FeatureRendererContext<T, SlimeEntityColouredModel<T>> context, EntityModelLoader loader) {
+        super(context);
+        this.model = new SlimeEntityColouredModel(loader.getModelPart(EntityModelLayers.SLIME_OUTER));
     }
 
-    @Override
-    public void render(final MatrixStack arg, final VertexConsumerProvider arg2, final int i, final T arg3, final float f, final float g, final float h, final float j, final float k, final float l) {
-        if (arg3.isInvisible()) {
-            return;
+    public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
+        MinecraftClient minecraftClient = MinecraftClient.getInstance();
+        boolean bl = minecraftClient.hasOutline(livingEntity) && livingEntity.isInvisible();
+        if (!livingEntity.isInvisible() || bl) {
+            VertexConsumer vertexConsumer2;
+            if (bl) {
+                vertexConsumer2 = vertexConsumerProvider.getBuffer(RenderLayer.getOutline(this.getTexture(livingEntity)));
+            } else {
+                vertexConsumer2 = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(livingEntity)));
+            }
+
+            ((SlimeEntityColouredModel)this.getContextModel()).copyStateTo(this.model);
+            this.model.animateModel(livingEntity, f, g, h);
+            this.model.setAngles(livingEntity, f, g, j, k, l);
+            this.model.render(matrixStack, vertexConsumer2, i, LivingEntityRenderer.getOverlay(livingEntity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
         }
-        this.getContextModel().copyStateTo(this.model);
-        this.model.animateModel(arg3, f, g, h);
-        this.model.setAngles(arg3, f, g, j, k, l);
-        final VertexConsumer lv = arg2.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(arg3)));
-        this.model.render(arg, lv, i, LivingEntityRenderer.getOverlay(arg3, 0.0f), 1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

@@ -15,11 +15,12 @@ public class BleachingBrush extends MiningToolItem {
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }
 
-    private static final Tag<Block> EFFECTIVE_BLOCKS;
-    static {
-        // Just saying that the Brush isn't effective at breaking any blocks.
-        EFFECTIVE_BLOCKS = ImmutableSet.of();
-    }
+    private static Tag<Block> EFFECTIVE_BLOCKS;
+//    private static final Tag<Block> EFFECTIVE_BLOCKS;
+//    static {
+//        // Just saying that the Brush isn't effective at breaking any blocks.
+//        EFFECTIVE_BLOCKS = ImmutableSet.of();
+//    }
 
     public static MiningToolItem BLEACHING_BRUSH = new BleachingBrush(0, -1.0f,
             ToolMaterialSlimeball.INSTANCE, EFFECTIVE_BLOCKS, new Item.Settings().group(Slimeology.SLIMEOLOGY));

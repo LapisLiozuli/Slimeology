@@ -15,7 +15,8 @@ import net.minecraft.world.World;
 import java.util.Set;
 
 public class SlimyToolBase extends MiningToolItem {
-    private static final Tag<Block> EFFECTIVE_ON = ImmutableSet.of(Blocks.SLIME_BLOCK, Blocks.OAK_LOG);
+//    private static final Tag<Block> EFFECTIVE_ON = ImmutableSet.of(Blocks.SLIME_BLOCK, Blocks.OAK_LOG);
+    private static Tag<Block> EFFECTIVE_ON;
 
     protected SlimyToolBase(int attackDamage, float attackSpeed, ToolMaterial material, Tag<Block> effectiveBlocks, Settings settings){
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);

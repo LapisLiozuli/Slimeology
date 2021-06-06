@@ -11,10 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Boxes;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.util.shape.VoxelShape;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -34,6 +31,11 @@ public abstract class PushEntitiesMixin extends BlockEntity {
     @Shadow private static final ThreadLocal<Direction> field_12205 = ThreadLocal.withInitial(() -> {
         return null;
     });
+
+    public PushEntitiesMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
+    }
+
     @Shadow protected abstract BlockState getHeadBlockState();
     @Shadow protected abstract Box offsetHeadBox(Box box);
     @Shadow public abstract Direction getMovementDirection();
@@ -63,10 +65,6 @@ public abstract class PushEntitiesMixin extends BlockEntity {
         field_12205.set((Direction)null);
     }
 
-
-    public PushEntitiesMixin(BlockEntityType<?> type) {
-        super(type);
-    }
 
     /**
      * @author: Lapis Liozuli
