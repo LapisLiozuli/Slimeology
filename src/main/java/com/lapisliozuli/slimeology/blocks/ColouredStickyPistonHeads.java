@@ -146,16 +146,16 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
         return blockState2.isOf(block) && (Boolean)blockState2.get(ColouredStickyPistons.EXTENDED) && blockState2.get(FACING) == blockState.get(FACING);
     }
 
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!world.isClient && player.abilities.creativeMode) {
-            BlockPos blockPos = pos.offset(((Direction)state.get(FACING)).getOpposite());
-            if (this.method_26980(state, world.getBlockState(blockPos))) {
-                world.breakBlock(blockPos, false);
-            }
-        }
-
-        super.onBreak(world, pos, state, player);
-    }
+//    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+//        if (!world.isClient && player.abilities.creativeMode) {
+//            BlockPos blockPos = pos.offset(((Direction)state.get(FACING)).getOpposite());
+//            if (this.method_26980(state, world.getBlockState(blockPos))) {
+//                world.breakBlock(blockPos, false);
+//            }
+//        }
+//
+//        super.onBreak(world, pos, state, player);
+//    }
 
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
