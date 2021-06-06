@@ -2,12 +2,9 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.lapisliozuli.slimeology.mixins",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "PistonHandlerInjectMixin",
-    "PushEntitiesMixin",
-    "PistonBlockEntityRendererMixin",
-    "CauldronWashMixin"
+    "PistonHandlerInjectMixin"
   ],
   "client": [
   ],
