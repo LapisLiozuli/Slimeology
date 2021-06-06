@@ -78,16 +78,16 @@ public class SlimySand extends FallingBlock {
     }
 
 
-    public void onSteppedOn(World world, BlockPos pos, Entity entity) {
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         double d = Math.abs(entity.getVelocity().y);
         if (d < 0.1D && !entity.bypassesSteppingEffects()) {
             // 2 is a constant that makes walking on Slimy Sand slightly faster than walking on Slime Blocks.
             double e = 2 * (0.4D + d * 0.2D);
             entity.setVelocity(entity.getVelocity().multiply(e, 1.0D, e));
         }
-        super.onSteppedOn(world, pos, entity);
-    }
 
+        super.onSteppedOn(world, pos, state, entity);
+    }
 
     public static void registerSlimySand() {
         Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, "slimy_sand"), SLIMY_SAND);

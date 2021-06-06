@@ -8,17 +8,19 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.*;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Set;
 
 public class SlimyToolBase extends MiningToolItem {
-    private static final Set<Block> EFFECTIVE_ON = ImmutableSet.of(Blocks.SLIME_BLOCK, Blocks.OAK_LOG);
+    private static final Tag<Block> EFFECTIVE_ON = ImmutableSet.of(Blocks.SLIME_BLOCK, Blocks.OAK_LOG);
 
-    protected SlimyToolBase(int attackDamage, float attackSpeed, ToolMaterial material, Set<Block> effectiveBlocks, Settings settings){
+    protected SlimyToolBase(int attackDamage, float attackSpeed, ToolMaterial material, Tag<Block> effectiveBlocks, Settings settings){
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }
+
 
     @Override
     public boolean postMine(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity miner) {

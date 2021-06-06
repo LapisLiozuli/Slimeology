@@ -21,8 +21,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.Property;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
@@ -33,6 +36,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 import java.util.*;
 
@@ -114,7 +118,6 @@ public class ColouredStickyPistons extends PistonBlock {
         }
     }
 
-
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         if (!world.isClient) {
             this.tryMove(world, pos, state);
@@ -129,7 +132,6 @@ public class ColouredStickyPistons extends PistonBlock {
 
     }
 
-
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (!oldState.isOf(state.getBlock())) {
             if (!world.isClient && world.getBlockEntity(pos) == null) {
@@ -139,11 +141,9 @@ public class ColouredStickyPistons extends PistonBlock {
         }
     }
 
-
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return (BlockState)((BlockState)this.getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite())).with(EXTENDED, false);
     }
-
 
     private void tryMove(World world, BlockPos pos, BlockState state) {
         Direction direction = (Direction)state.get(FACING);
@@ -165,10 +165,11 @@ public class ColouredStickyPistons extends PistonBlock {
                     }
                 }
             }
+
             world.addSyncedBlockEvent(pos, this, i, direction.getId());
         }
-    }
 
+    }
 
     private boolean shouldExtend(World world, BlockPos pos, Direction pistonFace) {
         Direction[] var4 = Direction.values();
@@ -200,7 +201,6 @@ public class ColouredStickyPistons extends PistonBlock {
         }
     }
 
-
     public boolean onSyncedBlockEvent(BlockState state, World world, BlockPos pos, int type, int data) {
         Direction direction = (Direction)state.get(FACING);
         if (!world.isClient) {
@@ -222,6 +222,7 @@ public class ColouredStickyPistons extends PistonBlock {
 
             world.setBlockState(pos, (BlockState)state.with(EXTENDED, true), 67);
             world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.5F, world.random.nextFloat() * 0.25F + 0.6F);
+            world.emitGameEvent(GameEvent.PISTON_EXTEND, pos);
         } else if (type == 1 || type == 2) {
             BlockEntity blockEntity = world.getBlockEntity(pos.offset(direction));
             if (blockEntity instanceof PistonBlockEntity) {
@@ -230,7 +231,7 @@ public class ColouredStickyPistons extends PistonBlock {
 
             BlockState blockState = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, direction)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
             world.setBlockState(pos, blockState, 20);
-            world.setBlockEntity(pos, PistonExtensionBlock.createBlockEntityPiston((BlockState)this.getDefaultState().with(FACING, Direction.byId(data & 7)), direction, false, true));
+            world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(pos, blockState, (BlockState)this.getDefaultState().with(FACING, Direction.byId(data & 7)), direction, false, true));
             world.updateNeighbors(pos, blockState.getBlock());
             blockState.updateNeighbors(world, pos, 2);
             if (this.sticky) {
@@ -249,13 +250,7 @@ public class ColouredStickyPistons extends PistonBlock {
                 }
 
                 if (!bl2) {
-                    if (type != 1
-                            || blockState2.isAir()
-                            || !isMovable(blockState2, world, blockPos, direction.getOpposite(), false, direction)
-                            || blockState2.getPistonBehavior() != PistonBehavior.NORMAL
-                            && !blockState2.isOf(Blocks.PISTON)
-                            && !blockState2.isOf(Blocks.STICKY_PISTON)
-                            && !ColouredStickyPistons.ColouredStickyPistonsMap.containsValue(blockState2.getBlock())) {
+                    if (type != 1 || blockState2.isAir() || !isMovable(blockState2, world, blockPos, direction.getOpposite(), false, direction) || blockState2.getPistonBehavior() != PistonBehavior.NORMAL && !blockState2.isOf(Blocks.PISTON) && !blockState2.isOf(Blocks.STICKY_PISTON)) {
                         world.removeBlock(pos.offset(direction), false);
                     } else {
                         this.move(world, pos, direction, false);
@@ -266,50 +261,52 @@ public class ColouredStickyPistons extends PistonBlock {
             }
 
             world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.5F, world.random.nextFloat() * 0.15F + 0.6F);
+            world.emitGameEvent(GameEvent.PISTON_CONTRACT, pos);
         }
 
         return true;
     }
 
+    public static boolean isMovable(BlockState state, World world, BlockPos pos, Direction direction, boolean canBreak, Direction pistonDir) {
+        if (pos.getY() >= world.getBottomY() && pos.getY() <= world.getTopY() - 1 && world.getWorldBorder().contains(pos)) {
+            if (state.isAir()) {
+                return true;
+            } else if (!state.isOf(Blocks.OBSIDIAN) && !state.isOf(Blocks.CRYING_OBSIDIAN) && !state.isOf(Blocks.RESPAWN_ANCHOR)) {
+                if (direction == Direction.DOWN && pos.getY() == world.getBottomY()) {
+                    return false;
+                } else if (direction == Direction.UP && pos.getY() == world.getTopY() - 1) {
+                    return false;
+                } else {
+                    if (!state.isOf(Blocks.PISTON) && !state.isOf(Blocks.STICKY_PISTON)) {
+                        if (state.getHardness(world, pos) == -1.0F) {
+                            return false;
+                        }
 
-    public static boolean isMovable(BlockState state, World world, BlockPos pos, Direction motionDir, boolean canBreak, Direction pistonDir) {
-        if (!state.isOf(Blocks.OBSIDIAN) && !state.isOf(Blocks.CRYING_OBSIDIAN) && !state.isOf(Blocks.RESPAWN_ANCHOR)) {
-            if (!world.getWorldBorder().contains(pos)) {
-                return false;
-            } else if (pos.getY() < 0 || motionDir == Direction.DOWN && pos.getY() == 0) {
-                return false;
-            } else if (pos.getY() > world.getHeight() - 1 || motionDir == Direction.UP && pos.getY() == world.getHeight() - 1) {
-                return false;
-            } else {
-                if (!state.isOf(Blocks.PISTON) && !state.isOf(Blocks.STICKY_PISTON) && !ColouredStickyPistons.ColouredStickyPistonsMap.containsValue(state.getBlock())) {
-                    if (state.getHardness(world, pos) == -1.0F) {
+                        switch(state.getPistonBehavior()) {
+                            case BLOCK:
+                                return false;
+                            case DESTROY:
+                                return canBreak;
+                            case PUSH_ONLY:
+                                return direction == pistonDir;
+                        }
+                    } else if ((Boolean)state.get(EXTENDED)) {
                         return false;
                     }
 
-                    switch(state.getPistonBehavior()) {
-                        case BLOCK:
-                            return false;
-                        case DESTROY:
-                            return canBreak;
-                        case PUSH_ONLY:
-                            return motionDir == pistonDir;
-                    }
-                } else if ((Boolean)state.get(EXTENDED)) {
-                    return false;
+                    return !state.hasBlockEntity();
                 }
-
-                return !state.getBlock().hasBlockEntity();
+            } else {
+                return false;
             }
         } else {
             return false;
         }
     }
 
-
     private boolean move(World world, BlockPos pos, Direction dir, boolean retract) {
         BlockPos blockPos = pos.offset(dir);
-        Block selfPistonHead = RegisterBlocks.CSPLinkBlockToHeadMap.get(this);
-        if (!retract && world.getBlockState(blockPos).isOf(selfPistonHead)) {
+        if (!retract && world.getBlockState(blockPos).isOf(Blocks.PISTON_HEAD)) {
             world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 20);
         }
 
@@ -335,41 +332,46 @@ public class ColouredStickyPistons extends PistonBlock {
 
             int l;
             BlockPos blockPos4;
-            BlockState blockState8;
+            BlockState blockState9;
             for(l = list3.size() - 1; l >= 0; --l) {
                 blockPos4 = (BlockPos)list3.get(l);
-                blockState8 = world.getBlockState(blockPos4);
-                BlockEntity blockEntity = blockState8.getBlock().hasBlockEntity() ? world.getBlockEntity(blockPos4) : null;
-                dropStacks(blockState8, world, blockPos4, blockEntity);
+                blockState9 = world.getBlockState(blockPos4);
+                BlockEntity blockEntity = blockState9.hasBlockEntity() ? world.getBlockEntity(blockPos4) : null;
+                dropStacks(blockState9, world, blockPos4, blockEntity);
                 world.setBlockState(blockPos4, Blocks.AIR.getDefaultState(), 18);
-                blockStates[j++] = blockState8;
+                if (!blockState9.isIn(BlockTags.FIRE)) {
+                    world.addBlockBreakParticles(blockPos4, blockState9);
+                }
+
+                blockStates[j++] = blockState9;
             }
 
             for(l = list.size() - 1; l >= 0; --l) {
                 blockPos4 = (BlockPos)list.get(l);
-                blockState8 = world.getBlockState(blockPos4);
+                blockState9 = world.getBlockState(blockPos4);
                 blockPos4 = blockPos4.offset(direction);
                 map.remove(blockPos4);
-                world.setBlockState(blockPos4, (BlockState)Blocks.MOVING_PISTON.getDefaultState().with(FACING, dir), 68);
-                world.setBlockEntity(blockPos4, PistonExtensionBlock.createBlockEntityPiston((BlockState)list2.get(l), dir, retract, false));
-                blockStates[j++] = blockState8;
+                BlockState blockState4 = (BlockState)Blocks.MOVING_PISTON.getDefaultState().with(FACING, dir);
+                world.setBlockState(blockPos4, blockState4, 68);
+                world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(blockPos4, blockState4, (BlockState)list2.get(l), dir, retract, false));
+                blockStates[j++] = blockState9;
             }
 
             if (retract) {
                 PistonType pistonType = this.sticky ? PistonType.STICKY : PistonType.DEFAULT;
-                BlockState blockState4 = (BlockState)((BlockState)selfPistonHead.getDefaultState().with(PistonHeadBlock.FACING, dir)).with(PistonHeadBlock.TYPE, pistonType);
-                blockState8 = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, dir)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
+                BlockState blockState5 = (BlockState)((BlockState)Blocks.PISTON_HEAD.getDefaultState().with(PistonHeadBlock.FACING, dir)).with(PistonHeadBlock.TYPE, pistonType);
+                blockState9 = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, dir)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
                 map.remove(blockPos);
-                world.setBlockState(blockPos, blockState8, 68);
-                world.setBlockEntity(blockPos, PistonExtensionBlock.createBlockEntityPiston(blockState4, dir, true, true));
+                world.setBlockState(blockPos, blockState9, 68);
+                world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(blockPos, blockState9, blockState5, dir, true, true));
             }
 
-            BlockState blockState6 = Blocks.AIR.getDefaultState();
+            BlockState blockState7 = Blocks.AIR.getDefaultState();
             Iterator var25 = map.keySet().iterator();
 
             while(var25.hasNext()) {
                 BlockPos blockPos5 = (BlockPos)var25.next();
-                world.setBlockState(blockPos5, blockState6, 82);
+                world.setBlockState(blockPos5, blockState7, 82);
             }
 
             var25 = map.entrySet().iterator();
@@ -378,20 +380,20 @@ public class ColouredStickyPistons extends PistonBlock {
             while(var25.hasNext()) {
                 Map.Entry<BlockPos, BlockState> entry = (Map.Entry)var25.next();
                 blockPos7 = (BlockPos)entry.getKey();
-                BlockState blockState7 = (BlockState)entry.getValue();
+                BlockState blockState8 = (BlockState)entry.getValue();
+                blockState8.prepare(world, blockPos7, 2);
+                blockState7.updateNeighbors(world, blockPos7, 2);
                 blockState7.prepare(world, blockPos7, 2);
-                blockState6.updateNeighbors(world, blockPos7, 2);
-                blockState6.prepare(world, blockPos7, 2);
             }
 
             j = 0;
 
             int n;
             for(n = list3.size() - 1; n >= 0; --n) {
-                blockState8 = blockStates[j++];
+                blockState9 = blockStates[j++];
                 blockPos7 = (BlockPos)list3.get(n);
-                blockState8.prepare(world, blockPos7, 2);
-                world.updateNeighborsAlways(blockPos7, blockState8.getBlock());
+                blockState9.prepare(world, blockPos7, 2);
+                world.updateNeighborsAlways(blockPos7, blockState9.getBlock());
             }
 
             for(n = list.size() - 1; n >= 0; --n) {
@@ -399,13 +401,12 @@ public class ColouredStickyPistons extends PistonBlock {
             }
 
             if (retract) {
-                world.updateNeighborsAlways(blockPos, selfPistonHead);
+                world.updateNeighborsAlways(blockPos, Blocks.PISTON_HEAD);
             }
 
             return true;
         }
     }
-
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
@@ -415,6 +416,13 @@ public class ColouredStickyPistons extends PistonBlock {
         return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
     }
 
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(new Property[]{FACING, EXTENDED});
+    }
+
+    public boolean hasSidedTransparency(BlockState state) {
+        return (Boolean)state.get(EXTENDED);
+    }
 
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
@@ -429,6 +437,7 @@ public class ColouredStickyPistons extends PistonBlock {
         EXTENDED_UP_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
         EXTENDED_DOWN_SHAPE = Block.createCuboidShape(0.0D, 4.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     }
+
 
     // Same as csbRegister. May want to repackage the method.
     public static void cspRegister(ColouredStickyPistons colouredStickyPistons, String path) {
