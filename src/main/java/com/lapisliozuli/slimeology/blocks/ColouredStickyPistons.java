@@ -259,8 +259,15 @@ public class ColouredStickyPistons extends PistonBlock {
                 }
 
                 if (!bl2) {
-                    if (type != 1 || blockState2.isAir() || !isMovable(blockState2, world, blockPos, direction.getOpposite(), false, direction) || blockState2.getPistonBehavior() != PistonBehavior.NORMAL && !blockState2.isOf(Blocks.PISTON) && !blockState2.isOf(Blocks.STICKY_PISTON)) {
-                        world.removeBlock(pos.offset(direction), false);
+//                    if (type != 1 || blockState2.isAir() || !isMovable(blockState2, world, blockPos, direction.getOpposite(), false, direction) || blockState2.getPistonBehavior() != PistonBehavior.NORMAL && !blockState2.isOf(Blocks.PISTON) && !blockState2.isOf(Blocks.STICKY_PISTON)) {
+//                        world.removeBlock(pos.offset(direction), false);
+                    if (type != 1
+                            || blockState2.isAir()
+                            || !isMovable(blockState2, world, blockPos, direction.getOpposite(), false, direction)
+                            || blockState2.getPistonBehavior() != PistonBehavior.NORMAL
+                            && !blockState2.isOf(Blocks.PISTON)
+                            && !blockState2.isOf(Blocks.STICKY_PISTON)
+                            && !ColouredStickyPistons.ColouredStickyPistonsMap.containsValue(blockState2.getBlock())) {
                     } else {
                         this.move(world, pos, direction, false);
                     }
@@ -286,7 +293,7 @@ public class ColouredStickyPistons extends PistonBlock {
                 } else if (direction == Direction.UP && pos.getY() == world.getTopY() - 1) {
                     return false;
                 } else {
-                    if (!state.isOf(Blocks.PISTON) && !state.isOf(Blocks.STICKY_PISTON)) {
+                    if (!state.isOf(Blocks.PISTON) && !state.isOf(Blocks.STICKY_PISTON) && !ColouredStickyPistons.ColouredStickyPistonsMap.containsValue(state.getBlock())) {
                         if (state.getHardness(world, pos) == -1.0F) {
                             return false;
                         }
@@ -313,9 +320,11 @@ public class ColouredStickyPistons extends PistonBlock {
         }
     }
 
+    // Fixed the textures for extension and extended, as well as the block-breaking animation/effects on extension.
     private boolean move(World world, BlockPos pos, Direction dir, boolean retract) {
         BlockPos blockPos = pos.offset(dir);
-        if (!retract && world.getBlockState(blockPos).isOf(Blocks.PISTON_HEAD)) {
+        Block selfPistonHead = RegisterBlocks.CSPLinkBlockToHeadMap.get(this);
+        if (!retract && world.getBlockState(blockPos).isOf(selfPistonHead)) {
             world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), Block.NO_REDRAW | Block.FORCE_STATE);
         }
 
@@ -342,12 +351,14 @@ public class ColouredStickyPistons extends PistonBlock {
             int l;
             BlockPos blockPos4;
             BlockState blockState9;
+            // Checks for blocks that would be broken by pistons.
             for(l = list3.size() - 1; l >= 0; --l) {
                 blockPos4 = (BlockPos)list3.get(l);
                 blockState9 = world.getBlockState(blockPos4);
                 BlockEntity blockEntity = blockState9.hasBlockEntity() ? world.getBlockEntity(blockPos4) : null;
                 dropStacks(blockState9, world, blockPos4, blockEntity);
                 world.setBlockState(blockPos4, Blocks.AIR.getDefaultState(), Block.NOTIFY_LISTENERS | Block.FORCE_STATE);
+                // For some reason this only runs in the breakable block is not on fire.
                 if (!blockState9.isIn(BlockTags.FIRE)) {
                     world.addBlockBreakParticles(blockPos4, blockState9);
                 }
@@ -368,8 +379,10 @@ public class ColouredStickyPistons extends PistonBlock {
 
             if (retract) {
                 PistonType pistonType = this.sticky ? PistonType.STICKY : PistonType.DEFAULT;
-                BlockState blockState5 = (BlockState)((BlockState)Blocks.PISTON_HEAD.getDefaultState().with(PistonHeadBlock.FACING, dir)).with(PistonHeadBlock.TYPE, pistonType);
+                BlockState blockState5 = (BlockState)((BlockState)selfPistonHead.getDefaultState().with(PistonHeadBlock.FACING, dir)).with(PistonHeadBlock.TYPE, pistonType);
                 blockState9 = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, dir)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
+//                BlockState blockState5 = (BlockState)((BlockState)Blocks.PISTON_HEAD.getDefaultState().with(PistonHeadBlock.FACING, dir)).with(PistonHeadBlock.TYPE, pistonType);
+//                blockState9 = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, dir)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
                 map.remove(blockPos);
                 world.setBlockState(blockPos, blockState9, Block.NO_REDRAW | Block.MOVED);
                 world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(blockPos, blockState9, blockState5, dir, true, true));
@@ -410,7 +423,7 @@ public class ColouredStickyPistons extends PistonBlock {
             }
 
             if (retract) {
-                world.updateNeighborsAlways(blockPos, Blocks.PISTON_HEAD);
+                world.updateNeighborsAlways(blockPos, selfPistonHead);
             }
 
             return true;

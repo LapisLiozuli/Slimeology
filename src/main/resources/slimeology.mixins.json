@@ -5,9 +5,10 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "PistonHandlerInjectMixin",
-    "PushEntitiesMixin",
     "PistonBlockAccessor",
-    "PistonGetHeadBlockStateInvoker"
+    "PistonGetHeadBlockStateInvoker",
+    "PushEntitiesMixin",
+    "PistonBlockEntityRendererMixin"
   ],
   "client": [
   ],

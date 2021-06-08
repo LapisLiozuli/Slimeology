@@ -196,6 +196,11 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
         return new ItemStack(state.get(TYPE) == PistonType.STICKY ? Blocks.STICKY_PISTON : Blocks.PISTON);
     }
 
+//    @Environment(EnvType.CLIENT)
+//    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+//        return new ItemStack(this.asBlock());
+//    }
+
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
     }
