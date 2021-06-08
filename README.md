@@ -1,12 +1,19 @@
 # Slimeology: The Discovery of Slime
 
+<a title="Fabric API" href="https://github.com/FabricMC/fabric">
+  <img src="https://i.imgur.com/Ol1Tcf8.png" width="151" height="50" />
+</a>
+<br/>
+<a href="https://www.curseforge.com/minecraft/mc-mods/auto-config-updated-api">
+  Requires Auto Config 3.3.1 to run.
+</a>
+
 ## Primer
 
 Explore the world in search of more varieties of slime than ever! Enjoy an expanded block palette for both building and redstoning! 
 
 Custom advancements will guide you along every step of the way. 
 
-Requires Auto Config 3.3.1 to run.
 
 Supports 1.16.1, 1.16.3, 1.16.4 and 1.16.5. 1.16.2 support may be added in future.
 
