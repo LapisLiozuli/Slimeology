@@ -10,6 +10,7 @@ import net.minecraft.block.enums.PistonType;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
@@ -26,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,12 +78,16 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
 
     public static final EnumProperty<PistonType> TYPE;
     public static final BooleanProperty SHORT;
+    public static final float field_31377 = 4.0F;
     protected static final VoxelShape EAST_HEAD_SHAPE;
     protected static final VoxelShape WEST_HEAD_SHAPE;
     protected static final VoxelShape SOUTH_HEAD_SHAPE;
     protected static final VoxelShape NORTH_HEAD_SHAPE;
     protected static final VoxelShape UP_HEAD_SHAPE;
     protected static final VoxelShape DOWN_HEAD_SHAPE;
+    protected static final float field_31378 = 2.0F;
+    protected static final float field_31379 = 6.0F;
+    protected static final float field_31380 = 10.0F;
     protected static final VoxelShape UP_ARM_SHAPE;
     protected static final VoxelShape DOWN_ARM_SHAPE;
     protected static final VoxelShape SOUTH_ARM_SHAPE;
@@ -94,77 +100,88 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
     protected static final VoxelShape SHORT_NORTH_ARM_SHAPE;
     protected static final VoxelShape SHORT_EAST_ARM_SHAPE;
     protected static final VoxelShape SHORT_WEST_ARM_SHAPE;
+    private static final VoxelShape[] SHORT_HEAD_SHAPES;
+    private static final VoxelShape[] HEAD_SHAPES;
 
+    private static VoxelShape[] getHeadShapes(boolean shortHead) {
+        return (VoxelShape[]) Arrays.stream(Direction.values()).map((direction) -> {
+            return getHeadShape(direction, shortHead);
+        }).toArray((i) -> {
+            return new VoxelShape[i];
+        });
+    }
 
-    private VoxelShape getHeadShape(BlockState state) {
-        switch((Direction)state.get(FACING)) {
+    private static VoxelShape getHeadShape(Direction direction, boolean shortHead) {
+        switch(direction) {
             case DOWN:
             default:
-                return DOWN_HEAD_SHAPE;
+                return VoxelShapes.union(DOWN_HEAD_SHAPE, shortHead ? SHORT_DOWN_ARM_SHAPE : DOWN_ARM_SHAPE);
             case UP:
-                return UP_HEAD_SHAPE;
+                return VoxelShapes.union(UP_HEAD_SHAPE, shortHead ? SHORT_UP_ARM_SHAPE : UP_ARM_SHAPE);
             case NORTH:
-                return NORTH_HEAD_SHAPE;
+                return VoxelShapes.union(NORTH_HEAD_SHAPE, shortHead ? SHORT_NORTH_ARM_SHAPE : NORTH_ARM_SHAPE);
             case SOUTH:
-                return SOUTH_HEAD_SHAPE;
+                return VoxelShapes.union(SOUTH_HEAD_SHAPE, shortHead ? SHORT_SOUTH_ARM_SHAPE : SOUTH_ARM_SHAPE);
             case WEST:
-                return WEST_HEAD_SHAPE;
+                return VoxelShapes.union(WEST_HEAD_SHAPE, shortHead ? SHORT_WEST_ARM_SHAPE : WEST_ARM_SHAPE);
             case EAST:
-                return EAST_HEAD_SHAPE;
+                return VoxelShapes.union(EAST_HEAD_SHAPE, shortHead ? SHORT_EAST_ARM_SHAPE : EAST_ARM_SHAPE);
         }
     }
+
+//    public PistonHeadBlock(AbstractBlock.Settings settings) {
+//        super(settings);
+//        this.setDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(FACING, Direction.NORTH)).with(TYPE, PistonType.DEFAULT)).with(SHORT, false));
+//    }
 
     public boolean hasSidedTransparency(BlockState state) {
         return true;
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.union(this.getHeadShape(state), this.getArmShape(state));
+        return ((Boolean)state.get(SHORT) ? SHORT_HEAD_SHAPES : HEAD_SHAPES)[((Direction)state.get(FACING)).ordinal()];
     }
 
-    private VoxelShape getArmShape(BlockState state) {
-        boolean bl = (Boolean)state.get(SHORT);
-        switch((Direction)state.get(FACING)) {
-            case DOWN:
-            default:
-                return bl ? SHORT_DOWN_ARM_SHAPE : DOWN_ARM_SHAPE;
-            case UP:
-                return bl ? SHORT_UP_ARM_SHAPE : UP_ARM_SHAPE;
-            case NORTH:
-                return bl ? SHORT_NORTH_ARM_SHAPE : NORTH_ARM_SHAPE;
-            case SOUTH:
-                return bl ? SHORT_SOUTH_ARM_SHAPE : SOUTH_ARM_SHAPE;
-            case WEST:
-                return bl ? SHORT_WEST_ARM_SHAPE : WEST_ARM_SHAPE;
-            case EAST:
-                return bl ? SHORT_EAST_ARM_SHAPE : EAST_ARM_SHAPE;
+//    private boolean isAttached(BlockState headState, BlockState pistonState) {
+//        Block block = headState.get(TYPE) == PistonType.DEFAULT ? Blocks.PISTON : Blocks.STICKY_PISTON;
+//        return pistonState.isOf(block) && (Boolean)pistonState.get(PistonBlock.EXTENDED) && pistonState.get(FACING) == headState.get(FACING);
+//    }
+
+    private boolean isAttached(BlockState headState, BlockState pistonState) {
+        // CSPs are always sticky.
+        Block block = RegisterBlocks.CSPLinkBlockToHeadMap.inverse().get(this);
+        return pistonState.isOf(block) && (Boolean)pistonState.get(ColouredStickyPistons.EXTENDED) && pistonState.get(FACING) == headState.get(FACING);
+    }
+
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (!world.isClient && player.getAbilities().creativeMode) {
+            BlockPos blockPos = pos.offset(((Direction)state.get(FACING)).getOpposite());
+            if (this.isAttached(state, world.getBlockState(blockPos))) {
+                world.breakBlock(blockPos, false);
+            }
+        }
+
+        super.onBreak(world, pos, state, player);
+    }
+
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            super.onStateReplaced(state, world, pos, newState, moved);
+            BlockPos blockPos = pos.offset(((Direction)state.get(FACING)).getOpposite());
+            if (this.isAttached(state, world.getBlockState(blockPos))) {
+                world.breakBlock(blockPos, true);
+            }
+
         }
     }
 
-    private boolean method_26980(BlockState blockState, BlockState blockState2) {
-        Block block = RegisterBlocks.CSPLinkBlockToHeadMap.inverse().get(this);
-        return blockState2.isOf(block) && (Boolean)blockState2.get(ColouredStickyPistons.EXTENDED) && blockState2.get(FACING) == blockState.get(FACING);
-    }
-
-//    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-//        if (!world.isClient && player.abilities.creativeMode) {
-//            BlockPos blockPos = pos.offset(((Direction)state.get(FACING)).getOpposite());
-//            if (this.method_26980(state, world.getBlockState(blockPos))) {
-//                world.breakBlock(blockPos, false);
-//            }
-//        }
-//
-//        super.onBreak(world, pos, state, player);
-//    }
-
-
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        return direction.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        return direction.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos.offset(((Direction)state.get(FACING)).getOpposite()));
-        return this.method_26980(state, blockState) || blockState.isOf(Blocks.MOVING_PISTON) && blockState.get(FACING) == state.get(FACING);
+        return this.isAttached(state, blockState) || blockState.isOf(Blocks.MOVING_PISTON) && blockState.get(FACING) == state.get(FACING);
     }
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
@@ -175,9 +192,8 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
 
     }
 
-    @Environment(EnvType.CLIENT)
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(this.asBlock());
+        return new ItemStack(state.get(TYPE) == PistonType.STICKY ? Blocks.STICKY_PISTON : Blocks.PISTON);
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
@@ -188,6 +204,9 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
         return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
     }
 
+//    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+//        builder.add(FACING, TYPE, SHORT);
+//    }
 
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
@@ -214,6 +233,8 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
         SHORT_NORTH_ARM_SHAPE = Block.createCuboidShape(6.0D, 6.0D, 4.0D, 10.0D, 10.0D, 16.0D);
         SHORT_EAST_ARM_SHAPE = Block.createCuboidShape(0.0D, 6.0D, 6.0D, 12.0D, 10.0D, 10.0D);
         SHORT_WEST_ARM_SHAPE = Block.createCuboidShape(4.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D);
+        SHORT_HEAD_SHAPES = getHeadShapes(true);
+        HEAD_SHAPES = getHeadShapes(false);
     }
 
 

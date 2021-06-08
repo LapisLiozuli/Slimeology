@@ -34,6 +34,7 @@ public class PistonHandlerInjectMixin {
         // CSBs will not stick to Slime Blocks, Honey Blocks or Slimeology sticky blocks.
         else if (((ColouredSlimeBlocks.colouredSlimeBlocksMap.containsValue(state.getBlock()))
                 & (adjacentState.getBlock() == Blocks.HONEY_BLOCK | adjacentState.getBlock() == Blocks.SLIME_BLOCK | RegisterBlocks.blocksList.contains(adjacentState.getBlock())))
+                // First condition and second condition are the same except state and adjacentState are swapped.
                 | ((state.getBlock() == Blocks.HONEY_BLOCK | state.getBlock() == Blocks.SLIME_BLOCK | RegisterBlocks.blocksList.contains(state.getBlock()))
                 & ColouredSlimeBlocks.colouredSlimeBlocksMap.containsValue(adjacentState.getBlock()))) {
             cir.setReturnValue(false);

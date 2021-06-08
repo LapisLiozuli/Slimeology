@@ -1,70 +1,146 @@
-//package com.lapisliozuli.slimeology.mixins;
-//
-//import com.lapisliozuli.slimeology.blocks.ColouredSlimeBlocks;
-//import net.minecraft.block.BlockState;
-//import net.minecraft.block.Blocks;
-//import net.minecraft.block.entity.BlockEntity;
-//import net.minecraft.block.entity.BlockEntityType;
-//import net.minecraft.block.entity.PistonBlockEntity;
-//import net.minecraft.block.piston.PistonBehavior;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.MovementType;
-//import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
-//import net.minecraft.server.network.ServerPlayerEntity;
-//import net.minecraft.util.math.*;
-//import net.minecraft.util.shape.VoxelShape;
-//import org.spongepowered.asm.mixin.Mixin;
-//import org.spongepowered.asm.mixin.Overwrite;
-//import org.spongepowered.asm.mixin.Shadow;
-//
-//import java.util.Iterator;
-//import java.util.List;
-//
-//@Mixin(PistonBlockEntity.class)
-//public abstract class PushEntitiesMixin extends BlockEntity {
-//    // Gives the launching behaviour to ColouredSlimeBlocks when used to push Entities via a Piston.
-//
-//    @Shadow private BlockState pushedBlock;
-//    @Shadow private float progress;
-//    @Shadow private boolean extending;
-//    @Shadow private boolean source;
-//    @Shadow private static final ThreadLocal<Direction> field_12205 = ThreadLocal.withInitial(() -> {
-//        return null;
-//    });
-//
-//    public PushEntitiesMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-//        super(type, pos, state);
-//    }
-//
-//    @Shadow protected abstract BlockState getHeadBlockState();
-//    @Shadow protected abstract Box offsetHeadBox(Box box);
-//    @Shadow public abstract Direction getMovementDirection();
-//    @Shadow public abstract void push(Entity entity, Direction direction, double amount);
-//
+package com.lapisliozuli.slimeology.mixins;
+
+import com.lapisliozuli.slimeology.blocks.ColouredSlimeBlocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.PistonBlockEntity;
+import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.MovementType;
+import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.*;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+
+import java.util.Iterator;
+import java.util.List;
+
+@Mixin(PistonBlockEntity.class)
+public class PushEntitiesMixin extends BlockEntity {
+    // Gives the launching behaviour to ColouredSlimeBlocks when used to push Entities via a Piston.
+    public PushEntitiesMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
+    }
+
+    @Shadow
+    private static Box offsetHeadBox(BlockPos pos, Box box, PistonBlockEntity blockEntity) {
+        return null;
+    }
+
+    @Shadow
+    private static double getIntersectionSize(Box box, Direction direction, Box box2) {
+        return 0;
+    }
+
+    @Shadow
+    private static void moveEntity(Direction direction, Entity entity, double d, Direction direction2) {
+    }
+
+    @Shadow
+    private static void push(BlockPos pos, Entity entity, Direction direction, double amount) {
+    }
+
 //    @Shadow
-//    public static double getIntersectionSize(Box box, Direction direction, Box box2) {
-//        switch(direction) {
-//            case EAST:
-//                return box.maxX - box2.minX;
-//            case WEST:
-//                return box2.maxX - box.minX;
-//            case UP:
-//            default:
-//                return box.maxY - box2.minY;
-//            case DOWN:
-//                return box2.maxY - box.minY;
-//            case SOUTH:
-//                return box.maxZ - box2.minZ;
-//            case NORTH:
-//                return box2.maxZ - box.minZ;
-//        }
+//    private BlockState getHeadBlockState() {
+//        return null;
 //    }
-//    @Shadow public static void method_23672(Direction direction, Entity entity, double d, Direction direction2) {
-//        field_12205.set(direction);
-//        entity.move(MovementType.PISTON, new Vec3d(d * (double)direction2.getOffsetX(), d * (double)direction2.getOffsetY(), d * (double)direction2.getOffsetZ()));
-//        field_12205.set((Direction)null);
-//    }
-//
+
+    /**
+         * @author: Lapis Liozuli
+         * @reason: Injecting to a target other than HEAD or TAIL is hard.
+         */
+    @Overwrite
+    private static void pushEntities(World world, BlockPos pos, float f, PistonBlockEntity blockEntity) {
+        Direction direction = blockEntity.getMovementDirection();
+
+        // Access private field using internal method.
+        BlockState pushedBlock = blockEntity.getPushedBlock();
+        // Access private fields using PistonBlockAccessor.
+        float progress = ((PistonBlockAccessor) blockEntity).getPistonProgress();
+        boolean extending = ((PistonBlockAccessor) blockEntity).getExtending();
+        boolean source = ((PistonBlockAccessor) blockEntity).getSource();
+
+
+        double d = (double) (f - progress);
+        VoxelShape voxelShape = ((PistonGetHeadBlockStateInvoker) blockEntity).invokeGetHeadBlockState().getCollisionShape(world, pos);
+        if (!voxelShape.isEmpty()) {
+            Box box = offsetHeadBox(pos, voxelShape.getBoundingBox(), blockEntity);
+            List<Entity> list = world.getOtherEntities((Entity) null, Boxes.stretch(box, direction, d).union(box));
+            if (!list.isEmpty()) {
+                List<Box> list2 = voxelShape.getBoundingBoxes();
+                boolean bl = pushedBlock.isOf(Blocks.SLIME_BLOCK)
+                        | ColouredSlimeBlocks.colouredSlimeBlocksMap.containsValue(pushedBlock.getBlock());
+                Iterator var12 = list.iterator();
+
+                while (true) {
+                    Entity entity;
+                    while (true) {
+                        do {
+                            if (!var12.hasNext()) {
+                                return;
+                            }
+
+                            entity = (Entity) var12.next();
+                        } while (entity.getPistonBehavior() == PistonBehavior.IGNORE);
+
+                        if (!bl) {
+                            break;
+                        }
+
+                        if (!(entity instanceof ServerPlayerEntity)) {
+                            Vec3d vec3d = entity.getVelocity();
+                            double e = vec3d.x;
+                            double g = vec3d.y;
+                            double h = vec3d.z;
+                            switch (direction.getAxis()) {
+                                case X:
+                                    e = (double) direction.getOffsetX();
+                                    break;
+                                case Y:
+                                    g = (double) direction.getOffsetY();
+                                    break;
+                                case Z:
+                                    h = (double) direction.getOffsetZ();
+                            }
+
+                            entity.setVelocity(e, g, h);
+                            break;
+                        }
+                    }
+
+                    double i = 0.0D;
+                    Iterator var16 = list2.iterator();
+
+                    while (var16.hasNext()) {
+                        Box box2 = (Box) var16.next();
+                        Box box3 = Boxes.stretch(offsetHeadBox(pos, box2, blockEntity), direction, d);
+                        Box box4 = entity.getBoundingBox();
+                        if (box3.intersects(box4)) {
+                            i = Math.max(i, getIntersectionSize(box3, direction, box4));
+                            if (i >= d) {
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!(i <= 0.0D)) {
+                        i = Math.min(i, d) + 0.01D;
+                        moveEntity(direction, entity, i, direction);
+                        if (!extending && source) {
+                            push(pos, entity, direction, d);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 //
 //    /**
 //     * @author: Lapis Liozuli

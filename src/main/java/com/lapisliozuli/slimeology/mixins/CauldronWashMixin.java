@@ -26,6 +26,7 @@
 //    @Final
 //    @Shadow
 //    public static IntProperty LEVEL;
+//    ShulkerBoxBlock
 //
 //    @Shadow
 //    public abstract void setLevel(World world, BlockPos pos, BlockState state, int level);
