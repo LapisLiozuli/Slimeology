@@ -135,6 +135,7 @@ public class RegisterSEC {
                 SlimeEntityColoured::canSpawnSEC);
 
         List<RegistryKey<Biome>> biomeRegKeyList = convertConfigIDsToBiomes(stringSECToBiomeList);
+        System.out.println(biomeRegKeyList);
 
         // Iterate over the Registry of Biomes
         for (RegistryKey<Biome> biomeReg : BuiltinBiomesAccessor.getBY_RAW_ID().values()) {
