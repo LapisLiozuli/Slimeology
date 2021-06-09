@@ -240,9 +240,11 @@ public class ColouredStickyPistons extends PistonBlock {
 
             BlockState blockState = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, direction)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
             world.setBlockState(pos, blockState, Block.NO_REDRAW | Block.FORCE_STATE);
+            // Creates PBE on retraction. Two creations: Server, then client.
             world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(pos, blockState, (BlockState)this.getDefaultState().with(FACING, Direction.byId(data & 7)), direction, false, true));
             world.updateNeighbors(pos, blockState.getBlock());
             blockState.updateNeighbors(world, pos, Block.NOTIFY_LISTENERS);
+            // CSP Head retract.
             if (this.sticky) {
                 BlockPos blockPos = pos.add(direction.getOffsetX() * 2, direction.getOffsetY() * 2, direction.getOffsetZ() * 2);
                 BlockState blockState2 = world.getBlockState(blockPos);
@@ -259,8 +261,6 @@ public class ColouredStickyPistons extends PistonBlock {
                 }
 
                 if (!bl2) {
-//                    if (type != 1 || blockState2.isAir() || !isMovable(blockState2, world, blockPos, direction.getOpposite(), false, direction) || blockState2.getPistonBehavior() != PistonBehavior.NORMAL && !blockState2.isOf(Blocks.PISTON) && !blockState2.isOf(Blocks.STICKY_PISTON)) {
-//                        world.removeBlock(pos.offset(direction), false);
                     if (type != 1
                             || blockState2.isAir()
                             || !isMovable(blockState2, world, blockPos, direction.getOpposite(), false, direction)
@@ -268,6 +268,7 @@ public class ColouredStickyPistons extends PistonBlock {
                             && !blockState2.isOf(Blocks.PISTON)
                             && !blockState2.isOf(Blocks.STICKY_PISTON)
                             && !ColouredStickyPistons.ColouredStickyPistonsMap.containsValue(blockState2.getBlock())) {
+                        world.removeBlock(pos.offset(direction), false);
                     } else {
                         this.move(world, pos, direction, false);
                     }
@@ -322,82 +323,109 @@ public class ColouredStickyPistons extends PistonBlock {
 
     // Fixed the textures for extension and extended, as well as the block-breaking animation/effects on extension.
     private boolean move(World world, BlockPos pos, Direction dir, boolean retract) {
-        BlockPos blockPos = pos.offset(dir);
+        BlockPos offsetBlockPos = pos.offset(dir);
         Block selfPistonHead = RegisterBlocks.CSPLinkBlockToHeadMap.get(this);
-        if (!retract && world.getBlockState(blockPos).isOf(selfPistonHead)) {
-            world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), Block.NO_REDRAW | Block.FORCE_STATE);
+
+        // If retract is false and the block in the offset-dir is a CSP head:
+        // Always activates on extension.
+        // Activates on retraction is a block is stuck.
+        System.out.println(world.getBlockState(offsetBlockPos).getBlock());
+        if (!retract && world.getBlockState(offsetBlockPos).isOf(selfPistonHead)) {
+            // If disabled, then the stickiness no longer works and the block doesn't get pulled back.
+            // Head breaking occurs whether an adjacent block is present or not.
+            world.setBlockState(offsetBlockPos, Blocks.AIR.getDefaultState(), Block.NO_REDRAW | Block.FORCE_STATE);
         }
 
         PistonHandler pistonHandler = new PistonHandler(world, pos, dir, retract);
+        // Seems to occur for breakable blocks. But also for sticky blocks (calls isBlockSticky() and isAdjacentBlockStuck()).
+        // But this behaviour only occurred if I disabled the code in the previous if-clause.
         if (!pistonHandler.calculatePush()) {
             return false;
         } else {
-            Map<BlockPos, BlockState> map = Maps.newHashMap();
-            List<BlockPos> list = pistonHandler.getMovedBlocks();
-            List<BlockState> list2 = Lists.newArrayList();
+            Map<BlockPos, BlockState> mapMovableBlocks = Maps.newHashMap();
+            List<BlockPos> movableBlockPoses = pistonHandler.getMovedBlocks();
+            List<BlockState> movableBlockStates = Lists.newArrayList();
 
-            for(int i = 0; i < list.size(); ++i) {
-                BlockPos blockPos2 = (BlockPos)list.get(i);
+            // If movable blocks are present, list will contain at least one element. Else, list is empty.
+            for(int i = 0; i < movableBlockPoses.size(); ++i) {
+                BlockPos blockPos2 = (BlockPos)movableBlockPoses.get(i);
                 BlockState blockState = world.getBlockState(blockPos2);
-                list2.add(blockState);
-                map.put(blockPos2, blockState);
+                // Stores the blocks to be moved.
+                movableBlockStates.add(blockState);
+                // Map stores position and block.
+                mapMovableBlocks.put(blockPos2, blockState);
             }
 
-            List<BlockPos> list3 = pistonHandler.getBrokenBlocks();
-            BlockState[] blockStates = new BlockState[list.size() + list3.size()];
+            List<BlockPos> breakableBlockPoses = pistonHandler.getBrokenBlocks();
+            BlockState[] blockStates = new BlockState[movableBlockPoses.size() + breakableBlockPoses.size()];
             Direction direction = retract ? dir : dir.getOpposite();
             int j = 0;
 
             int l;
-            BlockPos blockPos4;
-            BlockState blockState9;
+            BlockPos stuckBlockPos;
+            BlockState stuckBlockState;
             // Checks for blocks that would be broken by pistons.
-            for(l = list3.size() - 1; l >= 0; --l) {
-                blockPos4 = (BlockPos)list3.get(l);
-                blockState9 = world.getBlockState(blockPos4);
-                BlockEntity blockEntity = blockState9.hasBlockEntity() ? world.getBlockEntity(blockPos4) : null;
-                dropStacks(blockState9, world, blockPos4, blockEntity);
-                world.setBlockState(blockPos4, Blocks.AIR.getDefaultState(), Block.NOTIFY_LISTENERS | Block.FORCE_STATE);
-                // For some reason this only runs in the breakable block is not on fire.
-                if (!blockState9.isIn(BlockTags.FIRE)) {
-                    world.addBlockBreakParticles(blockPos4, blockState9);
+            for(l = breakableBlockPoses.size() - 1; l >= 0; --l) {
+                stuckBlockPos = (BlockPos)breakableBlockPoses.get(l);
+                stuckBlockState = world.getBlockState(stuckBlockPos);
+                BlockEntity blockEntity = stuckBlockState.hasBlockEntity() ? world.getBlockEntity(stuckBlockPos) : null;
+                dropStacks(stuckBlockState, world, stuckBlockPos, blockEntity);
+                world.setBlockState(stuckBlockPos, Blocks.AIR.getDefaultState(), Block.NOTIFY_LISTENERS | Block.FORCE_STATE);
+                // For some reason this only runs if the breakable block is not on fire.
+                // Now it always reaches this?
+                if (!stuckBlockState.isIn(BlockTags.FIRE)) {
+                    world.addBlockBreakParticles(stuckBlockPos, stuckBlockState);
                 }
 
-                blockStates[j++] = blockState9;
+                blockStates[j++] = stuckBlockState;
             }
 
-            for(l = list.size() - 1; l >= 0; --l) {
-                blockPos4 = (BlockPos)list.get(l);
-                blockState9 = world.getBlockState(blockPos4);
-                blockPos4 = blockPos4.offset(direction);
-                map.remove(blockPos4);
+            // Only runs if there are blocks to be moved (pushed/pulled).
+            for(l = movableBlockPoses.size() - 1; l >= 0; --l) {
+                stuckBlockPos = (BlockPos)movableBlockPoses.get(l);
+                stuckBlockState = world.getBlockState(stuckBlockPos);
+                stuckBlockPos = stuckBlockPos.offset(direction);
+                mapMovableBlocks.remove(stuckBlockPos);
                 BlockState blockState4 = (BlockState)Blocks.MOVING_PISTON.getDefaultState().with(FACING, dir);
-                world.setBlockState(blockPos4, blockState4, Block.NO_REDRAW | Block.MOVED);
-                world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(blockPos4, blockState4, (BlockState)list2.get(l), dir, retract, false));
-                blockStates[j++] = blockState9;
+                world.setBlockState(stuckBlockPos, blockState4, Block.NO_REDRAW | Block.MOVED);
+                // PBE created twice for both extension and retraction: Server, then client.
+                // When commented out, extension/retraction still works without stuck blocks.
+                // Stuck block pushed out, converted to Moving Piston. Cannot be moved if another block place between CSP and MP. Use /setblock to clear. Block breaking on retraction.
+                // Block pulled in, converted to MP adjacent to CSP. No block breaking on retraction. CSP can no longer extend.
+                world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(stuckBlockPos, blockState4, (BlockState)movableBlockStates.get(l), dir, retract, false));
+                blockStates[j++] = stuckBlockState;
             }
-
+            // Always runs on retraction. Runs twice, both before and after powering.
+            // Always runs whether blocks are stuck or not.
             if (retract) {
                 PistonType pistonType = this.sticky ? PistonType.STICKY : PistonType.DEFAULT;
+                // If replace selfPistonHead with Moving Piston, then the texture will change to Sticky Piston while extending, then break.
                 BlockState blockState5 = (BlockState)((BlockState)selfPistonHead.getDefaultState().with(PistonHeadBlock.FACING, dir)).with(PistonHeadBlock.TYPE, pistonType);
-                blockState9 = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, dir)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
-//                BlockState blockState5 = (BlockState)((BlockState)Blocks.PISTON_HEAD.getDefaultState().with(PistonHeadBlock.FACING, dir)).with(PistonHeadBlock.TYPE, pistonType);
-//                blockState9 = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, dir)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
-                map.remove(blockPos);
-                world.setBlockState(blockPos, blockState9, Block.NO_REDRAW | Block.MOVED);
-                world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(blockPos, blockState9, blockState5, dir, true, true));
+                stuckBlockState = (BlockState)((BlockState)Blocks.MOVING_PISTON.getDefaultState().with(PistonExtensionBlock.FACING, dir)).with(PistonExtensionBlock.TYPE, this.sticky ? PistonType.STICKY : PistonType.DEFAULT);
+                // Activates twice on extension. Server, then client.
+                mapMovableBlocks.remove(offsetBlockPos);
+                world.setBlockState(offsetBlockPos, stuckBlockState, Block.NO_REDRAW | Block.MOVED);
+                // When powered, CSP Head vanishes, but cannot place any blocks above CSP Base.
+                // When unpowered, CSP Head undergoes retraction animation and sound. But MP created adjacent to CSP Head. No block breaking particles or sound.
+                // With stuck block, block is pushed out on extension. Not pulled back on retraction as MP created. CSP Head can no longer extend.
+                world.addBlockEntity(PistonExtensionBlock.createBlockEntityPiston(offsetBlockPos, stuckBlockState, blockState5, dir, true, true));
             }
 
             BlockState blockState7 = Blocks.AIR.getDefaultState();
-            Iterator var25 = map.keySet().iterator();
+            Iterator var25 = mapMovableBlocks.keySet().iterator();
 
+            // Activates when non-air blocks are present.
             while(var25.hasNext()) {
                 BlockPos blockPos5 = (BlockPos)var25.next();
+                // If you disable this line, you get block duping.
                 world.setBlockState(blockPos5, blockState7, Block.NOTIFY_LISTENERS | Block.FORCE_STATE | Block.MOVED);
             }
 
-            var25 = map.entrySet().iterator();
+            var25 = mapMovableBlocks.entrySet().iterator();
 
+            // Activates when non-air blocks are present.
+            // But activation changes based on history of blocks placed.
+            // After blocks have been placed, this clause doesn't run any more.
             BlockPos blockPos7;
             while(var25.hasNext()) {
                 Map.Entry<BlockPos, BlockState> entry = (Map.Entry)var25.next();
@@ -410,20 +438,27 @@ public class ColouredStickyPistons extends PistonBlock {
 
             j = 0;
 
+            // Presence of block irrelevant. Activates on extension for air.
+            // Activates on both extension and retraction for non-air blocks.
+            // This also doesn't run any more.
             int n;
-            for(n = list3.size() - 1; n >= 0; --n) {
-                blockState9 = blockStates[j++];
-                blockPos7 = (BlockPos)list3.get(n);
-                blockState9.prepare(world, blockPos7, 2);
-                world.updateNeighborsAlways(blockPos7, blockState9.getBlock());
+            for(n = breakableBlockPoses.size() - 1; n >= 0; --n) {
+                stuckBlockState = blockStates[j++];
+                blockPos7 = (BlockPos)breakableBlockPoses.get(n);
+                stuckBlockState.prepare(world, blockPos7, 2);
+                world.updateNeighborsAlways(blockPos7, stuckBlockState.getBlock());
             }
 
-            for(n = list.size() - 1; n >= 0; --n) {
-                world.updateNeighborsAlways((BlockPos)list.get(n), blockStates[j++].getBlock());
+            // Presence of block irrelevant.
+            // Runs on extension and retraction when non-air present.
+            // Sometimes disabled.
+            for(n = movableBlockPoses.size() - 1; n >= 0; --n) {
+                world.updateNeighborsAlways((BlockPos)movableBlockPoses.get(n), blockStates[j++].getBlock());
             }
 
+            // Presence of block irrelevant.
             if (retract) {
-                world.updateNeighborsAlways(blockPos, selfPistonHead);
+                world.updateNeighborsAlways(offsetBlockPos, selfPistonHead);
             }
 
             return true;

@@ -147,9 +147,13 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
 //        return pistonState.isOf(block) && (Boolean)pistonState.get(PistonBlock.EXTENDED) && pistonState.get(FACING) == headState.get(FACING);
 //    }
 
+    // Runs 5 times when piston extends, 9 times when piston retracts.
     private boolean isAttached(BlockState headState, BlockState pistonState) {
         // CSPs are always sticky.
         Block block = RegisterBlocks.CSPLinkBlockToHeadMap.inverse().get(this);
+//        System.out.println("++++++++++");
+//        System.out.println(headState.getBlock());
+//        System.out.println(pistonState.getBlock());
         return pistonState.isOf(block) && (Boolean)pistonState.get(ColouredStickyPistons.EXTENDED) && pistonState.get(FACING) == headState.get(FACING);
     }
 
@@ -164,10 +168,12 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
         super.onBreak(world, pos, state, player);
     }
 
+    // Runs whenever the piston retracts, or extended piston is broken.
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             super.onStateReplaced(state, world, pos, newState, moved);
             BlockPos blockPos = pos.offset(((Direction)state.get(FACING)).getOpposite());
+            // Works only when a block is attached?
             if (this.isAttached(state, world.getBlockState(blockPos))) {
                 world.breakBlock(blockPos, true);
             }
@@ -180,7 +186,11 @@ public class ColouredStickyPistonHeads extends PistonHeadBlock {
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        BlockState blockState = world.getBlockState(pos.offset(((Direction)state.get(FACING)).getOpposite()));
+        BlockState blockState =  world.getBlockState(pos.offset(((Direction)state.get(FACING)).getOpposite()));
+//        System.out.println("++++++++++");
+//        System.out.println(this.isAttached(state, blockState));
+//        System.out.println(blockState.getBlock());
+//        System.out.println(blockState.get(FACING) == state.get(FACING));
         return this.isAttached(state, blockState) || blockState.isOf(Blocks.MOVING_PISTON) && blockState.get(FACING) == state.get(FACING);
     }
 
