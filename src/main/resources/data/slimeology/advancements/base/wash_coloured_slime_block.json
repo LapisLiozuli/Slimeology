@@ -21,7 +21,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -36,7 +38,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -51,7 +55,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -66,7 +72,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -81,7 +89,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -96,7 +106,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -111,7 +123,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -126,7 +140,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -141,7 +157,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -156,7 +174,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -171,7 +191,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -186,7 +208,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -201,7 +225,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -216,7 +242,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -231,7 +259,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
@@ -246,7 +276,9 @@
       "conditions": {
         "location": {
           "block": {
-            "block": "minecraft:cauldron"
+            "blocks": [
+              "minecraft:water_cauldron"
+            ]
           }
         },
         "item": {
