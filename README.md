@@ -1,6 +1,6 @@
 # Slimeology: The Discovery of Slime
 
-<a title="Fabric API" href="https://github.com/FabricMC/fabric">
+<a title="Fabric API" href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">
   <img src="https://i.imgur.com/Ol1Tcf8.png" width="151" height="50" />
 </a>
 <br/>
@@ -117,12 +117,26 @@ Crafted with a Coloured Slimeball and a Piston. However, the coloured slime spre
 
 ![Coloured Sticky Pistons, top view](https://imgur.com/DZFYIAP.png)
 
+## Known Issues
+
+- Incompatibilty with Terrarian Slimes due to conflict of mixins targeting Piston-classes.
+- Spawning rates might be lower in Dark Forests and Jungles.
+
+## Known Bugs
+
+- Unpowered Coloured Sticky Pistons cannot be moved by Pistons.
+- Middle-clicking on the extended head of a Coloured Sticky Piston will bring up a vanilla Sticky Piston.
+- (1.17) ‘Immersion’ advancement does not trigger when the Cauldron has water level of 1.
+- (1.16+) ‘Immersion’ advancement triggers on any Cauldron block regardless of fluid type or fluid level.
+
 ## Upcoming
 
-- Slimy Bricks
-- Slime-derived foodstuffs
 - A more effective method of separating Coloured Slime Blocks into vanilla Slime Blocks and dyes
 - Dyeing vanilla Slime Blocks into Coloured Slime Blocks
+- Slime-derived foodstuffs
+- Slimy Bricks
+- Individual spawn weight config for each type of Coloured Slime (Please contact me if you know how to determine biome distribution and allocate colours to each biome)
+- MAYBE: Configurable spawn weight for each type of Coloured Slime and biome
 - MAYBE: Slimy Armour
 
 ## License
