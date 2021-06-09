@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -138,6 +139,26 @@ public class ColouredSlimeBlocks extends SlimeBlock {
     }
 
 
+    static CauldronBehavior CLEAN_SLIME_BLOCK = (state, world, pos, player, hand, stack) -> {
+        Block block = Block.getBlockFromItem(stack.getItem());
+        if (!(block instanceof ColouredSlimeBlocks)) {
+            return ActionResult.PASS;
+        } else {
+            if (!world.isClient) {
+                ItemStack itemStack = new ItemStack(Blocks.SLIME_BLOCK);
+                if (stack.hasTag()) {
+                    itemStack.setTag(stack.getTag().copy());
+                }
+
+                player.setStackInHand(hand, itemStack);
+                LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+            }
+
+            return ActionResult.success(world.isClient);
+        }
+    };
+
+
     public static List<BlockItem> csbRegister(ColouredSlimeBlocks colouredSlimeBlock, String path, List<BlockItem> csbBlockItemsList) {
         // Block Register.
         Registry.register(Registry.BLOCK, new Identifier(Slimeology.MOD_ID, path), colouredSlimeBlock);
@@ -147,6 +168,9 @@ public class ColouredSlimeBlocks extends SlimeBlock {
         Registry.register(Registry.ITEM, new Identifier(Slimeology.MOD_ID, path), csbBlockItem);
         // Add to list.
         csbBlockItemsList.add(csbBlockItem);
+
+        // Add Cauldron washing.
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(csbBlockItem, CLEAN_SLIME_BLOCK);
 
 //        // Render
 //        BlockRenderLayerMap.INSTANCE.putBlock(colouredSlimeBlock, RenderLayer.getTranslucent());

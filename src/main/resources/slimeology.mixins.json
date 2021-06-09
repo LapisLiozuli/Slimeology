@@ -4,7 +4,7 @@
   "package": "com.lapisliozuli.slimeology.mixins",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "PistonHandlerInjectMixin",
+    "PistonHandlerMixin",
     "PistonBlockAccessor",
     "PistonGetHeadBlockStateInvoker",
     "PushEntitiesMixin",

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PistonHandler.class)
-public class PistonHandlerInjectMixin {
+public class PistonHandlerMixin {
     // Gives the ColouredSlimeBlocks their sticky behaviour.
     @Inject(at = @At("HEAD"), method = "isBlockSticky", cancellable = true)
     private static void IsBlockStickyMixin(BlockState state, CallbackInfoReturnable<Boolean> cir) {
