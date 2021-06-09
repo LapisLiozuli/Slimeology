@@ -1,5 +1,5 @@
 {
-  "parent": "slimeology:root",
+  "parent": "slimeology:base/root",
   "display": {
     "icon": {
       "item": "slimeology:slime_ball_yellow"
@@ -21,7 +21,18 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_white"
+            "items": "slimeology:slime_ball_white"
+          }
+        ]
+      }
+    },"get_slime_ball_white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "slimeology:slime_ball_white"
+            ]
           }
         ]
       }
@@ -31,7 +42,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_orange"
+            "items": [
+              "slimeology:slime_ball_orange"
+            ]
           }
         ]
       }
@@ -41,7 +54,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_magenta"
+            "items": [
+              "slimeology:slime_ball_magenta"
+            ]
           }
         ]
       }
@@ -51,7 +66,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_light_blue"
+            "items": [
+              "slimeology:slime_ball_light_blue"
+            ]
           }
         ]
       }
@@ -61,7 +78,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_yellow"
+            "items": [
+              "slimeology:slime_ball_yellow"
+            ]
           }
         ]
       }
@@ -71,7 +90,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_lime"
+            "items": [
+              "slimeology:slime_ball_lime"
+            ]
           }
         ]
       }
@@ -81,7 +102,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_pink"
+            "items": [
+              "slimeology:slime_ball_pink"
+            ]
           }
         ]
       }
@@ -91,7 +114,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_gray"
+            "items": [
+              "slimeology:slime_ball_gray"
+            ]
           }
         ]
       }
@@ -101,7 +126,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_light_gray"
+            "items": [
+              "slimeology:slime_ball_light_gray"
+            ]
           }
         ]
       }
@@ -111,7 +138,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_cyan"
+            "items": [
+              "slimeology:slime_ball_cyan"
+            ]
           }
         ]
       }
@@ -121,7 +150,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_purple"
+            "items": [
+              "slimeology:slime_ball_purple"
+            ]
           }
         ]
       }
@@ -131,7 +162,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_blue"
+            "items": [
+              "slimeology:slime_ball_blue"
+            ]
           }
         ]
       }
@@ -141,7 +174,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_brown"
+            "items": [
+              "slimeology:slime_ball_brown"
+            ]
           }
         ]
       }
@@ -151,7 +186,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_green"
+            "items": [
+              "slimeology:slime_ball_green"
+            ]
           }
         ]
       }
@@ -161,7 +198,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_red"
+            "items": [
+              "slimeology:slime_ball_red"
+            ]
           }
         ]
       }
@@ -171,7 +210,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_ball_black"
+            "items": [
+              "slimeology:slime_ball_black"
+            ]
           }
         ]
       }

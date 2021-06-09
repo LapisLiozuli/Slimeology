@@ -1,5 +1,5 @@
 {
-  "parent": "slimeology:get_coloured_slime_block",
+  "parent": "slimeology:base/get_coloured_slime_block",
   "display": {
     "icon": {
       "item": "slimeology:slimy_sand"
@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-          "item": "slimeology:slimy_sand"
+          "items": [
+            "slimeology:slimy_sand"
+            ]
           }
         ]
       }

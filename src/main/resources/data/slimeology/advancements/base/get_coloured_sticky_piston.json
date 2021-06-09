@@ -1,5 +1,5 @@
 {
-  "parent": "slimeology:get_coloured_slime_ball",
+  "parent": "slimeology:base/get_coloured_slime_ball",
   "display": {
     "icon": {
       "item": "slimeology:piston_yellow"
@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_white"
+            "items": [
+              "slimeology:piston_white"
+            ]
           }
         ]
       }
@@ -31,7 +33,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_orange"
+            "items": [
+              "slimeology:piston_orange"
+            ]
           }
         ]
       }
@@ -41,7 +45,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_magenta"
+            "items": [
+              "slimeology:piston_magenta"
+            ]
           }
         ]
       }
@@ -51,7 +57,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_light_blue"
+            "items": [
+              "slimeology:piston_light_blue"
+            ]
           }
         ]
       }
@@ -61,7 +69,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_yellow"
+            "items": [
+              "slimeology:piston_yellow"
+            ]
           }
         ]
       }
@@ -71,7 +81,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_lime"
+            "items": [
+              "slimeology:piston_lime"
+            ]
           }
         ]
       }
@@ -81,7 +93,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_pink"
+            "items": [
+              "slimeology:piston_pink"
+            ]
           }
         ]
       }
@@ -91,7 +105,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_gray"
+            "items": [
+              "slimeology:piston_gray"
+            ]
           }
         ]
       }
@@ -101,7 +117,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_light_gray"
+            "items": [
+              "slimeology:piston_light_gray"
+            ]
           }
         ]
       }
@@ -111,7 +129,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_cyan"
+            "items": [
+              "slimeology:piston_cyan"
+            ]
           }
         ]
       }
@@ -121,7 +141,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_purple"
+            "items": [
+              "slimeology:piston_purple"
+            ]
           }
         ]
       }
@@ -131,7 +153,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_blue"
+            "items": [
+              "slimeology:piston_blue"
+            ]
           }
         ]
       }
@@ -141,7 +165,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_brown"
+            "items": [
+              "slimeology:piston_brown"
+            ]
           }
         ]
       }
@@ -151,7 +177,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_green"
+            "items": [
+              "slimeology:piston_green"
+            ]
           }
         ]
       }
@@ -161,7 +189,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_red"
+            "items": [
+              "slimeology:piston_red"
+            ]
           }
         ]
       }
@@ -171,7 +201,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:piston_black"
+            "items": [
+              "slimeology:piston_black"
+            ]
           }
         ]
       }

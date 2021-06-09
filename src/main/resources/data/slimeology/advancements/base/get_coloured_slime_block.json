@@ -1,5 +1,5 @@
 {
-  "parent": "slimeology:root",
+  "parent": "slimeology:base/root",
   "display": {
     "icon": {
       "item": "slimeology:slime_block_blue"
@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_white"
+            "items": [
+              "slimeology:slime_block_white"
+            ]
           }
         ]
       }
@@ -31,7 +33,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_orange"
+            "items": [
+              "slimeology:slime_block_orange"
+            ]
           }
         ]
       }
@@ -41,7 +45,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_magenta"
+            "items": [
+              "slimeology:slime_block_magenta"
+            ]
           }
         ]
       }
@@ -51,7 +57,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_light_blue"
+            "items": [
+              "slimeology:slime_block_light_blue"
+            ]
           }
         ]
       }
@@ -61,7 +69,9 @@
       "conditions": {
         "items": [
           {
-          "item": "slimeology:slime_block_yellow"
+            "items": [
+              "slimeology:slime_block_yellow"
+            ]
           }
         ]
       }
@@ -71,7 +81,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_lime"
+            "items": [
+              "slimeology:slime_block_lime"
+            ]
           }
         ]
       }
@@ -81,7 +93,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_pink"
+            "items": [
+              "slimeology:slime_block_pink"
+            ]
           }
         ]
       }
@@ -91,7 +105,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_gray"
+            "items": [
+              "slimeology:slime_block_gray"
+            ]
           }
         ]
       }
@@ -101,7 +117,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_light_gray"
+            "items": [
+              "slimeology:slime_block_light_gray"
+            ]
           }
         ]
       }
@@ -111,7 +129,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_cyan"
+            "items": [
+              "slimeology:slime_block_cyan"
+            ]
           }
         ]
       }
@@ -121,7 +141,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_purple"
+            "items": [
+              "slimeology:slime_block_purple"
+            ]
           }
         ]
       }
@@ -131,7 +153,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_blue"
+            "items": [
+              "slimeology:slime_block_blue"
+            ]
           }
         ]
       }
@@ -141,7 +165,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_brown"
+            "items": [
+              "slimeology:slime_block_brown"
+            ]
           }
         ]
       }
@@ -151,7 +177,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_green"
+            "items": [
+              "slimeology:slime_block_green"
+            ]
           }
         ]
       }
@@ -161,7 +189,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_red"
+            "items": [
+              "slimeology:slime_block_red"
+            ]
           }
         ]
       }
@@ -171,7 +201,9 @@
       "conditions": {
         "items": [
           {
-            "item": "slimeology:slime_block_black"
+            "items": [
+              "slimeology:slime_block_black"
+            ]
           }
         ]
       }

@@ -1,14 +1,14 @@
 {
-  "parent": "slimeology:get_coloured_slime_block",
+  "parent": "slimeology:base/get_slimy_sand",
   "display": {
     "icon": {
-      "item": "slimeology:bleaching_brush"
+      "item": "slimeology:slimy_glass"
     },
     "title": {
-      "translate": "advancements.slimeology.bleach_coloured_slime_block_for_dye.title"
+      "translate": "advancements.slimeology.get_slimy_glass.title"
     },
     "description": {
-      "translate": "advancements.slimeology.bleach_coloured_slime_block_for_dye.description"
+      "translate": "advancements.slimeology.get_slimy_glass.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,12 +16,14 @@
     "hidden": false
   },
   "criteria": {
-    "get_bleaching_brush": {
+    "get_slimy_glass": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-          "item": "slimeology:bleaching_brush"
+          "items": [
+            "slimeology:slimy_glass"
+            ]
           }
         ]
       }
@@ -29,7 +31,7 @@
   },
   "requirements": [
     [
-      "get_bleaching_brush"
+      "get_slimy_glass"
     ]
   ]
 }

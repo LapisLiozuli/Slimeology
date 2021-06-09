@@ -1,0 +1,37 @@
+{
+  "parent": "slimeology:base/get_coloured_slime_block",
+  "display": {
+    "icon": {
+      "item": "slimeology:bleaching_brush"
+    },
+    "title": {
+      "translate": "advancements.slimeology.bleach_coloured_slime_block_for_dye.title"
+    },
+    "description": {
+      "translate": "advancements.slimeology.bleach_coloured_slime_block_for_dye.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_bleaching_brush": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+          "items": [
+            "slimeology:bleaching_brush"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_bleaching_brush"
+    ]
+  ]
+}
