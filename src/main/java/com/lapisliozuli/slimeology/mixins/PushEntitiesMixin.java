@@ -34,7 +34,7 @@ public class PushEntitiesMixin {
     }
 
     @ModifyVariable(
-            print = true,
+            print = false,
             method = "pushEntities",
             at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", shift = At.Shift.AFTER),
             index = 11,
