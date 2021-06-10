@@ -329,7 +329,6 @@ public class ColouredStickyPistons extends PistonBlock {
         // If retract is false and the block in the offset-dir is a CSP head:
         // Always activates on extension.
         // Activates on retraction is a block is stuck.
-        System.out.println(world.getBlockState(offsetBlockPos).getBlock());
         if (!retract && world.getBlockState(offsetBlockPos).isOf(selfPistonHead)) {
             // If disabled, then the stickiness no longer works and the block doesn't get pulled back.
             // Head breaking occurs whether an adjacent block is present or not.
