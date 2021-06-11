@@ -17,6 +17,7 @@ import java.util.List;
 
 @Mixin(PistonBlockEntity.class)
 public class PushEntitiesMixin {
+    // Gives launching behaviour to Coloured Slime Blocks.
     private static boolean isBlockSlimy;
     private static Block accessedPushedBlock;
 
