@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sticky_piston",
+    "slimeology:piston_white",
+    "slimeology:piston_orange",
+    "slimeology:piston_magenta",
+    "slimeology:piston_light_blue",
+    "slimeology:piston_yellow",
+    "slimeology:piston_lime",
+    "slimeology:piston_pink",
+    "slimeology:piston_gray",
+    "slimeology:piston_light_gray",
+    "slimeology:piston_cyan",
+    "slimeology:piston_purple",
+    "slimeology:piston_blue",
+    "slimeology:piston_brown",
+    "slimeology:piston_green",
+    "slimeology:piston_red",
+    "slimeology:piston_black"
+  ]
+}

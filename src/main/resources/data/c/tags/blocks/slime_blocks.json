@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:slime_block",
+    "slimeology:slime_block_white",
+    "slimeology:slime_block_orange",
+    "slimeology:slime_block_magenta",
+    "slimeology:slime_block_light_blue",
+    "slimeology:slime_block_yellow",
+    "slimeology:slime_block_lime",
+    "slimeology:slime_block_pink",
+    "slimeology:slime_block_gray",
+    "slimeology:slime_block_light_gray",
+    "slimeology:slime_block_cyan",
+    "slimeology:slime_block_purple",
+    "slimeology:slime_block_blue",
+    "slimeology:slime_block_brown",
+    "slimeology:slime_block_green",
+    "slimeology:slime_block_red",
+    "slimeology:slime_block_black",
+    "slimeology:slime_block_rainbow"
+  ]
+}
