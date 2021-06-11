@@ -19,8 +19,8 @@ import java.util.List;
 
 @Mixin(PistonBlockEntity.class)
 public class PushEntitiesMixin {
+    // Gives launching behaviour to Coloured Slime Blocks.
     private boolean isBlockSlimy;
-//    private Block accessedPushedBlock;
     @Shadow
     BlockState pushedBlock;
 
@@ -28,16 +28,14 @@ public class PushEntitiesMixin {
             method = "pushEntities",
             at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILSOFT,
-//            locals = LocalCapture.PRINT,
             cancellable = true
     )
     private void slimeology$changeBoolean(float nextProgress, CallbackInfo ci, Direction direction, double d, VoxelShape voxelShape, Box box, List list, List list2, boolean bl) {
         isBlockSlimy = bl;
-//        accessedPushedBlock = blockEntity.getPushedBlock().getBlock();
     }
 
     @ModifyVariable(
-            print = true,
+            print = false,
             method = "pushEntities",
             at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", shift = At.Shift.AFTER),
             index = 9,
