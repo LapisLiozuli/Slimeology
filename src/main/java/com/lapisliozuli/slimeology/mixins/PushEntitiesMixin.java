@@ -19,6 +19,7 @@ import java.util.List;
 
 @Mixin(PistonBlockEntity.class)
 public class PushEntitiesMixin {
+    // Gives launching behaviour to Coloured Slime Blocks.
     private boolean isBlockSlimy;
     @Shadow
     BlockState pushedBlock;
@@ -34,7 +35,7 @@ public class PushEntitiesMixin {
     }
 
     @ModifyVariable(
-            print = true,
+            print = false,
             method = "pushEntities",
             at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", shift = At.Shift.AFTER),
             index = 9,
