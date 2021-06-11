@@ -119,7 +119,6 @@ Crafted with a Coloured Slimeball and a Piston. However, the coloured slime spre
 
 ## Known Issues
 
-- Incompatibilty with Terrarian Slimes due to conflict of mixins targeting Piston-classes.
 - Spawning rates might be lower in Dark Forests and Jungles.
 
 ## Known Bugs
