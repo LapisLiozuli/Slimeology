@@ -91,5 +91,4 @@ publishing {
 }
 
 loom {
-	accessWidener "src/main/resources/slimeology.accesswidener"
 }

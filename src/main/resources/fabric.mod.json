@@ -36,6 +36,5 @@
     "autoconfig1u": "*"
   },
   "suggests": {
-  },
-  "accessWidener" : "slimeology.accesswidener"
+  }
 }
