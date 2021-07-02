@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "slimeology",
-  "version": "0.1.2+1.17",
+  "version": "${version}",
 
   "name": "Slimeology",
   "description": "A mod that profoundly explores the possibilities of slimes in Minecraft.",
