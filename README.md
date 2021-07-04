@@ -8,6 +8,8 @@
   Requires Auto Config 3.3.1 to run.
 </a>
 
+Also available at <a href="https://www.curseforge.com/minecraft/mc-mods/slimeologymc">Curseforge</a> and <a href="https://modrinth.com/mod/slimeology">Modrinth</a>.
+
 ## Primer
 
 Explore the world in search of more varieties of slime than ever! Enjoy an expanded block palette for both building and redstoning! 
