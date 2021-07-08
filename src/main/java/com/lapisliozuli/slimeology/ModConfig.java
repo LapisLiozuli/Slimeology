@@ -50,7 +50,7 @@ public final class ModConfig implements ConfigData {
         // Switch for the debug statements in canSpawnSEC(). Default false.
         // Seems better to check if an option is true rather than false.
         @Comment("Mainly for modders and server owners: Used in debugging of slime spawning.")
-        public boolean spawnReporting = true;
+        public boolean spawnReporting = false;
 
 
         // Doesn't actually seem to allow daytime spawning.
