@@ -8,9 +8,9 @@
   Requires Auto Config 3.3.1 to run.
 </a>
 
-NEWS: Waiting for Fabric Biomes API to update to 1.18 before I start updating. Unless I work on the next module of the mod to allow custom crafting of Coloured Slimeballs, but that is currently unlikely due to some personal issues.
-
 Also available at <a href="https://www.curseforge.com/minecraft/mc-mods/slimeologymc">Curseforge</a> and <a href="https://modrinth.com/mod/slimeology">Modrinth</a>.
+
+**NEWS**: Waiting for Fabric Biomes API to update to 1.18 before I start updating. Unless I work on the next module of the mod to allow custom crafting of Coloured Slimeballs, but that is currently unlikely due to some personal issues.
 
 ## Primer
 
